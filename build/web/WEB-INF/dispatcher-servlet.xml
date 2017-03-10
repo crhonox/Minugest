@@ -23,6 +23,7 @@
                 <prop key="cliente.htm">AdministracionController</prop> 
                 <prop key="receta.htm">AdministracionController</prop>  
                 <prop key="ingrediente.htm">AdministracionController</prop>
+                <prop key="AñadirCliente.htm">AdministracionController</prop>
             </props>             
         </property>
     </bean>

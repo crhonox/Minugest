@@ -12,6 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h1 align="center">Minugest</h1>
+        <br>
+        <hr/>
         <h1>Clientes</h1>
+        <ul>
+            <li><a href="AñadirCliente.htm">Añadir cliente</a></li>
+        </ul>
     </body>
 </html>
