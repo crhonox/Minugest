@@ -34,9 +34,9 @@
         <div>
         <div id="left">
         <ul>          
-            <li><a href="cliente.htm">Clientes</a></li>
-            <li><a href="receta.htm">Recetas</a></li>
-            <li><a href="ingrediente.htm">Ingredientes</a></li>
+            <li><a href="compañia.htm">Compañia</a></li>
+            <li><a href="soluciones.htm">Soluciones</a></li>
+            <li><a href="socios.htm">Socios</a></li>
             
         </ul>
             </div>

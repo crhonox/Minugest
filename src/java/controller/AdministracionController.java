@@ -11,14 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AdministracionController {
     
-    @RequestMapping("cliente.htm")
-    public ModelAndView cliente()
-    {
-        ModelAndView mav= new ModelAndView();
-        mav.setViewName("Administracion/cliente");
-        return mav;
-    }
-    
     @RequestMapping("login.htm")
     public ModelAndView login()
     {
@@ -27,6 +19,38 @@ public class AdministracionController {
         return mav;
     }
     
+    @RequestMapping("compañia.htm")
+    public ModelAndView compañia()
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Login/compañia");
+        return mav;
+    }
+    
+    @RequestMapping("socios.htm")
+    public ModelAndView socios()
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Login/socios");
+        return mav;
+    }
+    
+    @RequestMapping("soluciones.htm")
+    public ModelAndView soluciones()
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Login/soluciones");
+        return mav;
+    }
+    
+    @RequestMapping("cliente.htm")
+    public ModelAndView cliente()
+    {
+        ModelAndView mav= new ModelAndView();
+        mav.setViewName("Administracion/cliente");
+        return mav;
+    }
+           
     @RequestMapping("receta.htm")
     public ModelAndView receta()
     {

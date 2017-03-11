@@ -14,5 +14,19 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SupervisorController {
     
+    @RequestMapping("minutaDia.htm")
+    public ModelAndView minutaDia()
+    {
+        ModelAndView mav= new ModelAndView();
+        mav.setViewName("SupervisorC/minutaDia");
+        return mav;
+    }
     
+    @RequestMapping("consultaMinuta.htm")
+    public ModelAndView consultaMinuta()
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("SupervisorC/consultaMinuta");
+        return mav;
+    }
 }

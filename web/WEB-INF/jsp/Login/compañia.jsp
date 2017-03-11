@@ -1,11 +1,10 @@
 <%-- 
-    Document   : home
-    Created on : 09-03-2017, 20:38:14
-    Author     : crhonox
+    Document   : compañia
+    Created on : 11-03-2017, 12:15:12 AM
+    Author     : Sir Lekxas
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,23 +22,17 @@
             
             
      <div id="tituloright">
-         <img src="user-icon.png" width="20" height="20"><ul><a href="login.htm">Iniciar sesión</a></ul></div>
+         <img src="user-icon.png" width="20" height="20"><ul><a href="login.htm">Iniciar sesión</a></ul>
+         <ul><a href="home.htm">Inicio</a></ul></div>
                 
-            <div id="titulocenter"><h1 align="center">Minugest</h1></div>
+            <div id="titulocenter"><h1 align="center">Minugest Nosotros </h1></div>
                
         <hr/>       
             
        </div>
         
         <div>
-        <div id="left">
-        <ul>          
-            <li><a href="compañia.htm">Compañia</a></li>
-            <li><a href="soluciones.htm">Soluciones</a></li>
-            <li><a href="socios.htm">Socios</a></li>
-            
-        </ul>
-            </div>
+        
             <div id="center"></div>
             
             
