@@ -25,9 +25,9 @@
                 <prop key="ingrediente.htm">AdministracionController</prop>
                 <prop key="AñadirCliente.htm">AdministracionController</prop>
                 <prop key="login.htm">AdministracionController</prop>
-                <prop key="compañia.htm">AdministracionController</prop>
-                <prop key="socios.htm">AdministracionController</prop>
-                <prop key="soluciones.htm">AdministracionController</prop>
+                <prop key="compañia.htm">homeController</prop>
+                <prop key="socios.htm">homeController</prop>
+                <prop key="soluciones.htm">homeController</prop>
                 <prop key="consultaMinuta.htm">SupervisorController</prop>
                 <prop key="minutaDia.htm">SupervisorController</prop>
             </props>             

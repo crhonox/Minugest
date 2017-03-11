@@ -15,4 +15,29 @@ public class homeController
      mav.setViewName("home");
      return mav;
   }
+  
+  @RequestMapping("compañia.htm")
+    public ModelAndView compañia()
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Login/compañia");
+        return mav;
+    }
+    
+    @RequestMapping("socios.htm")
+    public ModelAndView socios()
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Login/socios");
+        return mav;
+    }
+    
+    @RequestMapping("soluciones.htm")
+    public ModelAndView soluciones()
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Login/soluciones");
+        return mav;
+    }
+    
 }
