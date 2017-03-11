@@ -1,14 +1,13 @@
 <%-- 
-    Document   : home
-    Created on : 09-03-2017, 20:38:14
-    Author     : crhonox
+    Document   : login
+    Created on : 10-03-2017, 11:09:54 PM
+    Author     : Sir Lekxas
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
 <!DOCTYPE html>
 <html>
-    <head>
+     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" href="ind.css" rel="stylesheet"/>
         <title>JSP Page</title>
@@ -23,7 +22,7 @@
             
             
      <div id="tituloright">
-         <img src="user-icon.png" width="20" height="20"><ul><a href="login.htm">Iniciar sesión</a></ul></div>
+        <ul><a href="home.htm">Inicio</a></ul></div>
                 
             <div id="titulocenter"><h1 align="center">Minugest</h1></div>
                
@@ -32,15 +31,24 @@
        </div>
         
         <div>
-        <div id="left">
-        <ul>          
-            <li><a href="cliente.htm">Clientes</a></li>
-            <li><a href="receta.htm">Recetas</a></li>
-            <li><a href="ingrediente.htm">Ingredientes</a></li>
-            
-        </ul>
+        
+            <div id="center">
+                <center><form>
+                        <table>
+                            
+                            <tr>Inicio de sesion</tr>
+                            <tr>
+                                <td>Nombre de Usuario:</td><td>XX</td>
+                            </tr>
+                            <tr>
+                                <td>Contraseña :</td><td>XX</td>
+                            </tr>
+                        </table>
+                        
+                    
+                    </form></center>
+                
             </div>
-            <div id="center"></div>
             
             
         </div>

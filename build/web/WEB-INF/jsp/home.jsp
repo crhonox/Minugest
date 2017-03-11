@@ -10,20 +10,39 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" href="ind.css" rel="stylesheet"/>
         <title>JSP Page</title>
         <%--  ${pageContext.request.contextPath} codigo para conseguir la ruta absoluta del directiorio
               <c:url value="/resources/css/styles.css" />
         --%>
     </head>
     <body>
-        <h1 align="center">Minugest</h1>
-        <br>
-        <hr/>
+        <div> 
+            
+            <div id="tituloleft"><h1 align="left">Logo</h1></div>
+            
+            
+     <div id="tituloright">
+         <img src="user-icon.png" width="20" height="20"><ul><a href="login.htm">Iniciar sesión</a></ul></div>
+                
+            <div id="titulocenter"><h1 align="center">Minugest</h1></div>
+               
+        <hr/>       
+            
+       </div>
+        
+        <div>
+        <div id="left">
         <ul>          
             <li><a href="cliente.htm">Clientes</a></li>
             <li><a href="receta.htm">Recetas</a></li>
             <li><a href="ingrediente.htm">Ingredientes</a></li>
             
         </ul>
+            </div>
+            <div id="center"></div>
+            
+            
+        </div>
     </body>
 </html>

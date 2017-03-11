@@ -19,6 +19,14 @@ public class AdministracionController {
         return mav;
     }
     
+    @RequestMapping("login.htm")
+    public ModelAndView login()
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Login/login");
+        return mav;
+    }
+    
     @RequestMapping("receta.htm")
     public ModelAndView receta()
     {
