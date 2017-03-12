@@ -8,14 +8,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" href="ind.css" rel="stylesheet"/>
-        <title>JSP Page</title>
+     <head>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <title>Minugest</title>
+    </head>
         <%--  ${pageContext.request.contextPath} codigo para conseguir la ruta absoluta del directiorio
               <c:url value="/resources/css/styles.css" />
         --%>
-    </head>
+
     <body>
         <div> 
             
