@@ -8,22 +8,29 @@
 <!DOCTYPE html>
 <html>
      <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" href="ind.css" rel="stylesheet"/>
-        <title>JSP Page</title>
-        <%--  ${pageContext.request.contextPath} codigo para conseguir la ruta absoluta del directiorio
-              <c:url value="/resources/css/styles.css" />
-        --%>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <title>Minugest</title>
     </head>
     <body>
+        <body>
         <div> 
             
             <div id="tituloleft"><h1 align="left">Logo</h1></div>
             
             
      <div id="tituloright">
-        <ul><a href="home.htm">Inicio</a></ul></div>
-                
+         
+         <%-- 
+             <img src="<c:url value="/public/icons/user-icons.png"/>" />
+             --%>
+             
+             <ul>
+                 <li><a href="login.htm"><span class="glyphicons glyphicons-user" aria-hidden="true"></span>Iniciar sesión</a></li>
+                 <li><a href="home.htm">Inicio</a></li>
+     </ul>
+     
+     </div>
             <div id="titulocenter"><h1 align="center">Minugest</h1></div>
                
         <hr/>       
@@ -32,16 +39,22 @@
         
         <div>
         
-            <div id="center">
+            <div class="container">
                 <center><form>
                         <table>
                             
-                            <tr>Inicio de sesion</tr>
+                            <tr><center><h1>Inicio de sesion</h1></center></tr>
                             <tr>
-                                <td>Nombre de Usuario:</td><td>XX</td>
+                               <div class="input-group">
+  <span class="input-group-addon" id="sizing-addon2">Nombre de usuario</span>
+  <input type="text" class="form-control" placeholder="Nombre" aria-describedby="sizing-addon1">
+</div>
                             </tr>
                             <tr>
-                                <td>Contraseña :</td><td>XX</td>
+                               <div class="input-group">
+  <span class="input-group-addon" id="sizing-addon2">Contraseña</span>
+  <input type="text" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
+</div> 
                             </tr>
                         </table>
                         

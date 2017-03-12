@@ -24,8 +24,15 @@
             
             
      <div id="tituloright">
-         <img src="user-icon.png" width="20" height="20"><ul><a href="login.htm">Iniciar sesión</a></ul></div>
+         
+         <%-- 
+             <img src="<c:url value="/public/icons/user-icons.png"/>" />
+             --%>
+             
+             
+         <a href="login.htm"><span class="glyphicons glyphicons-user" aria-hidden="true"></span>Iniciar sesión</a></ul>
                 
+     </div>
             <div id="titulocenter"><h1 align="center">Minugest</h1></div>
                
         <hr/>       

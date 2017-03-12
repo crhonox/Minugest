@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/crhonox/Documents/NetBeansProjects/Minugest/src/java/controller/AdministracionController.java</file>
-            <file>file:/C:/Users/crhonox/Documents/NetBeansProjects/Minugest/web/WEB-INF/dispatcher-servlet.xml</file>
-            <file>file:/C:/Users/crhonox/Documents/NetBeansProjects/Minugest/web/WEB-INF/jsp/Administracion/cliente.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/NetBeansProjects/Minugest/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/src/java/Modelos/ClienteValidate.java</file>
+            <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/web/WEB-INF/jsp/home.jsp</file>
+            <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/web/WEB-INF/jsp/Administracion/AñadirCliente.jsp</file>
+            <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/web/WEB-INF/jsp/SupervisorC/minutaDia.jsp</file>
         </group>
     </open-files>
 </project-private>

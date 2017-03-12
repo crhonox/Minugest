@@ -29,6 +29,8 @@
                 <prop key="socios.htm">homeController</prop>
                 <prop key="soluciones.htm">homeController</prop>
                 <prop key="consultaMinuta.htm">SupervisorController</prop>
+                <prop key="consultaExito.htm">SupervisorController</prop>
+                <prop key="consultaError.htm">SupervisorController</prop>
                 <prop key="minutaDia.htm">SupervisorController</prop>
             </props>             
         </property>

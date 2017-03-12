@@ -4,6 +4,7 @@
     Author     : Sir Lekxas
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,17 +22,44 @@
         
         
         <div>
+            <div class="container">
         <div id="left">
         <ul>          
-            <li><a href="compañia.htm">Compañia</a></li>
-            <li><a href="soluciones.htm">Soluciones</a></li>
-            <li><a href="socios.htm">Socios</a></li>
-            
+            <li><a href="consultaMinuta.htm">Consultar Minuta</a></li>
+            <li><a href="minutaDia.htm">Minuta del Día</a></li>
         </ul>
             </div>
-            <div id="center"></div>
             
+            <center><h1>Minuta del Día</h1></center>
+            <div class="row">
+                <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                <th>Nombre Minuta</th>
+                <th>Codigo</th>
+                <th>Casino</th>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                </tr>
+                </thead>    
+                <tbody>
+                    <c:forEach items="${datos}" var="dato">
+                        <tr>
+                            <td><c:out value="${dato.NOMBRE_MINUTA}"/></td>
+                            <td><c:out value="${dato.CODIGO_MINUTA}"/></td>
+                            <td><c:out value="${dato.CODIGO_CASINO}"/></td>
+                            <td><c:out value="${dato.CODIGO_USUARIO}"/></td>
+                            <td><c:out value="${dato.FECHA_MINUTA}"/></td>
+                        </tr>
+                    </c:forEach>
+              </tbody>
+                
+                
+                
+                </table>
+                </div>
             
         </div>
+            </div>
     </body>
 </html>

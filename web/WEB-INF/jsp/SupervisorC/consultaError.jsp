@@ -1,6 +1,6 @@
 <%-- 
-    Document   : consultaMinuta
-    Created on : 11-03-2017, 12:10:16 AM
+    Document   : consultaError
+    Created on : 12-03-2017, 02:47:08 AM
     Author     : Sir Lekxas
 --%>
 
@@ -28,12 +28,16 @@
         </ul>
             </div>
             <div class="container">
+                
                <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
                     <input type="text" class="form-control" placeholder="Fecha de minuta">
                      </div>
                      <button type="submit" class="btn btn-default">Buscar</button>
-                </form>   
+
+               </form>   
+                
+                <center><h1>Error en la busqueda de la Minuta</h1></center>
             </div>
             
             
