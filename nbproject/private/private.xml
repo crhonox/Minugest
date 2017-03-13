@@ -5,8 +5,12 @@
         <group>
             <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/src/java/Modelos/ClienteValidate.java</file>
             <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/web/WEB-INF/jsp/home.jsp</file>
-            <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/web/WEB-INF/jsp/Administracion/AñadirCliente.jsp</file>
+            <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/web/WEB-INF/jsp/Login/login.jsp</file>
+            <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/src/java/Modelos/MinutaValidate.java</file>
+            <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/src/java/controller/SupervisorController.java</file>
             <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/web/WEB-INF/jsp/SupervisorC/minutaDia.jsp</file>
+            <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/src/java/controller/AdministracionController.java</file>
+            <file>file:/C:/Users/Sir%20Lekxas/Documents/NetBeansProjects/Minugest/web/WEB-INF/jsp/SupervisorC/consultaMinuta.jsp</file>
         </group>
     </open-files>
 </project-private>

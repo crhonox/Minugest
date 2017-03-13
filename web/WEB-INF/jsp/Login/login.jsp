@@ -3,7 +3,8 @@
     Created on : 10-03-2017, 11:09:54 PM
     Author     : Sir Lekxas
 --%>
-
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -40,30 +41,25 @@
         <div>
         
             <div class="container">
-                <center><form>
-                        <table>
-                            
-                            <tr><center><h1>Inicio de sesion</h1></center></tr>
-                            <tr>
-                               <div class="input-group">
-  <span class="input-group-addon" id="sizing-addon2">Nombre de usuario</span>
-  <input type="text" class="form-control" placeholder="Nombre" aria-describedby="sizing-addon1">
-</div>
-                            </tr>
-                            <tr>
-                               <div class="input-group">
-  <span class="input-group-addon" id="sizing-addon2">Contraseña</span>
-  <input type="text" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
-</div> 
-                            </tr>
-                        </table>
-                        
+               <div class="row">
+                <div class="panel panel-primary"> 
+                    <div class="panel-heading"><center>Inicio de Sesion</center></div>
+                    <div class="panel-body">
+                    <form:form method="POST" commandName="login">
+                    <h1></h1>
+                    <form:errors path="*" element="diform:errorsv" cssClass="alert alert-danger" />
                     
-                    </form></center>
-                
+            <p><form:label path="rut">Rut  :</form:label><form:input path="rut" cssClass="form-control"/></p>
+            <p></p>
+            <p><form:label path="pass">Contraseña :</form:label><form:input path="email" cssClass="form-control"/></p>
+            <p></p>
+            <form:button class="btn btn-danger" >Ingresar</form:button>
+            
+        </form:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
-            
-            
-        </div>
     </body>
 </html>

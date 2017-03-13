@@ -35,15 +35,6 @@ public class AdministracionController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping("login.htm")
-    public ModelAndView login()
-    {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("Login/login");
-        return mav;
-    }
-    
-    
     @RequestMapping("cliente.htm")
     public ModelAndView cliente()
     {
@@ -89,7 +80,7 @@ public class AdministracionController {
     
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView añadirCliente()
-    {
+    {   
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Administracion/AñadirCliente");
         List regiones= this.jdbcTemplate.queryForList("select REGION_ID, REGION_NOMBRE from region");

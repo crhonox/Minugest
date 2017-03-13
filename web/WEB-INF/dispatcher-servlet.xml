@@ -24,7 +24,7 @@
                 <prop key="receta.htm">AdministracionController</prop>  
                 <prop key="ingrediente.htm">AdministracionController</prop>
                 <prop key="AñadirCliente.htm">AdministracionController</prop>
-                <prop key="login.htm">AdministracionController</prop>
+                <prop key="login.htm">LoginController</prop>
                 <prop key="compañia.htm">homeController</prop>
                 <prop key="socios.htm">homeController</prop>
                 <prop key="soluciones.htm">homeController</prop>
@@ -47,6 +47,7 @@
     <bean name="homeController" class="controller.homeController"/>
     <bean name="AdministracionController" class="controller.AdministracionController"/>
     <bean name="SupervisorController" class="controller.SupervisorController"/>
+    <bean name="LoginController" class="controller.LoginController"/>
     <bean name="indexController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />
