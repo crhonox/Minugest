@@ -119,4 +119,41 @@ public class AdministracionController {
         }
         
     }
+    /*@RequestMapping(method=RequestMethod.GET) 
+    public ModelAndView editarCliente(HttpServletRequest request)
+    {
+        ModelAndView mav=new ModelAndView();
+        String rut=request.getParameter("rut");
+        Cliente datos=this.selectCliente(rut);
+        mav.setViewName("Administracion/editarCliente");
+        mav.addObject("cliente",new Cliente(rut,datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
+        return mav;
+    }
+    
+    public Cliente selectCliente(String rut) 
+    {
+        final Cliente cliente = new Cliente();
+        String quer = "SELECT * FROM EMPRESAS WHERE RUT_EMPRESA='" + rut+"'";
+        return (Cliente) jdbcTemplate.query
+        (
+                quer, new ResultSetExtractor<Cliente>() 
+            {
+                public Cliente extractData(ResultSet rs) throws SQLException, DataAccessException {
+                    if (rs.next()) {
+                        cliente.setNombre(rs.getString("Nombre_EMPRESA"));
+                        cliente.setEmail(rs.getString("CORREO_EMPRESA"));
+                        cliente.setTelefono(rs.getString("TELEFONO_EMPRESA"));
+                        cliente.setComuna(rs.getString("COMUNA_EMPRESA"));
+                        cliente.setDireccion(rs.getString("DIRECCION_EMPRESA"));
+                        cliente.setRegion(rs.getString("REGION_EMPRESA"));
+                        
+                    }
+                    return cliente;
+                }
+
+
+            }
+        );
+    }*/
+    
 }
