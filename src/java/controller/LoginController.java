@@ -37,22 +37,13 @@ public LoginController(){
     Conexion con = new Conexion();
     this.jdbcTemplate=new JdbcTemplate(con.conectar());
 }
-
-@RequestMapping("login.htm")
-
-    public ModelAndView login()
-    {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("Login/login");
-        return mav;
-    }
-    
-    
+     
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView Login()
     {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Login/login");
+        mav.addObject("login",new Login());
         return mav;
     
     }
@@ -67,7 +58,10 @@ public LoginController(){
         mav.setViewName("Login/login");
         mav.addObject("login",new Login());
         return mav;
-         }else{
+         }
+         else
+         {
+          
          
          
          }

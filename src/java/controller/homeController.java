@@ -14,7 +14,6 @@ public class homeController
   @RequestMapping("home.htm")  
   public ModelAndView home()
   {
-      
      ModelAndView mav = new ModelAndView();
      mav.setViewName("home");
      return mav;

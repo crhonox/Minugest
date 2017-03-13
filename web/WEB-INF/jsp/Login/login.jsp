@@ -27,7 +27,6 @@
              --%>
              
              <ul>
-                 <li><a href="login.htm"><span class="glyphicons glyphicons-user" aria-hidden="true"></span>Iniciar sesión</a></li>
                  <li><a href="home.htm">Inicio</a></li>
      </ul>
      
@@ -51,7 +50,7 @@
                     
             <p><form:label path="rut">Rut  :</form:label><form:input path="rut" cssClass="form-control"/></p>
             <p></p>
-            <p><form:label path="pass">Contraseña :</form:label><form:input path="email" cssClass="form-control"/></p>
+            <p><form:label path="pass">Contraseña :</form:label><form:password path="pass" cssClass="form-control"/></p>
             <p></p>
             <form:button class="btn btn-danger" >Ingresar</form:button>
             

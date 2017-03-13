@@ -45,8 +45,7 @@
                 </tbody>
             </table>
                 <a href="AñadirCliente.htm" class="btn btn-success">Añadir cliente</a>
-            
-        </div>
+            </div>
         </div>
     </body>
 </html>
