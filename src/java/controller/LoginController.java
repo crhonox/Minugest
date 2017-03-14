@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -39,9 +40,10 @@ public LoginController(){
 }
      
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView Login()
+    public ModelAndView Login(HttpServletRequest request)
     {
         ModelAndView mav = new ModelAndView();
+        String rut=request.getParameter("rut");
         mav.setViewName("Login/login");
         mav.addObject("login",new Login());
         return mav;
@@ -49,18 +51,27 @@ public LoginController(){
     }
    
      @RequestMapping(method = RequestMethod.POST)
-     public ModelAndView form(@ModelAttribute ("login") Login log,BindingResult result, SessionStatus status  )
+     public ModelAndView form
+        (
+                @ModelAttribute ("login") Login log,
+                BindingResult result,
+                SessionStatus status, 
+                HttpServletRequest request
+        )
      {
          this.loginValidate.validate(log, result);
          if(result.hasErrors())
          {
          ModelAndView mav = new ModelAndView();
-        mav.setViewName("Login/login");
-        mav.addObject("login",new Login());
-        return mav;
+            mav.setViewName("Login/login");
+            mav.addObject("login",new Login());
+         return mav;
          }
          else
          {
+          ModelAndView mav=new ModelAndView();
+          String rut=request.getParameter("rut");
+          
           
          
          

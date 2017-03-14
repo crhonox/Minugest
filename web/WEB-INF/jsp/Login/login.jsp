@@ -21,12 +21,7 @@
             
             
      <div id="tituloright">
-         
-         <%-- 
-             <img src="<c:url value="/public/icons/user-icons.png"/>" />
-             --%>
-             
-             <ul>
+       <ul>
                  <li><a href="home.htm">Inicio</a></li>
      </ul>
      
