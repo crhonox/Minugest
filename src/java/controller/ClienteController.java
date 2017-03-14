@@ -6,6 +6,7 @@ import Modelos.ClienteValidate;
 import Modelos.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -37,6 +38,12 @@ public class ClienteController {
         ModelAndView mav=new ModelAndView();
         String rut=request.getParameter("rut");
         Cliente datos=this.selectCliente(rut);
+        List regiones= this.jdbcTemplate.queryForList("select REGION_ID, REGION_NOMBRE from region");
+        List comunas= this.jdbcTemplate.queryForList("select COMUNA_ID, COMUNA_NOMBRE from comuna");
+        List clicom= this.jdbcTemplate.queryForList("SELECT COMUNA_NOMBRE,REGION_NOMBRE,COMUNA_ID,REGION_ID FROM region  inner join provincia on REGION_ID = PROVINCIA_REGION_ID inner join comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join EMPRESA on COMUNA_EMPRESA = COMUNA_ID WHERE RUT_EMPRESA='"+rut+"'");
+        mav.addObject("regiones",regiones);
+        mav.addObject("comunas",comunas);
+        mav.addObject("clicoms",clicom);
         mav.setViewName("Administracion/editarCliente");
         mav.addObject("cliente",new Cliente(rut,datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
         return mav;
@@ -58,21 +65,14 @@ public class ClienteController {
             String rut=request.getParameter("rut");
             Cliente datos=this.selectCliente(rut);
             mav.setViewName("Administracion/editarCliente");
-            mav.addObject("usuarios",new Cliente(rut,datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
+            
+            mav.addObject("cliente",new Cliente(rut,datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
             return mav;
         }else
         {
             String rut=request.getParameter("rut");
         this.jdbcTemplate.update(
-                    "update Empresa "
-                + "set Nombre_EMPRESA=?,"
-                + "CORREO_EMPRESA=?,"
-                + "TELEFONO_EMPRESA=? "
-                + "COMUNA_EMPRESA=? "
-                + "REGION_EMPRESA=? "
-                + "DIRECCION_EMPRESA=? "
-                + "where "
-                + "rut=? ",
+                    "update EMPRESA set NOMBRE_EMPRESA=?,CORREO_EMPRESA=?,TELEFONO_EMPRESA=?,COMUNA_EMPRESA=? ,REGION_EMPRESA=? ,DIRECCION_EMPRESA=? where RUT_EMPRESA=? ",
          cli.getNombre(),cli.getEmail(),cli.getTelefono(),cli.getComuna(),cli.getRegion(),cli.getDireccion(),rut);
          return new ModelAndView("redirect:/cliente.htm");
         }
@@ -82,7 +82,21 @@ public class ClienteController {
     public Cliente selectCliente(String rut) 
     {
         final Cliente cliente = new Cliente();
-        String quer = "SELECT * FROM EMPRESA WHERE RUT_EMPRESA='" + rut+"'";
+       // String quer = "SELECT * FROM EMPRESA WHERE RUT_EMPRESA='" + rut+"'";
+        String quer="SELECT\n" +
+"   COMUNA_NOMBRE,\n" +
+"    REGION_NOMBRE,\n" +
+"    RUT_EMPRESA,\n" +
+"    NOMBRE_EMPRESA,\n" +
+"    TELEFONO_EMPRESA,\n" +
+"    CORREO_EMPRESA,\n" +
+"    DIRECCION_EMPRESA\n" +
+"FROM\n" +
+"    region  inner join\n" +
+"    provincia on REGION_ID = PROVINCIA_REGION_ID inner join\n" +
+"    comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join\n" +
+"    EMPRESA on COMUNA_EMPRESA = COMUNA_ID"
+                + " WHERE RUT_EMPRESA='" + rut+"'";
         return (Cliente) jdbcTemplate.query
         (
                 quer, new ResultSetExtractor<Cliente>() 
@@ -92,9 +106,9 @@ public class ClienteController {
                         cliente.setNombre(rs.getString("Nombre_EMPRESA"));
                         cliente.setEmail(rs.getString("CORREO_EMPRESA"));
                         cliente.setTelefono(rs.getString("TELEFONO_EMPRESA"));
-                        cliente.setComuna(rs.getString("COMUNA_EMPRESA"));
+                        cliente.setComuna(rs.getString("COMUNA_NOMBRE"));
                         cliente.setDireccion(rs.getString("DIRECCION_EMPRESA"));
-                        cliente.setRegion(rs.getString("REGION_EMPRESA"));
+                        cliente.setRegion(rs.getString("REGION_NOMBRE"));
                         
                     }
                     return cliente;

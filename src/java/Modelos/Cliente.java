@@ -12,7 +12,7 @@ public class Cliente {
     
     public Cliente(){}
 
-    public Cliente(String Nombre, String Direccion, String Region, String Comuna, String rut, String email, String Telefono) {
+    public Cliente(String rut,String Nombre,String email,String Telefono, String Region, String Comuna, String Direccion ) {
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Region = Region;
