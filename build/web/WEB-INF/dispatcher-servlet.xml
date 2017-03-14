@@ -32,7 +32,7 @@
                 <prop key="consultaExito.htm">SupervisorController</prop>
                 <prop key="consultaError.htm">SupervisorController</prop>
                 <prop key="minutaDia.htm">SupervisorController</prop>
-                
+                <prop key="editarCliente.htm">ClienteController</prop>
                 <prop key="admHome.htm">Administrador2Controller</prop>
                 <prop key="encarHome.htm">EncargadoController</prop>
             </props>             
@@ -51,7 +51,7 @@
     <bean name="AdministracionController" class="controller.AdministracionController"/>
     <bean name="SupervisorController" class="controller.SupervisorController"/>
     <bean name="LoginController" class="controller.LoginController"/>
-    
+    <bean name="ClienteController" class="controller.ClienteController"/>
     <bean name="Administrador2Controller" class="controller.Administrador2Controller"/>
     
     <bean name="EncargadoController" class="controller.EncargadoController"/>

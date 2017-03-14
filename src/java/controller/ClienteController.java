@@ -19,7 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("edit.htm")
+@RequestMapping("editarCliente.htm")
 public class ClienteController {
     private ClienteValidate clienteValidate;
     
@@ -57,19 +57,22 @@ public class ClienteController {
              ModelAndView mav=new ModelAndView();
             String rut=request.getParameter("rut");
             Cliente datos=this.selectCliente(rut);
-            mav.setViewName("edit");
+            mav.setViewName("Administracion/editarCliente");
             mav.addObject("usuarios",new Cliente(rut,datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
             return mav;
         }else
         {
             String rut=request.getParameter("rut");
         this.jdbcTemplate.update(
-                    "update usuarios "
-                + "set nombre=?,"
-                + " correo=?,"
-                + "telefono=? "
+                    "update Empresa "
+                + "set Nombre_EMPRESA=?,"
+                + "CORREO_EMPRESA=?,"
+                + "TELEFONO_EMPRESA=? "
+                + "COMUNA_EMPRESA=? "
+                + "REGION_EMPRESA=? "
+                + "DIRECCION_EMPRESA=? "
                 + "where "
-                + "id=? ",
+                + "rut=? ",
          cli.getNombre(),cli.getEmail(),cli.getTelefono(),cli.getComuna(),cli.getRegion(),cli.getDireccion(),rut);
          return new ModelAndView("redirect:/cliente.htm");
         }
@@ -79,7 +82,7 @@ public class ClienteController {
     public Cliente selectCliente(String rut) 
     {
         final Cliente cliente = new Cliente();
-        String quer = "SELECT * FROM EMPRESAS WHERE RUT_EMPRESA='" + rut+"'";
+        String quer = "SELECT * FROM EMPRESA WHERE RUT_EMPRESA='" + rut+"'";
         return (Cliente) jdbcTemplate.query
         (
                 quer, new ResultSetExtractor<Cliente>() 
