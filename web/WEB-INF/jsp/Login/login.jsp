@@ -41,7 +41,7 @@
                     <div class="panel-body">
                     <form:form method="POST" commandName="login">
                     <h1></h1>
-                    <form:errors path="*" element="diform:errorsv" cssClass="alert alert-danger" />
+                    <form:errors path="*" element="div" cssClass="alert alert-danger" />
                     
             <p><form:label path="rut">Rut  :</form:label><form:input path="rut" cssClass="form-control"/></p>
             <p></p>

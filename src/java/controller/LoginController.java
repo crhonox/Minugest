@@ -41,10 +41,9 @@ public LoginController(){
 }
      
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView Login(HttpServletRequest request)
+    public ModelAndView Login()
     {
         ModelAndView mav = new ModelAndView();
-        String rut=request.getParameter("rut");
         mav.setViewName("Login/login");
         mav.addObject("login",new Login());
         return mav;
@@ -56,53 +55,90 @@ public LoginController(){
         (
                 @ModelAttribute ("login") Login log,
                 BindingResult result,
-                SessionStatus status, 
-                HttpServletRequest request
+                SessionStatus status
+               
         )
      {
          this.loginValidate.validate(log, result);
+         Login datos = this.loginSelect(log.getRut(),log.getPass());
          if(result.hasErrors())
          {
-            ModelAndView mav = new ModelAndView();
-            String rut=request.getParameter("rut");
-            String pass=request.getParameter("pass");
-            mav.setViewName("Login/login");
-            mav.addObject("login",new Login(rut, pass));
-            return mav;
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Login/login");
+        mav.addObject("login",new Login());
+        
+        return mav;
          }
          else
          {
           ModelAndView mav=new ModelAndView();
-          String rut=request.getParameter("rut");
-          String pass=request.getParameter("pass");
-          String query = "SELECT CODIGO_PERFIL FROM USUARIO WHERE CODIGO_USUARIO = '"+rut+"' and PASS_USUARIO = '"+pass+"'";
+          if (log.getRut().equals(datos.getRut()) && log.getPass().equals(datos.getPass()))
+          {
+              int cod = Integer.parseInt(datos.getPerfil());
+              if(cod == 1)
+              {
+              return new ModelAndView("redirect:/cliente.htm");
+              }
+              else if(cod == 2)
+              {
+              return new ModelAndView("redirect:/admHome.htm");
+              }
+              else if(cod == 3)
+              {
+              return new ModelAndView("redirect:/minutaDia.htm");
+              }
+              else if(cod == 4)
+              {
+              return new ModelAndView("redirect:/encarHome.htm");
+              }
+              return new ModelAndView("redirect:/home.htm");
+          }else
+          {
+              
+          }
+     /*     String query = "SELECT CODIGO_PERFIL FROM USUARIO WHERE CODIGO_USUARIO = '"+log.getRut()+"' and PASS_USUARIO = '"+log.getPass()+"'";
+          return (Login) jdbcTemplate.query
+        (
+                query, new ResultSetExtractor<Login>() 
+            {
+                public Login extractData(ResultSet rs) throws SQLException, DataAccessException {
+                    if (rs.next()) {
+                        int cod = Integer.parseInt(rs.getString("CODIGO_PERFIL"));
+                    }
+                    
+                    if(){
+                        
+                    }
+                    return Login;
+                }
+
+
+            }
+        );*/
           
-          
-          /*if (query == "1")
-          {
-             mav.setViewName("Administracion/Cliente");
-             return mav;
-          }
-          else if (query == "2")
-          {
-              mav.setViewName("Administracion2/admHome");
-              return mav;
-          }
-          else if (query == "3")
-          { 
-              mav.setViewName("Encargado/encarHome");
-              return mav;
-          }
-          else if (query == "4")
-          {
-              mav.setViewName("SupervisorC/minutaDia");
-              return mav;
-          }
-          */
          }
                     
          return new ModelAndView("redirect:/login.htm");
      
          }
+        public Login loginSelect(String rut,String pass)
+        {
+        final Login login = new Login();
+          String query2 = "SELECT CODIGO_USUARIO,PASS_USUARIO,CODIGO_PERFIL FROM USUARIO WHERE CODIGO_USUARIO = '"+rut+"' and PASS_USUARIO = '"+pass+"'";
+          return (Login) jdbcTemplate.query( query2, new ResultSetExtractor<Login>() 
+            {
+                public Login extractData(ResultSet rs) throws SQLException, DataAccessException {
+                    if (rs.next()) {
+                        login.setRut(rs.getString("CODIGO_USUARIO"));
+                        login.setPass(rs.getString("PASS_USUARIO"));
+                        login.setPerfil(rs.getString("CODIGO_PERFIL"));
+                    }
+                    return login;
+                }
 
+
+            }
+        );
+        
+        }
 }

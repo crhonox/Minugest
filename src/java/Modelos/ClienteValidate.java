@@ -37,8 +37,8 @@ public class ClienteValidate implements Validator{
                   "El Correo electrónico "+cliente.getEmail()+" no es válido");
                }
         }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Telefono", "required.Telefono","El campo Tekefono es obligatorio");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Region", "required.Region","El campo Region es obligatorio");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Telefono", "required.Telefono","El campo Teléfono es obligatorio");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Region", "required.Region","El campo Región es obligatorio");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Comuna", "required.Comuna","El campo Comuna es obligatorio");
         
     }
