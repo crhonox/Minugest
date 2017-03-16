@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;/**
  */
 
 @Controller
+@RequestMapping("login.htm")
 public class LoginController{
 
 private LoginValidate loginValidate;
@@ -62,26 +63,46 @@ public LoginController(){
          this.loginValidate.validate(log, result);
          if(result.hasErrors())
          {
-         ModelAndView mav = new ModelAndView();
+            ModelAndView mav = new ModelAndView();
+            String rut=request.getParameter("rut");
+            String pass=request.getParameter("pass");
             mav.setViewName("Login/login");
-            mav.addObject("login",new Login());
-         return mav;
+            mav.addObject("login",new Login(rut, pass));
+            return mav;
          }
          else
          {
           ModelAndView mav=new ModelAndView();
           String rut=request.getParameter("rut");
+          String pass=request.getParameter("pass");
+          String query = "SELECT CODIGO_PERFIL FROM USUARIO WHERE CODIGO_USUARIO = '"+rut+"' and PASS_USUARIO = '"+pass+"'";
           
           
-         
-         
+          /*if (query == "1")
+          {
+             mav.setViewName("Administracion/Cliente");
+             return mav;
+          }
+          else if (query == "2")
+          {
+              mav.setViewName("Administracion2/admHome");
+              return mav;
+          }
+          else if (query == "3")
+          { 
+              mav.setViewName("Encargado/encarHome");
+              return mav;
+          }
+          else if (query == "4")
+          {
+              mav.setViewName("SupervisorC/minutaDia");
+              return mav;
+          }
+          */
          }
-    
+                    
          return new ModelAndView("redirect:/login.htm");
      
-     
-     
-     
-     }
+         }
 
 }

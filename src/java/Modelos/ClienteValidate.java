@@ -23,7 +23,7 @@ public class ClienteValidate implements Validator{
 
     @Override
     public void validate(Object o, Errors errors) {
-       Cliente cliente = (Cliente) o;
+        Cliente cliente = (Cliente) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Nombre", "required.Nombre","El campo Nombre es obligatorio");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Rut", "required.Rut","El campo Rut es obligatorio");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Direccion", "required.Direccion","El campo Direccion es obligatorio");

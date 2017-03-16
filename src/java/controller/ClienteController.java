@@ -61,17 +61,16 @@ public class ClienteController {
         this.clienteValidate.validate(cli, result);
         if(result.hasErrors())
         {
-             ModelAndView mav=new ModelAndView();
+            ModelAndView mav=new ModelAndView();
             String rut=request.getParameter("rut");
             Cliente datos=this.selectCliente(rut);
             mav.setViewName("Administracion/editarCliente");
-            
             mav.addObject("cliente",new Cliente(rut,datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
             return mav;
         }else
         {
             String rut=request.getParameter("rut");
-        this.jdbcTemplate.update(
+            this.jdbcTemplate.update(
                     "update EMPRESA set NOMBRE_EMPRESA=?,CORREO_EMPRESA=?,TELEFONO_EMPRESA=?,COMUNA_EMPRESA=? ,REGION_EMPRESA=? ,DIRECCION_EMPRESA=? where RUT_EMPRESA=? ",
          cli.getNombre(),cli.getEmail(),cli.getTelefono(),cli.getComuna(),cli.getRegion(),cli.getDireccion(),rut);
          return new ModelAndView("redirect:/cliente.htm");
@@ -101,8 +100,10 @@ public class ClienteController {
         (
                 quer, new ResultSetExtractor<Cliente>() 
             {
-                public Cliente extractData(ResultSet rs) throws SQLException, DataAccessException {
-                    if (rs.next()) {
+                public Cliente extractData(ResultSet rs) throws SQLException, DataAccessException 
+                {
+                    if (rs.next()) 
+                    {
                         cliente.setNombre(rs.getString("Nombre_EMPRESA"));
                         cliente.setEmail(rs.getString("CORREO_EMPRESA"));
                         cliente.setTelefono(rs.getString("TELEFONO_EMPRESA"));

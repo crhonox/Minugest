@@ -19,9 +19,9 @@ public class LoginValidate implements Validator {
     
     @Override
     public void validate(Object o, Errors errors){
-    Login login = (Login) o;
+        
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Rut", "required.Rut","El campo Rut es obligatorio");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Pass", "required.Pass","La contraseña es obligatorio");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Pass", "required.Pass","La Contraseña es obligatoria");
     
     }
 

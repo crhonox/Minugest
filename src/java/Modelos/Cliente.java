@@ -12,7 +12,8 @@ public class Cliente {
     
     public Cliente(){}
 
-    public Cliente(String rut,String Nombre,String email,String Telefono, String Region, String Comuna, String Direccion ) {
+    public Cliente(String rut,String Nombre,String email,String Telefono, String Region, String Comuna, String Direccion )
+    {
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Region = Region;
