@@ -105,16 +105,7 @@ public class AdministracionController {
         }else{
             this.jdbcTemplate.update("insert into EMPRESA (RUT_EMPRESA,NOMBRE_EMPRESA,TELEFONO_EMPRESA,CORREO_EMPRESA,Region_Empresa,Comuna_Empresa,Direccion_Empresa) values (?,?,?,?,?,?,?)"
                                     ,cli.getRut(),cli.getNombre(),cli.getTelefono(),cli.getEmail(),cli.getRegion(),cli.getComuna(),cli.getDireccion());
-            //Mostrar los datos ingresados
-       //     ModelAndView mav = new ModelAndView();
-      //  mav.setViewName("exito");
-       // mav.addObject("Nombre",cli.getNombre());
-       // mav.addObject("Rut",cli.getRut());
-      //  mav.addObject("Telefono",cli.getTelefono());
-       // mav.addObject("Comuna",cli.getComuna());
-       // mav.addObject("Region",cli.getRegion());
-       // mav.addObject("Direccion",cli.getDireccion());
-       // mav.addObject("email",cli.getEmail());
+       
         return new ModelAndView("redirect:/cliente.htm");
         }
         

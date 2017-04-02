@@ -33,7 +33,7 @@
                     <c:forEach items="${datos}" var="dato" >
                         <tr>
                             <td><c:out value="${dato.RUT_EMPRESA}"/></td>
-                            <td><c:out value="${dato.NOMBRE_EMPRESA}"/></td>
+                            <td><a href="infoCliente.htm?rut=${dato.RUT_EMPRESA}"><c:out value="${dato.NOMBRE_EMPRESA}"/></a></td>
                             <td><c:out value="${dato.TELEFONO_EMPRESA}"/></td>
                             <td><c:out value="${dato.CORREO_EMPRESA}"/></td>
                             <td><c:out value="${dato.REGION_NOMBRE}"/></td>

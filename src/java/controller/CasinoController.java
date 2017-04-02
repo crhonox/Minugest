@@ -1,8 +1,9 @@
 
 package controller;
 
+import Modelos.Casino;
+import Modelos.CasinoValidate;
 import Modelos.Cliente;
-import Modelos.ClienteValidate;
 import Modelos.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,62 +21,57 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("editarCliente.htm")
-public class ClienteController {
-    private ClienteValidate clienteValidate;
+public class CasinoController {
     
     private JdbcTemplate jdbcTemplate;
+    private CasinoValidate casinoValidate;
     
-    public ClienteController(){
-        this.clienteValidate=new ClienteValidate(); //Implementar Validator
+    public CasinoController(){ 
+        this.casinoValidate=new CasinoValidate();
         Conexion con= new Conexion();
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping(method=RequestMethod.GET) 
-    public ModelAndView editarCliente(HttpServletRequest request)
-    {
-        ModelAndView mav=new ModelAndView();
-        String rut=request.getParameter("rut");
+    @RequestMapping("listaCasino.htm")
+    public ModelAndView listadoCasino(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        String rut= request.getParameter("rut");
+        List datos2=this.jdbcTemplate.queryForList("SELECT CASINO.RUT_EMPRESA,CODIGO_CASINO, NOMBRE_CASINO,NOMBRE_EMPRESA FROM Minugest.CASINO inner join EMPRESA on CASINO.RUT_EMPRESA = EMPRESA.RUT_EMPRESA where CASINO.RUT_EMPRESA = '"+rut+"'");
+        mav.addObject("datos",datos2);
         Cliente datos=this.selectCliente(rut);
-        List regiones= this.jdbcTemplate.queryForList("select REGION_ID, REGION_NOMBRE from region");
-        List comunas= this.jdbcTemplate.queryForList("select COMUNA_ID, COMUNA_NOMBRE from comuna");
-        List clicom= this.jdbcTemplate.queryForList("SELECT COMUNA_NOMBRE,REGION_NOMBRE,COMUNA_ID,REGION_ID FROM region  inner join provincia on REGION_ID = PROVINCIA_REGION_ID inner join comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join EMPRESA on COMUNA_EMPRESA = COMUNA_ID WHERE RUT_EMPRESA='"+rut+"'");
-        mav.addObject("regiones",regiones);
-        mav.addObject("comunas",comunas);
-        mav.addObject("clicoms",clicom);
-        mav.setViewName("Administracion/editarCliente");
         mav.addObject("cliente",new Cliente(rut,datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
+        mav.setViewName("Administracion/listaCasino");
         return mav;
     }
     
-    @RequestMapping(method=RequestMethod.POST)
-    public ModelAndView form
-        (
-                @ModelAttribute("cliente") Cliente cli,
-                BindingResult result,
-                SessionStatus status,
-                HttpServletRequest request
-        )
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView añadirCasino(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        String rut = request.getParameter("rutemp");
+        mav.setViewName("Administracion/AñadirCasino");
+        mav.addObject("rutemp",rut);
+        mav.addObject("casino", new Casino());  
+        return mav;
+    }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView form(@ModelAttribute ("casino") Casino cas,BindingResult result, SessionStatus status  )
     {
-        this.clienteValidate.validate(cli, result);
+        this.casinoValidate.validate(cas, result);
         if(result.hasErrors())
         {
-            ModelAndView mav=new ModelAndView();
-            String rut=request.getParameter("rut");
-            Cliente datos=this.selectCliente(rut);
-            mav.setViewName("Administracion/editarCliente");
-            mav.addObject("cliente",new Cliente(rut,datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
-            return mav;
-        }else
-        {
-            String rut=request.getParameter("rut");
-            this.jdbcTemplate.update(
-                    "update EMPRESA set NOMBRE_EMPRESA=?,CORREO_EMPRESA=?,TELEFONO_EMPRESA=?,COMUNA_EMPRESA=? ,REGION_EMPRESA=? ,DIRECCION_EMPRESA=? where RUT_EMPRESA=? ",
-         cli.getNombre(),cli.getEmail(),cli.getTelefono(),cli.getComuna(),cli.getRegion(),cli.getDireccion(),rut);
-         return new ModelAndView("redirect:/cliente.htm");
-        }
+            //Volver al formulario por que los datos ingresados estan erroneos
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Administracion/AñadirCasino");
+         mav.addObject("casino",new Casino());
+        return mav;
+        }else{
+            this.jdbcTemplate.update("INSERT INTO CASINO (RUT_EMPRESA,NOMBRE_CASINO) VALUES (?,?)"
+                                      ,cas.getRutEmpresa(),cas.getNombreCasino());
        
+        return new ModelAndView("redirect:/listaCasino.htm?rut="+cas.getRutEmpresa());
+        }
+        
     }
     
     public Cliente selectCliente(String rut) 
@@ -119,7 +115,4 @@ public class ClienteController {
             }
         );
     }
-    
-    
-    
 }

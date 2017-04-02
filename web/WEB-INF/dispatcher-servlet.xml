@@ -24,10 +24,13 @@
                 <prop key="receta.htm">AdministracionController</prop>  
                 <prop key="ingrediente.htm">AdministracionController</prop>
                 <prop key="AñadirCliente.htm">AdministracionController</prop>
+                <prop key="AñadirUsuario.htm">InfoclienteController</prop>
+                <prop key="editarUsuario.htm">UsereditController</prop>
                 <prop key="login.htm">LoginController</prop>
                 <prop key="compañia.htm">homeController</prop>
                 <prop key="socios.htm">homeController</prop>
                 <prop key="soluciones.htm">homeController</prop>
+                <prop key="listaUsuario.htm">InfoclienteController</prop>
                 <prop key="consultaMinuta.htm">SupervisorController</prop>
                 <prop key="consultaExito.htm">SupervisorController</prop>
                 <prop key="consultaError.htm">SupervisorController</prop>
@@ -35,6 +38,11 @@
                 <prop key="editarCliente.htm">ClienteController</prop>
                 <prop key="admHome.htm">Administrador2Controller</prop>
                 <prop key="encarHome.htm">EncargadoController</prop>
+                <prop key="infoCliente.htm">InfoclienteController</prop>
+                <prop key="listaCasino.htm">CasinoController</prop>
+                <prop key="AñadirCasino.htm">CasinoController</prop>
+                <prop key="editarCasino.htm">CasinoeditController</prop>
+                <!--<prop key="eliminarCasino.htm">CasinoeditController</prop>-->
             </props>             
         </property>
     </bean>
@@ -47,12 +55,16 @@
     <!--
     The index controller.
     -->
+    <bean name="InfoclienteController" class="controller.InfoclienteController"/>
     <bean name="homeController" class="controller.homeController"/>
     <bean name="AdministracionController" class="controller.AdministracionController"/>
     <bean name="SupervisorController" class="controller.SupervisorController"/>
     <bean name="LoginController" class="controller.LoginController"/>
     <bean name="ClienteController" class="controller.ClienteController"/>
     <bean name="Administrador2Controller" class="controller.Administrador2Controller"/>
+    <bean name="CasinoController" class="controller.CasinoController"/>
+    <bean name="CasinoeditController" class="controller.CasinoeditController"/>
+    <bean name="UsereditController" class="controller.UsereditController"/>
     
     <bean name="EncargadoController" class="controller.EncargadoController"/>
     <bean name="indexController"

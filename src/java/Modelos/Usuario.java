@@ -5,84 +5,95 @@ package Modelos;
  * @author Sir Lekxas
  */
 public class Usuario {
-    private String codigo;
+    private String RutEmpresa;
+    private String rut;
     private String cod_casino;
     private String cod_perfil;
     private String nombre;
     private String correo;
     private String pass;
+    private String apellido;
+    
     
     public Usuario (){}
     
-    public Usuario(String codigo, String codigo_casino, String codigo_perfil, String Nombre, String Correo, String Pass)
-    {   
-        this.codigo = codigo;
+    public Usuario(String RutEmpresa,String rut, String codigo_casino, String codigo_perfil, String Nombre, String Correo, String Pass, String Apellido)
+    {  
+        this.RutEmpresa= RutEmpresa;
+        this.rut = rut;
         this.cod_casino = codigo_casino;
         this.cod_perfil = codigo_perfil;
         this.nombre = Nombre;
         this.correo = Correo;
         this.pass = Pass;
-    
+        this.apellido= Apellido;
+        
     
     }
-    
-    public String getNombre()
-    {
-        return nombre;
+
+    public String getRutEmpresa() {
+        return RutEmpresa;
     }
-    
-    public void setNombre(String Nombre)
-    {
-        this.nombre = Nombre;
+
+    public void setRutEmpresa(String RutEmpresa) {
+        this.RutEmpresa = RutEmpresa;
     }
-    
-    public String getCodigo()
-    {
-        return codigo;
+
+    public String getApellido() {
+        return apellido;
     }
-    
-    public void setCodigo(String codigo)
-    {
-        this.codigo = codigo;
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
-    
-    public String getCod_Casino()
-    {
+
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
+    public String getCod_casino() {
         return cod_casino;
     }
-    
-    public void setCod_Casino(String codigo_casino)
-    {
-        this.cod_casino = codigo_casino;
+
+    public void setCod_casino(String cod_casino) {
+        this.cod_casino = cod_casino;
     }
-    
-    public String getCod_Perfil()
-    {
+
+    public String getCod_perfil() {
         return cod_perfil;
     }
-    
-    public void setCod_Perfil(String codigo_perfil)
-    {
-        this.cod_perfil = codigo_perfil;
+
+    public void setCod_perfil(String cod_perfil) {
+        this.cod_perfil = cod_perfil;
     }
-    
-    public String getCorreo()
-    {
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCorreo() {
         return correo;
     }
-    
-    public void setCorreo(String Correo)
-    {
-        this.correo = Correo;
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
-    
-    public String getPass()
-    {
+
+    public String getPass() {
         return pass;
     }
-    
-    public void setPass(String Pass)
-    {
-        this.pass = Pass;
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
+    
+    
 }
