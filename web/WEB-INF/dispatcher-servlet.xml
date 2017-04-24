@@ -18,10 +18,11 @@
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
+                
                 <prop key="index.htm">indexController</prop>
                 <prop key="home.htm">homeController</prop>
                 <prop key="cliente.htm">AdministracionController</prop> 
-                <prop key="receta.htm">AdministracionController</prop>  
+                <prop key="receta.htm">RecetaController</prop>  
                 <prop key="ingrediente.htm">IngredienteController</prop>
                 <prop key="AñadirCliente.htm">AdministracionController</prop>
                 <prop key="AñadirUsuario.htm">InfoclienteController</prop>
@@ -44,7 +45,11 @@
                 <prop key="editarCasino.htm">CasinoeditController</prop>
                 <prop key="AñadirIngrediente.htm">IngredienteController</prop>
                 <prop key="editarIngrediente.htm">Ingrediente2Controller</prop>
-                <!--<prop key="eliminarCasino.htm">CasinoeditController</prop>-->
+                <prop key="AñadirReceta.htm">RecetaController</prop>
+                <prop key="editarReceta.htm">Receta2Controller</prop>
+               <!-- REVISAR  -->
+                <prop key="AñadirIngredienteReceta.htm">Receta3Controller</prop>
+           
             </props>             
         </property>
     </bean>
@@ -54,9 +59,12 @@
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
 
-    <!--
-    The index controller.
-    -->
+   
+   
+   
+    <bean name="Receta3Controller" class="controller.Receta3Controller" />
+    <bean name="Receta2Controller" class="controller.Receta2Controller" />
+    <bean name="RecetaController" class="controller.RecetaController" />
     <bean name="Ingrediente2Controller" class="controller.Ingrediente2Controller" />
     <bean name="IngredienteController" class="controller.IngredienteController" />
     <bean name="InfoclienteController" class="controller.InfoclienteController"/>
