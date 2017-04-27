@@ -27,15 +27,15 @@
                             <p><form:label path="email">E-mail  :</form:label><form:input path="email" cssClass="form-control"/></p>
                             <p><form:label path="Telefono">Telefono  :</form:label><form:input path="Telefono" cssClass="form-control"/></p>
                             <p><form:label path="Region">Region  :</form:label><form:select path="Region" cssClass="form-control">
-                                    <c:forEach items="${clicoms}" var="clicom" ><form:option value="${clicom.REGION_ID}">${clicom.REGION_NOMBRE}</form:option></c:forEach>
+                            <%--  <c:forEach items="${clicoms}" var="clicom" ><form:option value="${clicom.REGION_ID}">${clicom.REGION_NOMBRE}</form:option></c:forEach>--%>
                                     
                                 <c:forEach items="${regiones}" var="region">   
-                                    <form:option value="${region.REGION_ID}">${region.REGION_NOMBRE}</form:option>
+                                    <form:option value="${region.REGION_ID}" onclick="">${region.REGION_NOMBRE}</form:option>
                                 </c:forEach>                            
                         </form:select></p>
                             <p><form:label path="Comuna">Comuna  :</form:label>
                             <form:select path="Comuna" cssClass="form-control">
-                            <c:forEach items="${clicoms}" var="clicom" ><form:option value="${clicom.COMUNA_ID}">${clicom.COMUNA_NOMBRE}</form:option></c:forEach>
+                           <%-- <c:forEach items="${clicoms}" var="clicom" ><form:option value="${clicom.COMUNA_ID}">${clicom.COMUNA_NOMBRE}</form:option></c:forEach>--%>
                         <c:forEach items="${comunas}" var="comuna">
                             <form:option value="${comuna.COMUNA_ID}">${comuna.COMUNA_NOMBRE}</form:option>
                         </c:forEach>

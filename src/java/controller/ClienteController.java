@@ -83,8 +83,8 @@ public class ClienteController {
         final Cliente cliente = new Cliente();
        // String quer = "SELECT * FROM EMPRESA WHERE RUT_EMPRESA='" + rut+"'";
         String quer="SELECT\n" +
-"   COMUNA_NOMBRE,\n" +
-"    REGION_NOMBRE,\n" +
+"   COMUNA_NOMBRE,COMUNA_ID,\n" +
+"    REGION_NOMBRE,REGION_ID,\n" +
 "    RUT_EMPRESA,\n" +
 "    NOMBRE_EMPRESA,\n" +
 "    TELEFONO_EMPRESA,\n" +
@@ -107,9 +107,9 @@ public class ClienteController {
                         cliente.setNombre(rs.getString("Nombre_EMPRESA"));
                         cliente.setEmail(rs.getString("CORREO_EMPRESA"));
                         cliente.setTelefono(rs.getString("TELEFONO_EMPRESA"));
-                        cliente.setComuna(rs.getString("COMUNA_NOMBRE"));
+                        cliente.setComuna(rs.getString("COMUNA_ID"));
                         cliente.setDireccion(rs.getString("DIRECCION_EMPRESA"));
-                        cliente.setRegion(rs.getString("REGION_NOMBRE"));
+                        cliente.setRegion(rs.getString("REGION_ID"));
                         
                     }
                     return cliente;

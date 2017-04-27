@@ -48,7 +48,7 @@
                 <prop key="AñadirReceta.htm">RecetaController</prop>
                 <prop key="editarReceta.htm">Receta2Controller</prop>
                <!-- REVISAR  -->
-                <prop key="AñadirIngredienteReceta.htm">Receta3Controller</prop>
+                
            
             </props>             
         </property>
@@ -62,7 +62,7 @@
    
    
    
-    <bean name="Receta3Controller" class="controller.Receta3Controller" />
+   
     <bean name="Receta2Controller" class="controller.Receta2Controller" />
     <bean name="RecetaController" class="controller.RecetaController" />
     <bean name="Ingrediente2Controller" class="controller.Ingrediente2Controller" />
