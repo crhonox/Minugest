@@ -46,6 +46,9 @@
             <li><a href="soluciones.htm">Soluciones</a></li>
             <li><a href="socios.htm">Socios</a></li>
             
+            
+            <li><a href="Encargado/ingrediente.htm"> Ingredientes </a> </li>
+            
         </ul>
             </div>
             <div id="center"></div>

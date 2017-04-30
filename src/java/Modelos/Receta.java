@@ -11,14 +11,16 @@ public class Receta
     private String idCategoria;
     private String nombreReceta;
     private String descripcionReceta;
+    private String porcionReceta;
 
     public Receta() {}
 
-    public Receta(String idReceta, String nombreReceta, String idCategoria, String descripcionReceta) {
+    public Receta(String idReceta, String nombreReceta, String idCategoria, String descripcionReceta, String porcionReceta) {
         this.idReceta = idReceta;
         this.idCategoria = idCategoria;
         this.nombreReceta = nombreReceta;
         this.descripcionReceta = descripcionReceta;
+        this.porcionReceta = porcionReceta;
     }
 
     public String getDescripcionReceta() {
@@ -37,6 +39,11 @@ public class Receta
         return nombreReceta;
     }
 
+    public String getPorcionReceta() {
+        return porcionReceta;
+    }
+    
+    
     public void setDescripcionReceta(String descripcionReceta) {
         this.descripcionReceta = descripcionReceta;
     }
@@ -52,6 +59,11 @@ public class Receta
     public void setNombreReceta(String nombreReceta) {
         this.nombreReceta = nombreReceta;
     }
+
+    public void setPorcionReceta(String porcionReceta) {
+        this.porcionReceta = porcionReceta;
+    }
+    
     
     
     

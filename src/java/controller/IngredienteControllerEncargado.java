@@ -14,20 +14,20 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class IngredienteController 
+public class IngredienteControllerEncargado 
 {
     private IngredienteValidate ingredienteValidate;
     private JdbcTemplate jdbcTemplate;
     
     
-    public IngredienteController()
+    public IngredienteControllerEncargado()
     {
         this.ingredienteValidate = new IngredienteValidate();
         Conexion con= new Conexion();
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping("ingrediente.htm")
+    @RequestMapping("Encargado/ingrediente.htm")
     public ModelAndView ingrediente()
     {
           ModelAndView mav= new ModelAndView();
@@ -42,7 +42,7 @@ public class IngredienteController
         List datos=this.jdbcTemplate.queryForList(sql);
         mav.addObject("datos",datos);
 
-        mav.setViewName("Administracion/ingrediente");
+        mav.setViewName("Encargado/ingrediente");
         return mav;
     }
     
@@ -50,7 +50,7 @@ public class IngredienteController
     public ModelAndView añadirIngrediente()
     {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("Administracion/AñadirIngrediente");
+        mav.setViewName("Encargado/AñadirIngrediente");
         List unidadMedida= this.jdbcTemplate.queryForList("select CODIGO_UNIDAD, NOMBRE_UNIDAD from UNIDAD_DE_MEDIDA");
       
         mav.addObject("unidadMedida",unidadMedida);
@@ -65,14 +65,14 @@ public class IngredienteController
         if(result.hasErrors())
         {
                 ModelAndView mav = new ModelAndView();
-                mav.setViewName("Administracion/AñadirIngrediente");
+                mav.setViewName("Encargado/AñadirIngrediente");
                 mav.addObject("ingrediente",new Ingrediente());
                 return mav;
         }else
         {
            
             this.jdbcTemplate.update("insert into INGREDIENTE (CODIGO_UNIDAD, NOMBRE_INGREDIENTE) values (?,?)" , ing.getUnidadMedida() ,ing.getNombreIngrediente());
-            return new ModelAndView("redirect:/ingrediente.htm");
+            return new ModelAndView("redirect:/Encargado/ingrediente.htm");
         }
         
     } 

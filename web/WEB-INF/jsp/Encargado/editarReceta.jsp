@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Minugest</title>
+        <title>Encargado</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     </head>
     <body>
@@ -42,6 +42,7 @@
                             <form:label path="descripcionReceta">Descripción  :</form:label>
                             <form:input path="descripcionReceta" cssClass="form-control"/>
                         </p>
+                        
                         <p>
                             <form:label path="porcionReceta">Cantidad de Porción  :</form:label>
                             <input type="number" id="porcionReceta" name="porcionReceta" cssClass="form-control"/>

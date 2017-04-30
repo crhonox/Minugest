@@ -17,17 +17,17 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Bayron Cruz C
  */
 @Controller
-public class RecetaController {
+public class RecetaControllerEncargado {
     private RecetaValidate recetaValidate;
     private JdbcTemplate jdbcTemplate;
 
-    public RecetaController() 
+    public RecetaControllerEncargado() 
     {
         this.recetaValidate = new RecetaValidate();
         Conexion con= new Conexion();
         this.jdbcTemplate = new JdbcTemplate(con.conectar());
     }
-    @RequestMapping("receta.htm")
+    @RequestMapping("Encargado/receta.htm")
     public ModelAndView receta()
     {
           ModelAndView mav= new ModelAndView();
@@ -44,7 +44,7 @@ public class RecetaController {
         List datos=this.jdbcTemplate.queryForList(sql);
         mav.addObject("datos",datos);
 
-        mav.setViewName("Administracion/receta");
+        mav.setViewName("Encargado/receta");
         return mav;
     }
     
@@ -52,7 +52,7 @@ public class RecetaController {
  public ModelAndView añadirReceta()
  {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("Administracion/AñadirReceta");
+        mav.setViewName("Encargado/AñadirReceta");
         List idCategoria = this.jdbcTemplate.queryForList("select CODIGO_CATEGORIA, NOMBRE_CATEGORIA from CATEGORIA");
         
         mav.addObject("idCategoria",idCategoria);
@@ -67,7 +67,7 @@ public class RecetaController {
         if(result.hasErrors())
         {
                 ModelAndView mav = new ModelAndView();
-                mav.setViewName("Administracion/AñadirReceta");
+                mav.setViewName("Encargado/AñadirReceta");
                 mav.addObject("receta",new Receta());
                 return mav;
         }else
@@ -76,9 +76,10 @@ public class RecetaController {
             this.jdbcTemplate.update("insert into RECETA (CODIGO_CATEGORIA, "
                     + "NOMBRE_RECETA, DESCRIPCION_RECETA, CANTIDAD_PORCION) "
                     + "values (?,?,?,?)" , rec.getIdCategoria(), rec.getNombreReceta(), rec.getDescripcionReceta(), rec.getPorcionReceta());
-            return new ModelAndView("redirect:/receta.htm");
+            return new ModelAndView("redirect:/Encargado/receta.htm");
          } 
  
     
     }
+    
 }

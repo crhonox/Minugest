@@ -21,13 +21,13 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("editarReceta.htm")
-public class Receta2Controller 
+@RequestMapping("Encargado/editarReceta.htm")
+public class Receta2ControllerEncargado 
 {
     private RecetaValidate recetaValidate;
     private JdbcTemplate jdbcTemplate;
 
-    public Receta2Controller() 
+    public Receta2ControllerEncargado() 
     {
         this.recetaValidate = new RecetaValidate();
         Conexion con = new Conexion();
@@ -42,7 +42,7 @@ public class Receta2Controller
         List idCategoria = this.jdbcTemplate.queryForList("select CODIGO_CATEGORIA, NOMBRE_CATEGORIA from CATEGORIA");
         mav.addObject("idCategoria",idCategoria);
         
-        mav.setViewName("Administracion/editarReceta");
+        mav.setViewName("Encargado/editarReceta");
         mav.addObject("receta",new Receta(idReceta, datos.getNombreReceta(), datos.getIdCategoria(), datos.getDescripcionReceta(), datos.getPorcionReceta()));
         return mav;
     }
@@ -62,7 +62,7 @@ public class Receta2Controller
              ModelAndView mav=new ModelAndView();
             String idReceta  = request.getParameter("idReceta");
             Receta datos = this.selectReceta(idReceta);
-            mav.setViewName("Administracion/editarReceta");
+            mav.setViewName("Encargado/editarReceta");
             mav.addObject("receta",new Receta(idReceta, datos.getNombreReceta(), datos.getIdCategoria(), datos.getDescripcionReceta(), datos.getPorcionReceta()));
             return mav;
         }
@@ -72,7 +72,7 @@ public class Receta2Controller
             this.jdbcTemplate.update( //REVISAR ORDEN UPDATE 
                         "update RECETA set  CODIGO_CATEGORIA=?, NOMBRE_RECETA=?, DESCRIPCION_RECETA=?, CANTIDAD_PORCION=? where CODIGO_RECETA=? ",
         rec.getIdCategoria(),  rec.getNombreReceta(), rec.getDescripcionReceta(), rec.getPorcionReceta(), idReceta);
-         return new ModelAndView("redirect:/receta.htm");
+         return new ModelAndView("redirect:/Encargado/receta.htm");
         }
        
     }

@@ -47,9 +47,13 @@
                 <prop key="editarIngrediente.htm">Ingrediente2Controller</prop>
                 <prop key="AñadirReceta.htm">RecetaController</prop>
                 <prop key="editarReceta.htm">Receta2Controller</prop>
-               <!-- REVISAR  -->
-                
-           
+               
+                <prop key="Encargado/ingrediente.htm">IngredienteControllerEncargado</prop>
+                <prop key="Encargado/AñadirIngrediente.htm">IngredienteControllerEncargado</prop>
+                <prop key="Encargado/editarIngrediente.htm">Ingrediente2ControllerEncargado</prop>
+                 <prop key="Encargado/receta.htm">RecetaControllerEncargado</prop>
+                <prop key="Encargado/AñadirReceta.htm">RecetaControllerEncargado</prop>
+                 <prop key="Encargado/editarReceta.htm">Receta2ControllerEncargado</prop>
             </props>             
         </property>
     </bean>
@@ -62,6 +66,10 @@
    
    
    
+    <bean name="Receta2ControllerEncargado" class="controller.Receta2ControllerEncargado" />
+    <bean name="RecetaControllerEncargado" class="controller.RecetaControllerEncargado" />
+    <bean name="Ingrediente2ControllerEncargado" class="controller.Ingrediente2ControllerEncargado" />
+    <bean name="IngredienteControllerEncargado" class="controller.IngredienteControllerEncargado" />
    
     <bean name="Receta2Controller" class="controller.Receta2Controller" />
     <bean name="RecetaController" class="controller.RecetaController" />
