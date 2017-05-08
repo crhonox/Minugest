@@ -22,8 +22,6 @@
                 <prop key="index.htm">indexController</prop>
                 <prop key="home.htm">homeController</prop>
                 <prop key="cliente.htm">AdministracionController</prop> 
-                <prop key="receta.htm">RecetaController</prop>  
-                <prop key="ingrediente.htm">IngredienteController</prop>
                 <prop key="AñadirCliente.htm">AdministracionController</prop>
                 <prop key="AñadirUsuario.htm">InfoclienteController</prop>
                 <prop key="editarUsuario.htm">UsereditController</prop>
@@ -43,17 +41,23 @@
                 <prop key="listaCasino.htm">CasinoController</prop>
                 <prop key="AñadirCasino.htm">CasinoController</prop>
                 <prop key="editarCasino.htm">CasinoeditController</prop>
-                <prop key="AñadirIngrediente.htm">IngredienteController</prop>
-                <prop key="editarIngrediente.htm">Ingrediente2Controller</prop>
-                <prop key="AñadirReceta.htm">RecetaController</prop>
-                <prop key="editarReceta.htm">Receta2Controller</prop>
+                
                
-                <prop key="Encargado/ingrediente.htm">IngredienteControllerEncargado</prop>
-                <prop key="Encargado/AñadirIngrediente.htm">IngredienteControllerEncargado</prop>
-                <prop key="Encargado/editarIngrediente.htm">Ingrediente2ControllerEncargado</prop>
-                 <prop key="Encargado/receta.htm">RecetaControllerEncargado</prop>
-                <prop key="Encargado/AñadirReceta.htm">RecetaControllerEncargado</prop>
-                 <prop key="Encargado/editarReceta.htm">Receta2ControllerEncargado</prop>
+                <prop key="ingrediente.htm">                IngredienteController</prop>
+                <prop key="AñadirIngrediente.htm">          IngredienteController</prop>
+                <prop key="editarIngrediente.htm">          IngredienteController</prop>
+                <prop key="Encargado/ingrediente.htm">      IngredienteController</prop>
+                <prop key="Encargado/AñadirIngrediente.htm">IngredienteController</prop>
+                <prop key="Encargado/editarIngrediente.htm">IngredienteController</prop>
+                <prop key="receta.htm">                     RecetaController</prop>
+                <prop key="AñadirReceta.htm">               RecetaController</prop>
+                <prop key="editarReceta.htm">               RecetaController</prop>
+                <prop key="Encargado/receta.htm">           RecetaController</prop>
+                <prop key="Encargado/editarReceta.htm">     RecetaController</prop>
+                <prop key="Encargado/AñadirReceta.htm">     RecetaController</prop>
+        
+                 
+                
             </props>             
         </property>
     </bean>
@@ -66,15 +70,9 @@
    
    
    
-    <bean name="Receta2ControllerEncargado" class="controller.Receta2ControllerEncargado" />
-    <bean name="RecetaControllerEncargado" class="controller.RecetaControllerEncargado" />
-    <bean name="Ingrediente2ControllerEncargado" class="controller.Ingrediente2ControllerEncargado" />
-    <bean name="IngredienteControllerEncargado" class="controller.IngredienteControllerEncargado" />
-   
-    <bean name="Receta2Controller" class="controller.Receta2Controller" />
     <bean name="RecetaController" class="controller.RecetaController" />
-    <bean name="Ingrediente2Controller" class="controller.Ingrediente2Controller" />
     <bean name="IngredienteController" class="controller.IngredienteController" />
+   
     <bean name="InfoclienteController" class="controller.InfoclienteController"/>
     <bean name="homeController" class="controller.homeController"/>
     <bean name="AdministracionController" class="controller.AdministracionController"/>
