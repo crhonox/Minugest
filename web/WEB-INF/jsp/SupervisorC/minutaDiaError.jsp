@@ -1,13 +1,9 @@
 <%-- 
-    Document   : minutaDia
-    Created on : 11-03-2017, 12:10:03 AM
+    Document   : minutaDiaError
+    Created on : 25-04-2017, 10:26:58 AM
     Author     : Sir Lekxas
 --%>
 
-<%@page import="java.util.GregorianCalendar"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.sql.Date"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,24 +33,9 @@
                 <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                <th>Nombre Minuta</th>
-                <th>Codigo</th>
-                <th>Casino</th>
-                <th>Usuario</th>
-                <th>Fecha</th>
+                    <th><center>No Existen Minutas Este Día</center></th>
                 </tr>
                 </thead>
-                <tbody>
-                    <c:forEach items="${datos}" var="dato">
-                        <tr>
-                            <td><c:out value="${dato.NOMBRE_MINUTA}"/></td>
-                            <td><c:out value="${dato.CODIGO_MINUTA}"/></td>
-                            <td><c:out value="${dato.CODIGO_CASINO}"/></td>
-                            <td><c:out value="${dato.CODIGO_USUARIO}"/></td>
-                            <td><c:out value="${dato.FECHA_MINUTA}"/></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
                 </table>
                 </div>
         </div>

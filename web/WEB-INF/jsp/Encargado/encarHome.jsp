@@ -8,10 +8,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <title>Minugest</title>
     </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+    <div> 
+        <div id="tituloleft"><h1 align="left">Logo</h1></div>
+        <div id="tituloright">
+         <ul><a href="login.htm"><span class="glyphicon glyphicon-user" aria-hidden="ture"></span>Cerrar sesión</a></ul>
+         <ul><a href="home.htm">Inicio</a></ul></div>
+                
+            <div id="titulocenter"><h1 align="center">Minugest</h1></div>
+               
+        <hr/>       
+            
+       </div>
+        
+        <div>
+        
+            <div id="center"></div>
+            
+            
+        </div>
 </html>

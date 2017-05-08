@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.*;
+import javax.servlet.http.HttpSession;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -61,6 +62,7 @@ public LoginController(){
      {
          this.loginValidate.validate(log, result);
          Login datos = this.loginSelect(log.getRut(),log.getPass());
+          
          if(result.hasErrors())
          {
         ModelAndView mav = new ModelAndView();
@@ -96,26 +98,6 @@ public LoginController(){
           {
               
           }
-     /*     String query = "SELECT CODIGO_PERFIL FROM USUARIO WHERE CODIGO_USUARIO = '"+log.getRut()+"' and PASS_USUARIO = '"+log.getPass()+"'";
-          return (Login) jdbcTemplate.query
-        (
-                query, new ResultSetExtractor<Login>() 
-            {
-                public Login extractData(ResultSet rs) throws SQLException, DataAccessException {
-                    if (rs.next()) {
-                        int cod = Integer.parseInt(rs.getString("CODIGO_PERFIL"));
-                    }
-                    
-                    if(){
-                        
-                    }
-                    return Login;
-                }
-
-
-            }
-        );*/
-          
          }
                     
          return new ModelAndView("redirect:/login.htm");

@@ -8,12 +8,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" href="ind.css" rel="stylesheet"/>
-        <title>JSP Page</title>
-        <%--  ${pageContext.request.contextPath} codigo para conseguir la ruta absoluta del directiorio
-              <c:url value="/resources/css/styles.css" />
-        --%>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <title>Minugest</title>
     </head>
     <body>
         <div> 
@@ -22,7 +19,7 @@
             
             
      <div id="tituloright">
-         <img src="user-icon.png" width="20" height="20"><ul><a href="login.htm">Iniciar sesión</a></ul>
+         <ul><a href="login.htm"><span class="glyphicon glyphicon-user" aria-hidden="ture"></span>Iniciar sesión</a></ul>
          <ul><a href="home.htm">Inicio</a></ul></div>
                 
             <div id="titulocenter"><h1 align="center">Minugest Nosotros </h1></div>
