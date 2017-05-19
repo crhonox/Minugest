@@ -12,7 +12,9 @@ public class Receta
     private String nombreReceta;
     private String descripcionReceta;
     private String porcionReceta;
-
+    private Integer remove; // boolean flag
+    private Minuta  minuta;
+    
     public Receta() {}
 
     public Receta(String idReceta, String nombreReceta, String idCategoria, String descripcionReceta, String porcionReceta) {
@@ -21,6 +23,22 @@ public class Receta
         this.nombreReceta = nombreReceta;
         this.descripcionReceta = descripcionReceta;
         this.porcionReceta = porcionReceta;
+    }
+
+    public Minuta getMinuta() {
+        return minuta;
+    }
+
+    public void setMinuta(Minuta minuta) {
+        this.minuta = minuta;
+    }
+
+    public Integer getRemove() {
+        return remove;
+    }
+
+    public void setRemove(Integer remove) {
+        this.remove = remove;
     }
 
     public String getDescripcionReceta() {

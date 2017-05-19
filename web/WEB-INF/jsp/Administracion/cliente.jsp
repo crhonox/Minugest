@@ -8,6 +8,7 @@
         <title>Minugest</title>
     </head>
     <body>
+        <a href="/Minugest/home">Volver al inicio</a> 
         <div class="container">
         <h1 align="center">Minugest</h1>
         <br>

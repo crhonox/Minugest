@@ -35,7 +35,7 @@ public class AdministracionController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping("cliente.htm")
+    @RequestMapping("Administracion/cliente.htm")
     public ModelAndView cliente()
     {
         ModelAndView mav= new ModelAndView();

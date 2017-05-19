@@ -1,5 +1,7 @@
 package Modelos;
 
+import java.util.List;
+
 public class Minuta {
 
     private String Nombre_Min;
@@ -7,6 +9,7 @@ public class Minuta {
     private String Codigo_Casi;
     private String Codigo_User;
     private String Fecha_Min;
+    private List<String>  IdReceta;
 
 public Minuta(){}
 
@@ -19,6 +22,21 @@ public Minuta(String Nombre_Min, String Codigo_Min, String Codigo_Casi, String C
     this.Fecha_Min = Fecha_Min;
 }
 
+    public List<String> getIdReceta() {
+        return IdReceta;
+    }
+
+    public void setIdReceta(List<String> IdReceta) {
+        this.IdReceta = IdReceta;
+    }
+
+public Minuta (String Nombre_Min, String Codigo_Min,String Codigo_Casi,String Fecha_Min)
+{
+    this.Nombre_Min = Nombre_Min;
+    this.Codigo_Min = Codigo_Min;
+    this.Codigo_Casi = Codigo_Casi;
+    this.Fecha_Min = Fecha_Min;
+}
 public String getNombre_Min() {
         return Nombre_Min;
     }
@@ -57,5 +75,8 @@ public String getFecha_Min() {
 
     public void setFecha_Min(String Fecha_Min) {
         this.Fecha_Min = Fecha_Min;
-    }    
+    } 
+
+    
+    
 }

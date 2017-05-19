@@ -3,7 +3,8 @@
     Created on : 09-03-2017, 20:38:14
     Author     : crhonox
 --%>
-
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
 <!DOCTYPE html>
@@ -30,7 +31,7 @@
              --%>
              
              
-         <a href="login.htm"><span class="glyphicon glyphicon-user" aria-hidden="ture"></span>Iniciar sesión</a></ul>
+         <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="ture"></span>Iniciar sesión</a></ul>
                 
      </div>
             <div id="titulocenter"><h1 align="center">Minugest</h1></div>
@@ -41,6 +42,7 @@
         
         <div>
         <div id="left">
+           
         <ul>          
             <li><a href="compañia.htm">Compañia</a></li>
             <li><a href="soluciones.htm">Soluciones</a></li>
@@ -51,7 +53,66 @@
             
         </ul>
             </div>
-            <div id="center"></div>
+            <div id="center">
+                <sec:authorize access="hasRole('AdministradorA')">
+		<!-- For login user -->
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<script>
+			function formSubmit() {
+				document.getElementById("logoutForm").submit();
+			}
+		</script>
+
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<h2>
+				User : ${pageContext.request.userPrincipal.name} | <a
+					href="javascript:formSubmit()"> Logout</a>
+                                        
+			</h2>
+                                        <h1>ESTE ROL ES EL ADMINISTRADOR</h1>
+                <ul>          
+            <li><a href="Administracion/cliente.htm">Clientes</a></li>
+     
+             </ul>
+		</c:if>
+                
+
+	</sec:authorize>
+                
+                
+                 <sec:authorize access="hasRole('Encargado')">
+		<!-- For login user -->
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<script>
+			function formSubmit() {
+				document.getElementById("logoutForm").submit();
+			}
+		</script>
+
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<h2>
+				User : ${pageContext.request.userPrincipal.name} | <a
+					href="javascript:formSubmit()"> Logout</a>
+                                        
+			</h2>
+                                        <h1>ESTE ROL ES EL ENCARGADO</h1>
+                <ul>          
+            <li><a href="Encargado/Minuta.htm">Planificacion de Minutas</a></li>
+     
+             </ul>
+		</c:if>
+                
+
+	</sec:authorize>
+            </div>
             
             
         </div>

@@ -30,11 +30,14 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
             <props>
                 <prop key="index.htm">indexController</prop>
                 <prop key="home.htm">homeController</prop>
-                <prop key="cliente.htm">AdministracionController</prop> 
-                <prop key="AñadirCliente.htm">AdministracionController</prop>
+                <prop key="/">homeController</prop>
+                <prop key="/welcome**">homeController</prop>
+                <prop key="Administracion/cliente.htm">AdministracionController</prop> 
+                <prop key="Administracion/AñadirCliente.htm">AdministracionController</prop>
                 <prop key="AñadirUsuario.htm">InfoclienteController</prop>
                 <prop key="editarUsuario.htm">UsereditController</prop>
-                <prop key="login.htm">LoginController</prop>
+                <prop key="/login">LoginController</prop>
+                <prop key="/403">LoginController</prop>
                 <prop key="compañia.htm">homeController</prop>
                 <prop key="socios.htm">homeController</prop>
                 <prop key="soluciones.htm">homeController</prop>
@@ -43,13 +46,18 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
                 <prop key="consultaExito.htm">SupervisorController</prop>
                 <prop key="consultaError.htm">SupervisorController</prop>
                 <prop key="minutaDia.htm">SupervisorController</prop>
-                <prop key="editarCliente.htm">ClienteController</prop>
+                <prop key="Administracion/editarCliente.htm">ClienteController</prop>
                 <prop key="admHome.htm">Administrador2Controller</prop>
                 <prop key="encarHome.htm">EncargadoController</prop>
-                <prop key="infoCliente.htm">InfoclienteController</prop>
+                <prop key="Administracion/infoCliente.htm">InfoclienteController</prop>
                 <prop key="listaCasino.htm">CasinoController</prop>
                 <prop key="AñadirCasino.htm">CasinoController</prop>
                 <prop key="editarCasino.htm">CasinoeditController</prop>
+                <prop key="Encargado/Minuta.htm">     MinutaController</prop>
+                <prop key="Encargado/AñadirMinuta.htm">MinutaController</prop>
+                <prop key="Encargado/ModificarMinuta.htm">MinutaController</prop>
+                <prop key="Encargado/RecetaMinuta.htm">MinutaController</prop>
+                <prop key="Encargado/getTags">MinutaController</prop>
                 
                
                 <prop key="ingrediente.htm">                IngredienteController</prop>
@@ -81,7 +89,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
    
     <bean name="RecetaController" class="controller.RecetaController" />
     <bean name="IngredienteController" class="controller.IngredienteController" />
-   
+    <bean name="MinutaController" class="controller.MinutaController" />
     <bean name="InfoclienteController" class="controller.InfoclienteController"/>
     <bean name="homeController" class="controller.homeController"/>
     <bean name="AdministracionController" class="controller.AdministracionController"/>
