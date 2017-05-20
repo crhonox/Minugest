@@ -33,7 +33,7 @@ public class RecetaController {
         this.jdbcTemplate = new JdbcTemplate(con.conectar());
     }
     //ADMINITRACIÓN =============================================================================
-    @RequestMapping("receta.htm")
+    @RequestMapping(value = "Administracion/receta.htm")
     public ModelAndView receta()
     {
           ModelAndView mav= new ModelAndView();
@@ -54,7 +54,7 @@ public class RecetaController {
         return mav;
     }
     
- @RequestMapping(method = RequestMethod.GET)
+ @RequestMapping(value = "Administracion/AñadirReceta.htm",method = RequestMethod.GET)
  public ModelAndView añadirReceta()
  {
         ModelAndView mav = new ModelAndView();
@@ -66,7 +66,7 @@ public class RecetaController {
         return mav;
  }
  
- @RequestMapping(method = RequestMethod.POST)
+ @RequestMapping(value = "Administracion/AñadirReceta.htm",method = RequestMethod.POST)
     public ModelAndView form (@ModelAttribute("receta") Receta rec, BindingResult result, SessionStatus status)  
     {
     this.recetaValidate.validate(rec, result);
@@ -177,7 +177,7 @@ public class RecetaController {
     
        }
         //ENCARGADO =========================================================================
-        @RequestMapping("Encargado/receta.htm")
+        @RequestMapping(value = "Encargado/receta.htm")
              public ModelAndView recetaEnc()
     {
           ModelAndView mav= new ModelAndView();

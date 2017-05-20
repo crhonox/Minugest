@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller 
 public class EncargadoController 
 {
-    @RequestMapping("encarHome.htm") 
+    @RequestMapping(value = "encarHome.htm") 
     public ModelAndView encarHome()
     {
         ModelAndView mav = new ModelAndView();

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller 
 public class Administrador2Controller 
 {
-    @RequestMapping("admHome.htm") 
+    @RequestMapping(value = "admHome.htm") 
     public ModelAndView admHome()
     {
         ModelAndView mav = new ModelAndView();

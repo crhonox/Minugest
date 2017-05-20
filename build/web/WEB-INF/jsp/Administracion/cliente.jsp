@@ -4,10 +4,11 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
         <title>Minugest</title>
     </head>
     <body>
+        <a href="/Minugest/home">Volver al inicio</a> 
         <div class="container">
         <h1 align="center">Minugest</h1>
         <br>
@@ -33,7 +34,7 @@
                     <c:forEach items="${datos}" var="dato" >
                         <tr>
                             <td><c:out value="${dato.RUT_EMPRESA}"/></td>
-                            <td><c:out value="${dato.NOMBRE_EMPRESA}"/></td>
+                            <td><a href="infoCliente.htm?rut=${dato.RUT_EMPRESA}"><c:out value="${dato.NOMBRE_EMPRESA}"/></a></td>
                             <td><c:out value="${dato.TELEFONO_EMPRESA}"/></td>
                             <td><c:out value="${dato.CORREO_EMPRESA}"/></td>
                             <td><c:out value="${dato.REGION_NOMBRE}"/></td>

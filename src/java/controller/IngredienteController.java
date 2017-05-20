@@ -33,7 +33,7 @@ public class IngredienteController
     }
     
     //ADMINSTRACIÓN ============================================================
-    @RequestMapping("ingrediente.htm")
+    @RequestMapping(value = "Administracion/ingrediente.htm")
     public ModelAndView ingrediente()
     {
           ModelAndView mav= new ModelAndView();
@@ -52,7 +52,7 @@ public class IngredienteController
         return mav;
     }
     
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "Administracion/AñadirIngrediente.htm",method = RequestMethod.GET)
     public ModelAndView añadirIngrediente()
     {
         ModelAndView mav = new ModelAndView();
@@ -64,7 +64,7 @@ public class IngredienteController
         return mav;
     }
      
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/Administracion/AñadirIngrediente.htm",method = RequestMethod.POST)
     public ModelAndView form (@ModelAttribute("ingrediente") Ingrediente ing, BindingResult result, SessionStatus status)  
     {
         this.ingredienteValidate.validate(ing, result);
@@ -165,7 +165,7 @@ public class IngredienteController
     
         //ENCARGADO ===========================================================
       //LISTAR
-    @RequestMapping("Encargado/ingrediente.htm")
+    @RequestMapping(value = "Encargado/ingrediente.htm")
     public ModelAndView ingredienteEnc()
     {
           ModelAndView mav= new ModelAndView();

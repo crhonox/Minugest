@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="<c:url value="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>"/>
+        <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
         <title>Minugest</title>
     </head>
     <body>

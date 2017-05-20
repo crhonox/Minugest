@@ -31,7 +31,7 @@ class UsereditController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping(method=RequestMethod.GET) 
+    @RequestMapping(value="Administracion/editarUsuario.htm",method=RequestMethod.GET) 
     public ModelAndView editarUsuario(HttpServletRequest request)
     {
         ModelAndView mav=new ModelAndView();
@@ -47,7 +47,7 @@ class UsereditController {
         return mav;
     }
     
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="Administracion/editarUsuario.htm",method = RequestMethod.POST)
     public ModelAndView form(@ModelAttribute ("usuario") Usuario user,BindingResult result, SessionStatus status  )
     {
         this.usuarioValidate.validate(user, result);

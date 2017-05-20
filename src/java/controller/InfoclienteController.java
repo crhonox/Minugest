@@ -34,7 +34,7 @@ public class InfoclienteController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-     @RequestMapping("infoCliente.htm") 
+     @RequestMapping(value = "infoCliente.htm") 
     public ModelAndView infoCliente(HttpServletRequest request)
     {
         ModelAndView mav=new ModelAndView();
@@ -45,7 +45,7 @@ public class InfoclienteController {
         return mav;
     }
        
-    @RequestMapping("listaUsuario.htm")
+    @RequestMapping(value = "listaUsuario.htm")
     public ModelAndView listaUsuario(HttpServletRequest request)
     {
        ModelAndView mav= new ModelAndView();
@@ -59,7 +59,7 @@ public class InfoclienteController {
         return mav;
     }
     
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="AñadirUsuario.htm",method = RequestMethod.GET)
     public ModelAndView añadirUsuario(HttpServletRequest request)
     {   
         ModelAndView mav = new ModelAndView();
@@ -75,7 +75,7 @@ public class InfoclienteController {
         return mav;
     }
     
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="AñadirUsuario.htm",method = RequestMethod.POST)
     public ModelAndView form(@ModelAttribute ("usuario") Usuario user,BindingResult result, SessionStatus status  )
     {
         this.usuarioValidate.validate(user, result);

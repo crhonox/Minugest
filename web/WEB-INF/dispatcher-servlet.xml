@@ -1,110 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns:mvc="http://www.springframework.org/schema/mvc"
-xmlns:p="http://www.springframework.org/schema/p"
-xmlns:tx="http://www.springframework.org/schema/tx"
-xmlns:context="http://www.springframework.org/schema/context"
-xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
-                    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd     
-                    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-                    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-    <!-- the mvc resources tag does the magic -->
+    <context:component-scan base-package="controller" />
 
- 
-
-    <!-- also add the following beans to get rid of some exceptions -->
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/> 
-    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
-
-    <!--
-    Most controllers will use the ControllerClassNameHandlerMapping above, but
-    for the index controller we are using ParameterizableViewController, so we must
-    define an explicit mapping for it.
-    -->
-     
-    
-    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="mappings">
-            <props>
-                <prop key="index.htm">indexController</prop>
-                <prop key="home.htm">homeController</prop>
-                <prop key="/">homeController</prop>
-                <prop key="/welcome**">homeController</prop>
-                <prop key="Administracion/cliente.htm">AdministracionController</prop> 
-                <prop key="Administracion/AñadirCliente.htm">AdministracionController</prop>
-                <prop key="AñadirUsuario.htm">InfoclienteController</prop>
-                <prop key="editarUsuario.htm">UsereditController</prop>
-                <prop key="/login">LoginController</prop>
-                <prop key="/403">LoginController</prop>
-                <prop key="compañia.htm">homeController</prop>
-                <prop key="socios.htm">homeController</prop>
-                <prop key="soluciones.htm">homeController</prop>
-                <prop key="listaUsuario.htm">InfoclienteController</prop>
-                <prop key="consultaMinuta.htm">SupervisorController</prop>
-                <prop key="consultaExito.htm">SupervisorController</prop>
-                <prop key="consultaError.htm">SupervisorController</prop>
-                <prop key="minutaDia.htm">SupervisorController</prop>
-                <prop key="Administracion/editarCliente.htm">ClienteController</prop>
-                <prop key="admHome.htm">Administrador2Controller</prop>
-                <prop key="encarHome.htm">EncargadoController</prop>
-                <prop key="Administracion/infoCliente.htm">InfoclienteController</prop>
-                <prop key="listaCasino.htm">CasinoController</prop>
-                <prop key="AñadirCasino.htm">CasinoController</prop>
-                <prop key="editarCasino.htm">CasinoeditController</prop>
-                <prop key="Encargado/Minuta.htm">     MinutaController</prop>
-                <prop key="Encargado/AñadirMinuta.htm">MinutaController</prop>
-                <prop key="Encargado/ModificarMinuta.htm">MinutaController</prop>
-                <prop key="Encargado/RecetaMinuta.htm">MinutaController</prop>
-                <prop key="Encargado/getTags">MinutaController</prop>
-                
-               
-                <prop key="ingrediente.htm">                IngredienteController</prop>
-                <prop key="AñadirIngrediente.htm">          IngredienteController</prop>
-                <prop key="editarIngrediente.htm">          IngredienteController</prop>
-                <prop key="Encargado/ingrediente.htm">      IngredienteController</prop>
-                <prop key="Encargado/AñadirIngrediente.htm">IngredienteController</prop>
-                <prop key="Encargado/editarIngrediente.htm">IngredienteController</prop>
-                <prop key="receta.htm">                     RecetaController</prop>
-                <prop key="AñadirReceta.htm">               RecetaController</prop>
-                <prop key="editarReceta.htm">               RecetaController</prop>
-                <prop key="Encargado/receta.htm">           RecetaController</prop>
-                <prop key="Encargado/editarReceta.htm">     RecetaController</prop>
-                <prop key="Encargado/AñadirReceta.htm">     RecetaController</prop>
-        
-                 
-                
-            </props>             
-        </property>
-    </bean>
-
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/jsp/"
-          p:suffix=".jsp" />
-
-   
-   
-   
-    <bean name="RecetaController" class="controller.RecetaController" />
-    <bean name="IngredienteController" class="controller.IngredienteController" />
-    <bean name="MinutaController" class="controller.MinutaController" />
-    <bean name="InfoclienteController" class="controller.InfoclienteController"/>
-    <bean name="homeController" class="controller.homeController"/>
-    <bean name="AdministracionController" class="controller.AdministracionController"/>
-    <bean name="SupervisorController" class="controller.SupervisorController"/>
-    <bean name="LoginController" class="controller.LoginController"/>
-    <bean name="ClienteController" class="controller.ClienteController"/>
-    <bean name="Administrador2Controller" class="controller.Administrador2Controller"/>
-    <bean name="CasinoController" class="controller.CasinoController"/>
-    <bean name="CasinoeditController" class="controller.CasinoeditController"/>
-    <bean name="UsereditController" class="controller.UsereditController"/>
-    <bean name="EncargadoController" class="controller.EncargadoController"/>
-    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />
-<mvc:default-servlet-handler/>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+        <mvc:resources mapping="/resources/**" location="/resources/"/>
+	<mvc:annotation-driven/>
 
     
 </beans>

@@ -39,7 +39,7 @@ public class SupervisorController {
     }
     
     
-    @RequestMapping("minutaDia.htm")
+    @RequestMapping(value = "minutaDia.htm")
     public ModelAndView minutaDia()
     {
        
@@ -79,7 +79,7 @@ public class SupervisorController {
     }
     
     
-    @RequestMapping("consultaExito.htm")
+    @RequestMapping(value = "consultaExito.htm")
     public ModelAndView consultaExito()
     {
         ModelAndView mav= new ModelAndView();
@@ -87,7 +87,7 @@ public class SupervisorController {
         return mav;
     }
     
-    @RequestMapping("consultaError.htm")
+    @RequestMapping(value = "consultaError.htm")
     public ModelAndView consultaError()
     {
         ModelAndView mav = new ModelAndView();
@@ -95,7 +95,7 @@ public class SupervisorController {
         return mav;
     }
  
-    @RequestMapping("minutaDiaError.htm")
+    @RequestMapping(value = "minutaDiaError.htm")
     public ModelAndView minutaDiaError()
     {
         ModelAndView mav = new ModelAndView();
@@ -103,7 +103,7 @@ public class SupervisorController {
         return mav;
     }
     
-    @RequestMapping(method=RequestMethod.GET) 
+    @RequestMapping(value = "SupervisorC/consultaMinuta.htm",method=RequestMethod.GET) 
     public ModelAndView consultarMinuta()
     {
         ModelAndView mav=new ModelAndView();
@@ -112,7 +112,7 @@ public class SupervisorController {
         return mav;
     }
     
-    @RequestMapping(method=RequestMethod.POST) 
+    @RequestMapping(value = "SupervisorC/consultaMinuta.htm",method=RequestMethod.POST) 
     public ModelAndView conMinuta(@ModelAttribute ("minuta") Minuta minu)
     {
         String Fecha = minu.getFecha_Min();

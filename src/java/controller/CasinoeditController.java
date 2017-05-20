@@ -29,7 +29,7 @@ public class CasinoeditController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping("eliminarCasino.htm") 
+    @RequestMapping(value = "eliminarCasino.htm") 
     public ModelAndView eliminarCasino(HttpServletRequest request){
         
          String cod=request.getParameter("cod");
@@ -40,7 +40,7 @@ public class CasinoeditController {
          return new ModelAndView("redirect:/listaCasino.htm?rut="+datos.getRutEmpresa());
     }
      
-     @RequestMapping(method=RequestMethod.GET) 
+     @RequestMapping(value ="EditarCasino.htm" ,method=RequestMethod.GET) 
     public ModelAndView editarCasino(HttpServletRequest request)
     {
         ModelAndView mav=new ModelAndView();
@@ -51,7 +51,7 @@ public class CasinoeditController {
         return mav;
     }
     
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(value ="EditarCasino.htm" ,method=RequestMethod.POST)
     public ModelAndView form
         (
                 @ModelAttribute("casino") Casino cas,

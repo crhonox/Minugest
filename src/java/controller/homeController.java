@@ -11,28 +11,28 @@
     @Controller
     public class homeController {
 
-        @RequestMapping(value = {"/**", "/home**", "/welcome**"}, method = RequestMethod.GET)
+        @RequestMapping(value = {"/", "/home**", "/welcome**"}, method = RequestMethod.GET)
         public ModelAndView home() {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("home");
             return mav;
         }
 
-        @RequestMapping("compañia.htm")
+        @RequestMapping(value = "compañia.htm")
         public ModelAndView compañia() {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("Login/compañia");
             return mav;
         }
 
-        @RequestMapping("socios.htm")
+        @RequestMapping(value = "socios.htm")
         public ModelAndView socios() {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("Login/socios");
             return mav;
         }
 
-        @RequestMapping("soluciones.htm")
+        @RequestMapping(value = "soluciones.htm")
         public ModelAndView soluciones() {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("Login/soluciones");

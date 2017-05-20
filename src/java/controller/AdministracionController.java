@@ -35,7 +35,7 @@ public class AdministracionController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping("Administracion/cliente.htm")
+    @RequestMapping(value = "Administracion/cliente.htm")
     public ModelAndView cliente()
     {
         ModelAndView mav= new ModelAndView();
@@ -59,7 +59,7 @@ public class AdministracionController {
         return mav;
     }
            
-    @RequestMapping("receta.htm")
+    @RequestMapping(value = "receta.htm")
     public ModelAndView receta()
     {
         ModelAndView mav= new ModelAndView();
@@ -67,7 +67,7 @@ public class AdministracionController {
         return mav;
     }
     
-    @RequestMapping("ingrediente.htm")
+    @RequestMapping(value = "ingrediente.htm")
     public ModelAndView ingrediente()
     {
         ModelAndView mav= new ModelAndView();
@@ -78,7 +78,7 @@ public class AdministracionController {
   
     
     
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "AñadirCliente.htm",method = RequestMethod.GET)
     public ModelAndView añadirCliente()
     {   
         ModelAndView mav = new ModelAndView();
@@ -91,7 +91,7 @@ public class AdministracionController {
         return mav;
     }
     
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "AñadirCliente.htm",method = RequestMethod.POST)
     public ModelAndView form(@ModelAttribute ("cliente") Cliente cli,BindingResult result, SessionStatus status  )
     {
         this.clienteValidate.validate(cli, result);

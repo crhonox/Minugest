@@ -32,7 +32,7 @@ public class CasinoController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping("listaCasino.htm")
+    @RequestMapping(value = "listaCasino.htm")
     public ModelAndView listadoCasino(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         String rut= request.getParameter("rut");
@@ -44,7 +44,7 @@ public class CasinoController {
         return mav;
     }
     
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "AñadirCasino.htm",method = RequestMethod.GET)
     public ModelAndView añadirCasino(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         String rut = request.getParameter("rutemp");
@@ -54,7 +54,7 @@ public class CasinoController {
         return mav;
     }
     
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "AñadirCasino.htm",method = RequestMethod.POST)
     public ModelAndView form(@ModelAttribute ("casino") Casino cas,BindingResult result, SessionStatus status  )
     {
         this.casinoValidate.validate(cas, result);

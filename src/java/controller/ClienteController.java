@@ -24,7 +24,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Controller
-@RequestMapping("editarCliente.htm")
 public class ClienteController {
     private ClienteValidate clienteValidate;
     
@@ -36,7 +35,7 @@ public class ClienteController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping(method=RequestMethod.GET) 
+    @RequestMapping(value="editarCliente.htm",method=RequestMethod.GET) 
     public ModelAndView editarCliente(HttpServletRequest request)
     {
         ModelAndView mav=new ModelAndView();
@@ -53,7 +52,7 @@ public class ClienteController {
         return mav;
     }
     
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(value="editarCliente.htm",method=RequestMethod.POST)
     public ModelAndView form
         (
                 @ModelAttribute("cliente") Cliente cli,
