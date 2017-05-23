@@ -214,6 +214,30 @@ public class MinutaController {
  
     
     }
+    
+    @RequestMapping(value = "/Encargado/DetalleMinuta.htm",method = RequestMethod.GET)
+    public ModelAndView DetalleMinuta(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Encargado/DetalleMinuta");
+        String Codigo = request.getParameter("COD");
+        Minuta datos = selectMinuta(Codigo);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String user=userDetail.getUsername();
+        String Nombre=datos.getNombre_Min();
+        String fecha=datos.getFecha_Min();
+        String codcasino=datos.getCodigo_Casi();
+        String Casino=this.jdbcTemplate.queryForObject("SELECT NOMBRE_CASINO from CASINO where CODIGO_CASINO='"+codcasino+"'", String.class);
+        String Usuario= this.jdbcTemplate.queryForObject("SELECT NOMBRE_USUARIO from USUARIO where CODIGO_USUARIO='"+user+"'", String.class);
+        List Recetas = this.jdbcTemplate.queryForList("SELECT RECETAMINUTA.CODIGO_RECETA,NOMBRE_RECETA,RECETAMINUTA.CANTIDAD_PORCION from RECETA inner join RECETAMINUTA on RECETA.CODIGO_RECETA=RECETAMINUTA.CODIGO_RECETA where CODIGO_MINUTA='"+Codigo+"'");
+        mav.addObject("casino",Casino);
+        mav.addObject("nombre",Nombre);
+        mav.addObject("fecha",fecha);
+        mav.addObject("usuario",Usuario);
+        mav.addObject("recetas",Recetas);
+        mav.addObject("Minuta",new Minuta(datos.getNombre_Min(),Codigo,datos.getCodigo_Casi(),datos.getFecha_Min()));
+        return mav;
+    }
    
     
     

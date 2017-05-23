@@ -8,12 +8,12 @@
     <head>
         <meta charset="UTF-8"/>
 
-        <script type="text/javascript" src="<c:url value="/bower_components/jquery/jquery.min.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/bower_components/moment/min/moment.min.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/bower_components/bootstrap/dist/js/bootstrap.min.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"/>"></script>
-  <link rel="stylesheet" href="<c:url value="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>" />
-  <link rel="stylesheet" href="<c:url value="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>" />
+        <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/js/moment.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datetimepicker.min.js"/>"></script>
+  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>" />
+  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" />
   
         <title>Encargado</title>
     </head>

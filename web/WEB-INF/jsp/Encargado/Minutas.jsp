@@ -30,7 +30,7 @@
                 <tbody>
                     <c:forEach items="${minutas}" var="dato" >
                         <tr>
-                            <td><c:out value="${dato.NOMBRE_MINUTA}"/></td>
+                            <td><a href="DetalleMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><c:out value="${dato.NOMBRE_MINUTA}"/></a></td>
                             <td><c:out value="${dato.NOMBRE_CASINO}"/></td>
                             <td><c:out value="${dato.CODIGO_USUARIO}"/></td>
                             <td><c:out value="${dato.FECHA_MINUTA}"/></td>
