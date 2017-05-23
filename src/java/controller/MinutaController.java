@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -39,16 +41,9 @@ public class MinutaController {
         Conexion con= new Conexion();
         this.minutaValidate = new MinutaValidate();
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
-        data.add(new Tag(1, "ruby"));//PRUEBA
-		data.add(new Tag(2, "rails"));
-		data.add(new Tag(3, "c / c++"));
-		data.add(new Tag(4, ".net"));
-		data.add(new Tag(5, "python"));
-		data.add(new Tag(6, "java"));
-		data.add(new Tag(7, "javascript"));
-		data.add(new Tag(8, "jscript"));
+        
     }
-//-----------------------------CODIGO DE PRUEBA-------------------//    
+//----------------------------INICIO-CODIGO DE PRUEBA-------------------//    
 @RequestMapping(value = "Encargado/getTags", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Tag> getTags(@RequestParam String tagName) {
@@ -62,6 +57,19 @@ public class MinutaController {
 		List<Tag> result = new ArrayList<Tag>();
 
 		// iterate a list and filter by tagName
+                String quer="SELECT CODIGO_RECETA,NOMBRE_RECETA FROM RECETA";
+
+
+	List<Map<String, Object>> rows = this.jdbcTemplate.queryForList(quer);
+	for (Map row : rows) {
+		Tag tag = new Tag();
+		tag.setId((int) (row.get("CODIGO_RECETA")));
+		tag.setTagName((String) (row.get("NOMBRE_RECETA")));
+		data.add(new Tag(tag.getId(),tag.getTagName()));
+		;
+	}
+
+                
 		for (Tag tag : data) {
 			if (tag.getTagName().contains(tagName)) {
 				result.add(tag);
@@ -70,7 +78,7 @@ public class MinutaController {
 
 		return result;
 	}       
-  //---------------------------CODIGO DE PUREBA--------------------------//  
+  //---------------------------FIN-CODIGO DE PUREBA--------------------------//  
     @RequestMapping(value = "/Encargado/Minuta.htm")
     public ModelAndView Minuta(){
         ModelAndView mav = new ModelAndView();
@@ -180,17 +188,34 @@ public class MinutaController {
         mav.setViewName("Encargado/RecetaMinuta");
         String Codigo = request.getParameter("COD");
         Minuta datos = selectMinuta(Codigo);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetail = (UserDetails) auth.getPrincipal();
-        String user=userDetail.getUsername();
-        String rut_emp= this.jdbcTemplate.queryForObject("SELECT RUT_EMPRESA from USUARIO inner join CASINO on USUARIO.CODIGO_CASINO = CASINO.CODIGO_CASINO where CODIGO_USUARIO='"+user+"'", String.class);
-        List casino = this.jdbcTemplate.queryForList("select CODIGO_CASINO, NOMBRE_CASINO from CASINO where RUT_EMPRESA='"+rut_emp+"'");
-        mav.addObject("casino",casino);
-        List Recetas= this.jdbcTemplate.queryForList("SELECT NOMBRE_RECETA FROM RECETA");
+        List Recetas= this.jdbcTemplate.queryForList("SELECT CODIGO_RECETA,NOMBRE_RECETA FROM RECETA");
         mav.addObject("Receta",Recetas);
-        mav.addObject("ReMinuta",new Minuta(datos.getNombre_Min(),Codigo,datos.getCodigo_Casi(),datos.getFecha_Min()));
+        mav.addObject("Minuta",new Minuta(datos.getNombre_Min(),Codigo,datos.getCodigo_Casi(),datos.getFecha_Min()));
         return mav;
     }
+    
+     @RequestMapping(value = "/Encargado/RecetaMinuta.htm",method = RequestMethod.POST)
+    public ModelAndView RecetaInsertMinuta (@ModelAttribute("Minuta") Minuta minuta, BindingResult result, SessionStatus status,HttpServletRequest request)  
+    {
+             String Codigo = request.getParameter("COD");
+             List<String> lista = new ArrayList<>();
+             List<String> lista2 = new ArrayList<>();
+             lista = minuta.getCombobox();
+             lista2 = minuta.getCantidad();
+             for (int i = 0; i < lista.size(); i++) {
+            this.jdbcTemplate.update("insert into RECETAMINUTA (CODIGO_RECETA, "
+                    + "CODIGO_MINUTA,CANTIDAD_PORCION)"
+                    + "values (?,?,?)" , lista.get(i),Codigo,lista2.get(i));
+        }
+             
+              
+            return new ModelAndView("redirect:/Encargado/Minuta.htm");
+          
+ 
+    
+    }
+   
+    
     
      public Minuta selectMinuta(String COD) 
     {

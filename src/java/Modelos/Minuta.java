@@ -9,7 +9,18 @@ public class Minuta {
     private String Codigo_Casi;
     private String Codigo_User;
     private String Fecha_Min;
-    private List<String>  IdReceta;
+    private List<String>  combobox;
+    private List<String> Cantidad;
+
+    public List<String> getCantidad() {
+        return Cantidad;
+    }
+
+    public void setCantidad(List<String> Cantidad) {
+        this.Cantidad = Cantidad;
+    }
+
+    
 
 public Minuta(){}
 
@@ -22,13 +33,15 @@ public Minuta(String Nombre_Min, String Codigo_Min, String Codigo_Casi, String C
     this.Fecha_Min = Fecha_Min;
 }
 
-    public List<String> getIdReceta() {
-        return IdReceta;
+    public List<String> getCombobox() {
+        return combobox;
     }
 
-    public void setIdReceta(List<String> IdReceta) {
-        this.IdReceta = IdReceta;
+    public void setCombobox(List<String> combobox) {
+        this.combobox = combobox;
     }
+
+   
 
 public Minuta (String Nombre_Min, String Codigo_Min,String Codigo_Casi,String Fecha_Min)
 {

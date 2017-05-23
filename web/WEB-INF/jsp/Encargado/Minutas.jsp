@@ -22,6 +22,7 @@
                 <th>Casino</th>
                 <th>Usuario</th>
                 <th>Fecha</th>
+                <th>Recetas</th>
                 <th>Acciones</th>
                 
                     </tr>
@@ -33,8 +34,8 @@
                             <td><c:out value="${dato.NOMBRE_CASINO}"/></td>
                             <td><c:out value="${dato.CODIGO_USUARIO}"/></td>
                             <td><c:out value="${dato.FECHA_MINUTA}"/></td>
-                            <td><a href="RecetaMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>     
-                            <a href="ModificarMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>     
+                            <td><a href="RecetaMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-plus" aria-hidden="true">Añadir</span></a></td>    
+                            <td><a href="ModificarMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>     
                         </tr>
                     </c:forEach>
                 </tbody>

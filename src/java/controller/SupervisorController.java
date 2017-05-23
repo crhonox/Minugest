@@ -46,7 +46,7 @@ public class SupervisorController {
         long milis = System.currentTimeMillis();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date resultdate = new Date(milis);
-        
+        String fecha = sdf.format(resultdate);
         
         ModelAndView mav= new ModelAndView();
         String sql ="SELECT\n" +

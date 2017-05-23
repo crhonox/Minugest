@@ -14,6 +14,19 @@ public class Tag {
 
 	public int id;
 	public String tagName;
+        public String idMinuta;
+
+    public String getIdMinuta() {
+        return idMinuta;
+    }
+
+    public void setIdMinuta(String idMinuta) {
+        this.idMinuta = idMinuta;
+    }
+
+   
+
+    
 
     public int getId() {
         return id;
@@ -32,7 +45,14 @@ public class Tag {
     }
 
 	//getter and setter methods
-
+        
+        public Tag() {  
+        }
+        
+        public Tag(String idMinuta){
+            this.idMinuta=idMinuta;
+        }
+        
 	public Tag(int id, String tagName) {
 		this.id = id;
 		this.tagName = tagName;
