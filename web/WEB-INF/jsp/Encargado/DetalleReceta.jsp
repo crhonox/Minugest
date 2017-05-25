@@ -27,48 +27,47 @@
                    
                     <div class="panel-heading"> 
                         <ol class="breadcrumb">
-                <li><a href="<c:url value="Minuta.htm" />">Listado de Minutas</a></li>
-                <li class="active"> Detalle de Minuta</li>
+                <li><a href="<c:url value="receta.htm" />">Listado de Recetas</a></li>
+                <li class="active"> Detalle de Receta</li>
                 </ol>
                     </div>
                     <div class="panel-body">
                         <table>
                             <tr>
-                                <td><label>Nombre de Minuta: </label></td>
+                                <td><label>Nombre de Receta: </label></td>
                                 <td><c:out value="${nombre}"/></td>
                             </tr>
                             <tr>
-                                <td><label>Fecha de Minuta: </label></td>
-                                <td><c:out value="${fecha}"/></td>
+                                <td><label>Categoria: </label></td>
+                                <td><c:out value="${categoria}"/></td>
                             </tr>
                             <tr>
-                                <td><label>Casino asociado: </label></td>
+                                <td><label>Porciones: </label></td>
                                 <td><c:out value="${casino}"/></td>
                             </tr>
-                            <tr>
-                                <td><label>Creador de Minuta: </label></td>
-                                <td><c:out value="${usuario}"/></td>
-                            </tr>
+                           
                             
                         </table>
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                <th><label>Recetas asignadas </label></th>
-                                <th><label>Porciones </label></th>
+                                <th><label>Ingredientes asignadas </label></th>
+                                <th><label>Cantidad </label></th>
+                                <th><label>Unidad de Medida </label></th>
                                 <th><label>Acciones </label></th>
                                     </tr>
                             </thead>
-                            <c:forEach items="${recetas}" var="dato" >
+                            <c:forEach items="${ingredientes}" var="dato" >
                                 <tr>
-                                <td><c:out value="${dato.NOMBRE_RECETA}"/></td>
-                                <td><c:out value="${dato.CANTIDAD_PORCION}"/></td>
-                                <td><a href="EliminarReceta.htm?CODM=${CODM}&CODR=${dato.CODIGO_RECETA}" onclick="return confirm('Esta seguro que quiere eliminar esta Receta?');">Eliminar</a></td>
+                                <td><c:out value="${dato.NOMBRE_INGREDIENTE}"/></td>
+                                <td><c:out value="${dato.CANTIDAD_INGREDIENTE}"/></td>
+                                <td><c:out value="${dato.NOMBRE_UNIDAD}"/></td>
+                                <td><a href="EliminarIngrediente.htm?CODR=${codigo}&CODI=${dato.CODIGO_INGREDIENTE}" onclick="return confirm('Esta seguro que quiere eliminar esta Receta?');">Eliminar</a></td>
                                 
                             </tr>
                             </c:forEach>
                             </table>
-                            <a href="RecetaMinuta.htm?COD=${CODM}" ><span class="glyphicon glyphicon-plus" aria-hidden="true">Añadir</span></a>
+                            <a href="AñadirIngredienteReceta.htm?idReceta=${codigo}" ><span class="glyphicon glyphicon-plus" aria-hidden="true">Añadir</span></a>
     
                     </div>
                 </div>

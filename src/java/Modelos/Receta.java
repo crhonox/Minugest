@@ -1,5 +1,7 @@
 package Modelos;
 
+import java.util.List;
+
 /**
  *
  * @author Bayron Cruz C
@@ -14,6 +16,25 @@ public class Receta
     private String porcionReceta;
     private Integer remove; // boolean flag
     private Minuta  minuta;
+    private List<String>  combobox;
+    private List<String> Cantidad;
+
+    public List<String> getCombobox() {
+        return combobox;
+    }
+
+    public void setCombobox(List<String> combobox) {
+        this.combobox = combobox;
+    }
+
+    public List<String> getCantidad() {
+        return Cantidad;
+    }
+
+    public void setCantidad(List<String> Cantidad) {
+        this.Cantidad = Cantidad;
+    }
+   
     
     public Receta() {}
 

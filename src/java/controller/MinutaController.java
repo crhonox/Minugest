@@ -235,11 +235,19 @@ public class MinutaController {
         mav.addObject("fecha",fecha);
         mav.addObject("usuario",Usuario);
         mav.addObject("recetas",Recetas);
+        mav.addObject("CODM",Codigo);
         mav.addObject("Minuta",new Minuta(datos.getNombre_Min(),Codigo,datos.getCodigo_Casi(),datos.getFecha_Min()));
         return mav;
     }
    
-    
+    @RequestMapping(value = "/Encargado/EliminarReceta.htm",method = RequestMethod.GET)
+    public ModelAndView EliminarReceta(HttpServletRequest request){
+        String CodigoM = request.getParameter("CODM");
+        String CodigoR = request.getParameter("CODR");
+        String Query = "DELETE FROM `Minugest`.`RECETAMINUTA` WHERE CODIGO_RECETA='"+CodigoR+"' AND CODIGO_MINUTA='"+CodigoM+"'";
+        this.jdbcTemplate.execute(Query);
+        return new ModelAndView("redirect:/Encargado/DetalleMinuta.htm?COD="+CodigoM);
+    }
     
      public Minuta selectMinuta(String COD) 
     {

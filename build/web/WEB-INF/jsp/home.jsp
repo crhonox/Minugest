@@ -106,6 +106,7 @@
                                         <h1>ESTE ROL ES EL ENCARGADO</h1>
                 <ul>          
             <li><a href="Encargado/Minuta.htm">Planificacion de Minutas</a></li>
+            <li><a href="Encargado/receta.htm">Gestion de Recetas</a></li>
      
              </ul>
 		</c:if>

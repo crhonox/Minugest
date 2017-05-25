@@ -9,7 +9,10 @@
             <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/controller/MinutaController.java</file>
             <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/dispatcher-servlet.xml</file>
             <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Encargado/AñadirMinuta.jsp</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Encargado/DetalleMinuta.jsp</file>
             <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Encargado/Minutas.jsp</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Encargado/ModificarMinuta.jsp</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/Modelos/Minuta.java</file>
         </group>
     </open-files>
 </project-private>

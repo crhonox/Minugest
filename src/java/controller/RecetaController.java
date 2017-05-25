@@ -5,6 +5,7 @@ import Modelos.Receta;
 import Modelos.RecetaValidate;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataAccessException;
@@ -275,6 +276,68 @@ public class RecetaController {
         }
        
     }
+        
+        @RequestMapping(value="Encargado/AñadirIngredienteReceta.htm",method=RequestMethod.GET)
+    public ModelAndView RecetaIngrediente (HttpServletRequest request)
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Encargado/IngredienteReceta");
+        String idReceta  = request.getParameter("idReceta");
+        Receta datos = this.selectReceta(idReceta);
+        List idCategoria = this.jdbcTemplate.queryForList("select CODIGO_CATEGORIA, NOMBRE_CATEGORIA from CATEGORIA");
+        List ingrediente= this.jdbcTemplate.queryForList("SELECT CODIGO_INGREDIENTE,NOMBRE_INGREDIENTE,UNIDAD_DE_MEDIDA.NOMBRE_UNIDAD FROM INGREDIENTE inner join UNIDAD_DE_MEDIDA on UNIDAD_DE_MEDIDA.CODIGO_UNIDAD=INGREDIENTE.CODIGO_UNIDAD;");
+        mav.addObject("idReceta",idReceta);
+        mav.addObject("ingrediente",ingrediente);
+        mav.addObject("nombre",datos.getNombreReceta());
+        mav.addObject("porcion",datos.getPorcionReceta());
+        mav.addObject("receta",new Receta(idReceta, datos.getNombreReceta(), datos.getIdCategoria(), datos.getDescripcionReceta(), datos.getPorcionReceta()));
+        return mav;
+    }
+    
+    @RequestMapping(value = "/Encargado/AñadirIngredienteReceta.htm",method = RequestMethod.POST)
+    public ModelAndView IngredienteInsertReceta (@ModelAttribute("Receta") Receta receta, BindingResult result, SessionStatus status,HttpServletRequest request)  
+    {
+             String Codigo = request.getParameter("idReceta");
+             List<String> lista = new ArrayList<>();
+             List<String> lista2 = new ArrayList<>();
+             lista = receta.getCombobox();
+             lista2 = receta.getCantidad();
+             for (int i = 0; i < lista.size(); i++) {
+            this.jdbcTemplate.update("insert into RECETAINGREDIENTE (CODIGO_RECETA, "
+                    + "CODIGO_INGREDIENTE,CANTIDAD_INGREDIENTE)"
+                    + "values (?,?,?)" , Codigo,lista.get(i),lista2.get(i));
+        }
+             
+              
+            return new ModelAndView("redirect:/Encargado/receta.htm");
+    
+    }
+    
+    @RequestMapping(value = "/Encargado/DetalleReceta.htm",method = RequestMethod.GET)
+    public ModelAndView DetalleReceta(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Encargado/DetalleReceta");
+        String Codigo = request.getParameter("COD");
+        Receta datos = this.selectReceta(Codigo);
+        List ingrediente= this.jdbcTemplate.queryForList("SELECT INGREDIENTE.CODIGO_INGREDIENTE,NOMBRE_INGREDIENTE,UNIDAD_DE_MEDIDA.NOMBRE_UNIDAD,RECETAINGREDIENTE.CANTIDAD_INGREDIENTE FROM INGREDIENTE inner join UNIDAD_DE_MEDIDA on UNIDAD_DE_MEDIDA.CODIGO_UNIDAD=INGREDIENTE.CODIGO_UNIDAD inner join RECETAINGREDIENTE on RECETAINGREDIENTE.CODIGO_INGREDIENTE=INGREDIENTE.CODIGO_INGREDIENTE where RECETAINGREDIENTE.CODIGO_RECETA='"+Codigo+"';");
+        String categoria = this.jdbcTemplate.queryForObject("select NOMBRE_CATEGORIA from CATEGORIA inner join RECETA on CATEGORIA.CODIGO_CATEGORIA=RECETA.CODIGO_CATEGORIA where CODIGO_RECETA='"+Codigo+"'",String.class);
+        mav.addObject("ingredientes",ingrediente);
+        mav.addObject("nombre",datos.getNombreReceta());
+        mav.addObject("categoria",categoria);
+        mav.addObject("codigo",Codigo);
+        mav.addObject("porciones",datos.getPorcionReceta());
+        mav.addObject("receta",new Receta(Codigo, datos.getNombreReceta(), datos.getIdCategoria(), datos.getDescripcionReceta(), datos.getPorcionReceta()));
+        return mav;
+    }
+    
+     @RequestMapping(value = "/Encargado/EliminarIngrediente.htm",method = RequestMethod.GET)
+    public ModelAndView EliminarReceta(HttpServletRequest request){
+        String CodigoR = request.getParameter("CODR");
+        String CodigoI = request.getParameter("CODI");
+        String Query = "DELETE FROM `Minugest`.`RECETAINGREDIENTE` WHERE CODIGO_RECETA='"+CodigoR+"' AND CODIGO_INGREDIENTE='"+CodigoI+"'";
+        this.jdbcTemplate.execute(Query);
+        return new ModelAndView("redirect:/Encargado/DetalleReceta.htm?COD="+CodigoR);
+    }
     
         public Receta selectRecetaEnc(String idReceta) 
     {
@@ -291,7 +354,7 @@ public class RecetaController {
                 + "  WHERE CODIGO_RECETA='" + idReceta + "'"; */
         String quer="SELECT\n"
                 + "     CODIGO_RECETA,\n"
-                + "     NOMBRE_CATEGORIA,\n"
+                + "     CATEGORIA.CODIGO_CATEGORIA,\n"
                 + "     NOMBRE_RECETA,\n"
                 + "     DESCRIPCION_RECETA,\n"
                 + "     CANTIDAD_PORCION\n"
@@ -307,7 +370,7 @@ public class RecetaController {
                     if (rs.next()) 
                     {
                         receta.setNombreReceta(rs.getString("NOMBRE_RECETA"));
-                        receta.setIdCategoria(rs.getString("NOMBRE_CATEGORIA"));
+                        receta.setIdCategoria(rs.getString("CATEGORIA.CODIGO_CATEGORIA"));
                         receta.setDescripcionReceta(rs.getString("DESCRIPCION_RECETA"));
                         receta.setPorcionReceta(rs.getString("CANTIDAD_PORCION"));
                      }

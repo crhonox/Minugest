@@ -32,7 +32,7 @@
                     <rec:forEach items="${datos}" var="dato" >
                         <tr>
                             <td><rec:out value="${dato.CODIGO_RECETA}"/></td>
-                            <td><rec:out value="${dato.NOMBRE_RECETA}"/></td>
+                            <td><a href="DetalleReceta.htm?COD=${dato.CODIGO_RECETA}"><rec:out value="${dato.NOMBRE_RECETA}"/></a></td>
                             <td><rec:out value="${dato.NOMBRE_CATEGORIA}"/></td>
                             <td><rec:out value="${dato.DESCRIPCION_RECETA}"/></td>
                             <td><rec:out value="${dato.CANTIDAD_PORCION}"/></td>
