@@ -66,7 +66,7 @@ public class RecetaController {
         mav.addObject("receta",new Receta());
         return mav;
  }
- 
+
  @RequestMapping(value = "Administracion/AñadirReceta.htm",method = RequestMethod.POST)
     public ModelAndView form (@ModelAttribute("receta") Receta rec, BindingResult result, SessionStatus status)  
     {
