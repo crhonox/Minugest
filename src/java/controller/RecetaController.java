@@ -89,7 +89,7 @@ public class RecetaController {
     
     }
     
-      @RequestMapping(value="editarReceta.htm",method=RequestMethod.GET)
+      @RequestMapping(value="Administracion/editarReceta.htm",method=RequestMethod.GET)
     public ModelAndView editarReceta (HttpServletRequest request)
     {
         ModelAndView mav = new ModelAndView();
@@ -103,7 +103,7 @@ public class RecetaController {
         return mav;
     }
     
-      @RequestMapping(value="editarReceta.htm" ,method=RequestMethod.POST)
+      @RequestMapping(value="Administracion/editarReceta.htm" ,method=RequestMethod.POST)
     public ModelAndView form
         (
                 @ModelAttribute("receta") Receta rec,
@@ -277,7 +277,7 @@ public class RecetaController {
        
     }
         
-        @RequestMapping(value="Encargado/AñadirIngredienteReceta.htm",method=RequestMethod.GET)
+        @RequestMapping(value="Encargado/IngredienteReceta.htm",method=RequestMethod.GET)
     public ModelAndView RecetaIngrediente (HttpServletRequest request)
     {
         ModelAndView mav = new ModelAndView();
@@ -294,7 +294,7 @@ public class RecetaController {
         return mav;
     }
     
-    @RequestMapping(value = "/Encargado/AñadirIngredienteReceta.htm",method = RequestMethod.POST)
+    @RequestMapping(value = "Encargado/AñadirIngredienteReceta.htm",method = RequestMethod.POST)
     public ModelAndView IngredienteInsertReceta (@ModelAttribute("Receta") Receta receta, BindingResult result, SessionStatus status,HttpServletRequest request)  
     {
              String Codigo = request.getParameter("idReceta");
@@ -313,7 +313,7 @@ public class RecetaController {
     
     }
     
-    @RequestMapping(value = "/Encargado/DetalleReceta.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "Encargado/DetalleReceta.htm",method = RequestMethod.GET)
     public ModelAndView DetalleReceta(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Encargado/DetalleReceta");
@@ -330,7 +330,7 @@ public class RecetaController {
         return mav;
     }
     
-     @RequestMapping(value = "/Encargado/EliminarIngrediente.htm",method = RequestMethod.GET)
+     @RequestMapping(value = "Encargado/EliminarIngrediente.htm",method = RequestMethod.GET)
     public ModelAndView EliminarReceta(HttpServletRequest request){
         String CodigoR = request.getParameter("CODR");
         String CodigoI = request.getParameter("CODI");

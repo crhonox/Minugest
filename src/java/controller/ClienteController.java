@@ -35,7 +35,7 @@ public class ClienteController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping(value="editarCliente.htm",method=RequestMethod.GET) 
+    @RequestMapping(value="Administracion/editarCliente.htm",method=RequestMethod.GET) 
     public ModelAndView editarCliente(HttpServletRequest request)
     {
         ModelAndView mav=new ModelAndView();
@@ -52,7 +52,7 @@ public class ClienteController {
         return mav;
     }
     
-    @RequestMapping(value="editarCliente.htm",method=RequestMethod.POST)
+    @RequestMapping(value="Administracion/editarCliente.htm",method=RequestMethod.POST)
     public ModelAndView form
         (
                 @ModelAttribute("cliente") Cliente cli,
