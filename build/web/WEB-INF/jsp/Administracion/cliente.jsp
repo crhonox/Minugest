@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,18 @@
         
         <h1>Clientes</h1>
         <div class="row">
+            <form:form  method="POST" modelAttribute="cliente">
+                    <h1></h1>
+                     <form:errors path="*" element="div" cssClass="alert alert-danger" />
+                    
+                    <p><form:label path="Nombre">Nombre  :</form:label>
+                    <form:input path="Nombre" cssClass="form-control"/></p>
+
+            <form:button class="btn btn-danger" > Buscar</form:button>
+            <a href="cliente.htm" class="btn btn-success">Mostrar todo</a>
+            
+            <hr>
+        </form:form>
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>

@@ -4,17 +4,13 @@ package controller;
 import Modelos.Cliente;
 import Modelos.ClienteValidate;
 import Modelos.Conexion;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+
 import java.util.List;
-import java.util.Map;
-import org.springframework.dao.DataAccessException;
+
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,9 +50,47 @@ public class AdministracionController {
 "    EMPRESA on COMUNA_EMPRESA = COMUNA_ID";
         List datos=this.jdbcTemplate.queryForList(sql);
         mav.addObject("datos",datos);
-
+        mav.addObject("cliente", new Cliente());
         mav.setViewName("Administracion/cliente");
         return mav;
+    }
+    
+    @RequestMapping(value="Administracion/cliente.htm", method = RequestMethod.POST)
+    public ModelAndView formBuscarAdm (@ModelAttribute("cliente") Cliente cli, BindingResult result, SessionStatus status)  
+    {
+        this.clienteValidate.validate(cli, result);
+        if(result.hasErrors())
+        {
+        ModelAndView mav= new ModelAndView();
+        String sql ="SELECT\n" +
+                        "   COMUNA_NOMBRE,\n" +
+                        "    REGION_NOMBRE,\n" +
+                        "    RUT_EMPRESA,\n" +
+                        "    NOMBRE_EMPRESA,\n" +
+                        "    TELEFONO_EMPRESA,\n" +
+                        "    CORREO_EMPRESA,\n" +
+                        "    DIRECCION_EMPRESA\n" +
+                        "FROM\n" +
+                        "    region  inner join\n" +
+                        "    provincia on REGION_ID = PROVINCIA_REGION_ID inner join\n" +
+                        "    comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join\n" +
+                        "    EMPRESA on COMUNA_EMPRESA = COMUNA_ID";
+            List datos=this.jdbcTemplate.queryForList(sql);
+            mav.addObject("datos",datos);
+            mav.addObject("cliente", new Cliente());
+            mav.setViewName("Administracion/cliente");
+            return mav;
+        }
+        else
+        {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("Administracion/cliente");
+            List cliente = this.jdbcTemplate.queryForList("SELECT * FROM EMPRESA where NOMBRE_EMPRESA regexp '"+cli.getNombre()+"'");
+            mav.addObject("datos", cliente);
+            mav.addObject("cliente",new Cliente());
+            return mav;
+        }
+        
     }
            
     @RequestMapping(value = "receta.htm")

@@ -47,9 +47,44 @@ public class IngredienteController
         
         List datos=this.jdbcTemplate.queryForList(sql);
         mav.addObject("datos",datos);
-
+        mav.addObject("ingrediente",new Ingrediente());
         mav.setViewName("Administracion/ingrediente");
         return mav;
+    }
+    
+    // b u s c a r 
+      @RequestMapping(value="Administracion/ingrediente.htm", method = RequestMethod.POST)
+    public ModelAndView formBuscarAdm (@ModelAttribute("ingrediente") Ingrediente ing, BindingResult result, SessionStatus status)  
+    {
+        this.ingredienteValidate.validate(ing, result);
+        if(result.hasErrors())
+        {
+        ModelAndView mav= new ModelAndView();
+        String sql ="SELECT\n"
+                + "     CODIGO_INGREDIENTE,\n"
+                + "     NOMBRE_UNIDAD,\n"
+                + "     NOMBRE_INGREDIENTE\n"
+                + "FROM\n"
+                + "INGREDIENTE inner join\n"
+                + " UNIDAD_DE_MEDIDA on UNIDAD_DE_MEDIDA.CODIGO_UNIDAD = INGREDIENTE.CODIGO_UNIDAD";
+        
+        
+             List datos=this.jdbcTemplate.queryForList(sql);
+             mav.addObject("datos",datos);
+             mav.addObject("ingrediente",new Ingrediente());
+             mav.setViewName("Administracion/ingrediente");
+             return mav;
+        }
+        else
+        {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("Administracion/ingrediente");
+            List ingrediente = this.jdbcTemplate.queryForList("SELECT * FROM INGREDIENTE inner join UNIDAD_DE_MEDIDA on UNIDAD_DE_MEDIDA.CODIGO_UNIDAD = INGREDIENTE.CODIGO_UNIDAD where NOMBRE_INGREDIENTE regexp '"+ing.getNombreIngrediente()+"'");
+            mav.addObject("datos", ingrediente);
+            mav.addObject("ingrediente",new Ingrediente());
+            return mav;
+        }
+        
     }
     
     @RequestMapping(value = "Administracion/AñadirIngrediente.htm",method = RequestMethod.GET)
@@ -165,7 +200,7 @@ public class IngredienteController
     
         //ENCARGADO ===========================================================
       //LISTAR
-    @RequestMapping(value = "Encargado/ingrediente.htm")
+    @RequestMapping(value = "Encargado/ingrediente.htm", method = RequestMethod.GET)
     public ModelAndView ingredienteEnc()
     {
           ModelAndView mav= new ModelAndView();
@@ -179,9 +214,43 @@ public class IngredienteController
         
         List datos=this.jdbcTemplate.queryForList(sql);
         mav.addObject("datos",datos);
-
+        mav.addObject("ingrediente", new Ingrediente());
         mav.setViewName("Encargado/ingrediente");
         return mav;
+    }
+    //B U S C A R
+    @RequestMapping(value="Encargado/ingrediente.htm", method = RequestMethod.POST)
+    public ModelAndView formBuscarEnc (@ModelAttribute("ingrediente") Ingrediente ing, BindingResult result, SessionStatus status)  
+    {
+        this.ingredienteValidate.validate(ing, result);
+        if(result.hasErrors())
+        {
+        ModelAndView mav= new ModelAndView();
+        String sql ="SELECT\n"
+                + "     CODIGO_INGREDIENTE,\n"
+                + "     NOMBRE_UNIDAD,\n"
+                + "     NOMBRE_INGREDIENTE\n"
+                + "FROM\n"
+                + "INGREDIENTE inner join\n"
+                + " UNIDAD_DE_MEDIDA on UNIDAD_DE_MEDIDA.CODIGO_UNIDAD = INGREDIENTE.CODIGO_UNIDAD";
+        
+        
+             List datos=this.jdbcTemplate.queryForList(sql);
+             mav.addObject("datos",datos);
+             mav.addObject("ingrediente",new Ingrediente());
+             mav.setViewName("Encargado/ingrediente");
+             return mav;
+        }
+        else
+        {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("Encargado/ingrediente");
+            List ingrediente = this.jdbcTemplate.queryForList("SELECT * FROM INGREDIENTE inner join UNIDAD_DE_MEDIDA on UNIDAD_DE_MEDIDA.CODIGO_UNIDAD = INGREDIENTE.CODIGO_UNIDAD where NOMBRE_INGREDIENTE regexp '"+ing.getNombreIngrediente()+"'");
+            mav.addObject("datos", ingrediente);
+            mav.addObject("ingrediente",new Ingrediente());
+            return mav;
+        }
+        
     }
     
     //AÑADIR INGREDIENTE ENCARGADO
