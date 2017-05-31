@@ -23,12 +23,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class InfoclienteController {
+public class UsuarioController {
     
     private UsuarioValidate usuarioValidate;
     private JdbcTemplate jdbcTemplate;
     
-    public InfoclienteController(){
+    public UsuarioController(){
         this.usuarioValidate=new UsuarioValidate(); //Implementar Validator
         Conexion con= new Conexion();
         this.jdbcTemplate=new JdbcTemplate(con.conectar());

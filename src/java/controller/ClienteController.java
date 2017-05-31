@@ -53,7 +53,7 @@ public class ClienteController {
     }
     
     @RequestMapping(value="editarCliente.htm",method=RequestMethod.POST)
-    public ModelAndView form
+    public ModelAndView formEditarCliente
         (
                 @ModelAttribute("cliente") Cliente cli,
                 BindingResult result,

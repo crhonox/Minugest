@@ -3,46 +3,22 @@
 <html>
 <head>
 <title>Login Page</title>
-<style>
-.error {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1;
-}
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
 
-.msg {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #31708f;
-	background-color: #d9edf7;
-	border-color: #bce8f1;
-}
-
-#login-box {
-	width: 300px;
-	padding: 20px;
-	margin: 100px auto;
-	background: #fff;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border: 1px solid #000;
-}
-</style>
 </head>
 <body onload='document.loginForm.username.focus();'>
 
-	<h1>Spring Security Login Form (Database Authentication)
+	
             <br><a href="home">Volver al inicio</a> </h1>
-
-	<div id="login-box">
-
-		<h2>Login with Username and Password</h2>
+            <div id="titulocenter"><h1 align="center">Minugest</h1></div>
+            
+             <div class="container">
+                 <div class="row">
+                <div class="panel panel-primary"> 
+	
+                    <div class="panel-heading"><center>Inicio de Sesion</center></div>
+                    <div class="panel-body">
+		
                 
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
@@ -53,27 +29,26 @@
 
 		<form name='loginForm'
 		  action="<c:url value='/j_spring_security_check' />" method='POST'>
-
-		<table>
-			<tr>
-				<td>User:</td>
-				<td><input type='text' name='CODIGO_USUARIO'></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><input type='password' name='PASS_USUARIO' /></td>
-			</tr>
-			<tr>
-				<td colspan='2'><input name="submit" type="submit"
-				  value="submit" /></td>
-			</tr>
-		  </table>
+                    
+		
+                    <label>RUT :</label>
+                                <input type='text' name='CODIGO_USUARIO' class="form-control">
+			
+			
+                                <label>Password :</label>
+                                <input type='password' name='PASS_USUARIO' class="form-control" />
+			<p></p>
+				<input name="submit" type="submit" value="Ingresar" class="btn btn-danger" />
+			
+		  
 
 		  <input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
 
 		</form>
-	</div>
-
+                    </div>
+                        </div>
+                        </div>
+             </div>
 </body>
 </html> 

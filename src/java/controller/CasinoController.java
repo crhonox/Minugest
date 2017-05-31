@@ -33,7 +33,7 @@ public class CasinoController {
     }
     
     @RequestMapping(value = "listaCasino.htm")
-    public ModelAndView listadoCasino(HttpServletRequest request){
+    public ModelAndView listadoCasinoEMPRESA(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         String rut= request.getParameter("rut");
         List datos2=this.jdbcTemplate.queryForList("SELECT CASINO.RUT_EMPRESA,CODIGO_CASINO, NOMBRE_CASINO,NOMBRE_EMPRESA FROM Minugest.CASINO inner join EMPRESA on CASINO.RUT_EMPRESA = EMPRESA.RUT_EMPRESA where CASINO.RUT_EMPRESA = '"+rut+"'");
@@ -43,6 +43,7 @@ public class CasinoController {
         mav.setViewName("Administracion/listaCasino");
         return mav;
     }
+    
     
     @RequestMapping(value = "AñadirCasino.htm",method = RequestMethod.GET)
     public ModelAndView añadirCasino(HttpServletRequest request){

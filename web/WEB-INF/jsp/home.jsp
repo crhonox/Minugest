@@ -11,7 +11,7 @@
 <html>
      <head>
         <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
         <title>Minugest</title>
     </head>
         <%--  ${pageContext.request.contextPath} codigo para conseguir la ruta absoluta del directiorio
@@ -21,21 +21,17 @@
     <body>
         <div> 
             
-            <div id="tituloleft"><h1 align="left">Logo</h1></div>
+            <div id="tituloleft"><h1 align="left">Logo</h1>
+            <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+            </div>
             
             
-     <div id="tituloright">
-         
-         <%-- 
-             <img src="<c:url value="/public/icons/user-icons.png"/>" />
-             --%>
-             
-             
-         <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="ture"></span>Iniciar sesión</a></ul>
-                
-     </div>
+     
             <div id="titulocenter"><h1 align="center">Minugest</h1></div>
-               
+               <div id="tituloright">
+         
+                   
+     </div>
         <hr/>       
             
        </div>
@@ -49,7 +45,7 @@
             <li><a href="socios.htm">Socios</a></li>
             
             
-            <li><a href="Encargado/ingrediente.htm"> Ingredientes </a> </li>
+            
             
         </ul>
             </div>
@@ -76,6 +72,7 @@
                                         <h1>ESTE ROL ES EL ADMINISTRADOR</h1>
                 <ul>          
             <li><a href="Administracion/cliente.htm">Clientes</a></li>
+            
      
              </ul>
 		</c:if>
@@ -107,6 +104,7 @@
                 <ul>          
             <li><a href="Encargado/Minuta.htm">Planificacion de Minutas</a></li>
             <li><a href="Encargado/receta.htm">Gestion de Recetas</a></li>
+            <li><a href="Encargado/ingrediente.htm"> Ingredientes </a> </li>
      
              </ul>
 		</c:if>

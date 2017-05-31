@@ -31,23 +31,11 @@ public class AdministracionController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping(value = "Administracion/cliente.htm")
+    @RequestMapping(value = "Administracion/cliente.htm",method = RequestMethod.GET)
     public ModelAndView cliente()
     {
         ModelAndView mav= new ModelAndView();
-        String sql ="SELECT\n" +
-"   COMUNA_NOMBRE,\n" +
-"    REGION_NOMBRE,\n" +
-"    RUT_EMPRESA,\n" +
-"    NOMBRE_EMPRESA,\n" +
-"    TELEFONO_EMPRESA,\n" +
-"    CORREO_EMPRESA,\n" +
-"    DIRECCION_EMPRESA\n" +
-"FROM\n" +
-"    region  inner join\n" +
-"    provincia on REGION_ID = PROVINCIA_REGION_ID inner join\n" +
-"    comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join\n" +
-"    EMPRESA on COMUNA_EMPRESA = COMUNA_ID";
+        String sql ="SELECT COMUNA_NOMBRE,REGION_NOMBRE,RUT_EMPRESA,NOMBRE_EMPRESA,TELEFONO_EMPRESA,CORREO_EMPRESA,DIRECCION_EMPRESA FROM region inner join  provincia on REGION_ID = PROVINCIA_REGION_ID inner join comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join EMPRESA on COMUNA_EMPRESA = COMUNA_ID";
         List datos=this.jdbcTemplate.queryForList(sql);
         mav.addObject("datos",datos);
         mav.addObject("cliente", new Cliente());
@@ -58,38 +46,17 @@ public class AdministracionController {
     @RequestMapping(value="Administracion/cliente.htm", method = RequestMethod.POST)
     public ModelAndView formBuscarAdm (@ModelAttribute("cliente") Cliente cli, BindingResult result, SessionStatus status)  
     {
-        this.clienteValidate.validate(cli, result);
-        if(result.hasErrors())
-        {
-        ModelAndView mav= new ModelAndView();
-        String sql ="SELECT\n" +
-                        "   COMUNA_NOMBRE,\n" +
-                        "    REGION_NOMBRE,\n" +
-                        "    RUT_EMPRESA,\n" +
-                        "    NOMBRE_EMPRESA,\n" +
-                        "    TELEFONO_EMPRESA,\n" +
-                        "    CORREO_EMPRESA,\n" +
-                        "    DIRECCION_EMPRESA\n" +
-                        "FROM\n" +
-                        "    region  inner join\n" +
-                        "    provincia on REGION_ID = PROVINCIA_REGION_ID inner join\n" +
-                        "    comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join\n" +
-                        "    EMPRESA on COMUNA_EMPRESA = COMUNA_ID";
-            List datos=this.jdbcTemplate.queryForList(sql);
-            mav.addObject("datos",datos);
-            mav.addObject("cliente", new Cliente());
-            mav.setViewName("Administracion/cliente");
-            return mav;
-        }
-        else
-        {
+        
             ModelAndView mav = new ModelAndView();
             mav.setViewName("Administracion/cliente");
-            List cliente = this.jdbcTemplate.queryForList("SELECT * FROM EMPRESA where NOMBRE_EMPRESA regexp '"+cli.getNombre()+"'");
+            String sql ="SELECT COMUNA_NOMBRE,REGION_NOMBRE,RUT_EMPRESA,NOMBRE_EMPRESA,TELEFONO_EMPRESA,CORREO_EMPRESA,DIRECCION_EMPRESA FROM region inner join  provincia on REGION_ID = PROVINCIA_REGION_ID inner join comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join EMPRESA on COMUNA_EMPRESA = COMUNA_ID where NOMBRE_EMPRESA regexp '"+cli.getNombre()+"'";
+            List cliente = this.jdbcTemplate.queryForList(sql);
             mav.addObject("datos", cliente);
+            String Nombre=cli.getNombre();
+            mav.addObject("NomEmp",Nombre);
             mav.addObject("cliente",new Cliente());
             return mav;
-        }
+        
         
     }
            
@@ -112,7 +79,7 @@ public class AdministracionController {
   
     
     
-    @RequestMapping(value = "AñadirCliente.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "Administracion/AñadirCliente.htm",method = RequestMethod.GET)
     public ModelAndView añadirCliente()
     {   
         ModelAndView mav = new ModelAndView();
@@ -125,7 +92,7 @@ public class AdministracionController {
         return mav;
     }
     
-    @RequestMapping(value = "AñadirCliente.htm",method = RequestMethod.POST)
+    @RequestMapping(value = "Administracion/AñadirCliente.htm",method = RequestMethod.POST)
     public ModelAndView form(@ModelAttribute ("cliente") Cliente cli,BindingResult result, SessionStatus status  )
     {
         this.clienteValidate.validate(cli, result);
@@ -140,7 +107,7 @@ public class AdministracionController {
             this.jdbcTemplate.update("insert into EMPRESA (RUT_EMPRESA,NOMBRE_EMPRESA,TELEFONO_EMPRESA,CORREO_EMPRESA,Region_Empresa,Comuna_Empresa,Direccion_Empresa) values (?,?,?,?,?,?,?)"
                                     ,cli.getRut(),cli.getNombre(),cli.getTelefono(),cli.getEmail(),cli.getRegion(),cli.getComuna(),cli.getDireccion());
        
-        return new ModelAndView("redirect:/cliente.htm");
+        return new ModelAndView("redirect:cliente.htm");
         }
         
     }
