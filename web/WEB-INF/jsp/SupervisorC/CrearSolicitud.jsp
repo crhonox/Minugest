@@ -38,6 +38,7 @@
                 <form:label path="contenido">Solicitud :</form:label>
                 <form:textarea path="contenido" cssClass="form-control"/>
          </p>
+         <input type="hidden" value="${usuario}" name="codigo_usuario" id="codigo_usuario"/>
          
             <form:button class="btn btn-danger" >Enviar</form:button>
         </form:form>

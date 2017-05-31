@@ -31,7 +31,7 @@
                     <c:forEach items="${solicitud}" var="dato" >
                         <tr>
                             <td><c:out value="${dato.ASUNTO}"/></td>
-                            <td><c:out value="${dato.DESTINO}"/></td>
+                            <td><c:out value="${dato.Nombre}"/></td>
                             <td><c:out value="${dato.TIEMPO}"/></td>
                             <td><c:out value="${dato.CONTENIDO}"/></td>
                             <td><c:out value="${dato.ESTADO}"/></td>
