@@ -78,7 +78,7 @@ public class MinutaController {
 		return result;
 	}       
   //---------------------------FIN-CODIGO DE PUREBA--------------------------//  
-    @RequestMapping(value = "/Encargado/Minuta.htm")
+    @RequestMapping(value = "Encargado/Minutas.htm")
     public ModelAndView Minuta(){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Encargado/Minutas");
@@ -91,7 +91,7 @@ public class MinutaController {
         return mav;
     }
     
-    @RequestMapping(value = "/Encargado/AñadirMinuta.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "Encargado/AñadirMinuta.htm",method = RequestMethod.GET)
     public ModelAndView AñadirMinuta(){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Encargado/AñadirMinuta");
@@ -105,7 +105,7 @@ public class MinutaController {
         return mav;
     }
     
-    @RequestMapping(value = "/Encargado/AñadirMinuta.htm",method = RequestMethod.POST)
+    @RequestMapping(value = "Encargado/AñadirMinuta.htm",method = RequestMethod.POST)
     public ModelAndView formMinuta (@ModelAttribute("Minuta") Minuta min, BindingResult result, SessionStatus status)  
     {
     this.minutaValidate.validate(min, result);
@@ -136,7 +136,7 @@ public class MinutaController {
     
     
 
-    @RequestMapping(value = "/Encargado/ModificarMinuta.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "Encargado/ModificarMinuta.htm",method = RequestMethod.GET)
     public ModelAndView ModificarMinuta(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Encargado/ModificarMinuta");
@@ -152,7 +152,7 @@ public class MinutaController {
         return mav;
     }
     
-    @RequestMapping(value = "/Encargado/ModificarMinuta.htm",method = RequestMethod.POST)
+    @RequestMapping(value = "Encargado/ModificarMinuta.htm",method = RequestMethod.POST)
     public ModelAndView UpdateMinuta (@ModelAttribute("Minuta") Minuta min, BindingResult result, SessionStatus status,HttpServletRequest request)  
     {
     this.minutaValidate.validate(min, result);
@@ -193,7 +193,7 @@ public class MinutaController {
         return mav;
     }
     
-     @RequestMapping(value = "/Encargado/RecetaMinuta.htm",method = RequestMethod.POST)
+     @RequestMapping(value = "Encargado/RecetaMinuta.htm",method = RequestMethod.POST)
     public ModelAndView RecetaInsertMinuta (@ModelAttribute("Minuta") Minuta minuta, BindingResult result, SessionStatus status,HttpServletRequest request)  
     {
              String Codigo = request.getParameter("COD");
@@ -214,7 +214,7 @@ public class MinutaController {
     
     }
     
-    @RequestMapping(value = "/Encargado/DetalleMinuta.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "Encargado/DetalleMinuta.htm",method = RequestMethod.GET)
     public ModelAndView DetalleMinuta(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Encargado/DetalleMinuta");
@@ -239,7 +239,7 @@ public class MinutaController {
         return mav;
     }
    
-    @RequestMapping(value = "/Encargado/EliminarReceta.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "Encargado/EliminarReceta.htm",method = RequestMethod.GET)
     public ModelAndView EliminarReceta(HttpServletRequest request){
         String CodigoM = request.getParameter("CODM");
         String CodigoR = request.getParameter("CODR");

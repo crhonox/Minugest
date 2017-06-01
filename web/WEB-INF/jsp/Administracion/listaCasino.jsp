@@ -33,7 +33,7 @@
                         <tr>
                             <td><c:out value="${dato.NOMBRE_CASINO}"/></td>                                                      
                             <td><c:out value="${dato.NOMBRE_EMPRESA}"/></td>
-                            <td><a href="editarCasino.htm?cod=${dato.CODIGO_CASINO}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
+                            <td><a href="EditarCasino.htm?cod=${dato.CODIGO_CASINO}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
                             <!--<a href="eliminarCasino.htm?cod=${dato.CODIGO_CASINO}" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>  --> </td> 
                         </tr>
                     </c:forEach>
