@@ -37,7 +37,7 @@ public class CasinoeditController {
          this.jdbcTemplate.update(
                     "DELETE FROM CASINO WHERE CODIGO_CASINO=?",
                     cod);
-         return new ModelAndView("redirect:/listaCasino.htm?rut="+datos.getRutEmpresa());
+         return new ModelAndView("redirect:listaCasino.htm?rut="+datos.getRutEmpresa());
     }
      
      @RequestMapping(value ="Administracion/EditarCasino.htm" ,method=RequestMethod.GET) 
@@ -75,7 +75,7 @@ public class CasinoeditController {
             this.jdbcTemplate.update(
                     "UPDATE CASINO SET NOMBRE_CASINO=? WHERE CODIGO_CASINO=?",
          cas.getNombreCasino(),cod);
-         return new ModelAndView("redirect:/listaCasino.htm?rut="+cas.getRutEmpresa());
+         return new ModelAndView("redirect:listaCasino.htm?rut="+cas.getRutEmpresa());
         }
        
     }

@@ -30,6 +30,7 @@ public class UsuarioValidate implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Rut", "required.Rut","El campo Rut es obligatorio");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cod_perfil", "required.cod_perfil","El campo Perfil es obligatorio");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "correo", "required.correo","El campo E-mail es obligatorio");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "pass", "required.pass","El campo Contraseña es obligatorio");    
          if (!(usuario.getCorreo()!= null && usuario.getCorreo().isEmpty()))
         {
             this.pattern = Pattern.compile(EMAIL_PATTERN);
@@ -39,7 +40,7 @@ public class UsuarioValidate implements Validator{
                   "El Correo electrónico "+usuario.getCorreo()+" no es válido");
                }
         }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "pass", "required.pass","El campo Contraseña es obligatorio");    
+        
     }
     
 }

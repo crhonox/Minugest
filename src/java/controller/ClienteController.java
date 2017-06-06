@@ -35,7 +35,7 @@ public class ClienteController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping(value="editarCliente.htm",method=RequestMethod.GET) 
+    @RequestMapping(value="Administracion/editarCliente.htm",method=RequestMethod.GET) 
     public ModelAndView editarCliente(HttpServletRequest request)
     {
         ModelAndView mav=new ModelAndView();
@@ -52,7 +52,7 @@ public class ClienteController {
         return mav;
     }
     
-    @RequestMapping(value="editarCliente.htm",method=RequestMethod.POST)
+    @RequestMapping(value="Administracion/editarCliente.htm",method=RequestMethod.POST)
     public ModelAndView formEditarCliente
         (
                 @ModelAttribute("cliente") Cliente cli,
@@ -76,7 +76,7 @@ public class ClienteController {
             this.jdbcTemplate.update(
                     "update EMPRESA set NOMBRE_EMPRESA=?,CORREO_EMPRESA=?,TELEFONO_EMPRESA=?,COMUNA_EMPRESA=? ,REGION_EMPRESA=? ,DIRECCION_EMPRESA=? where RUT_EMPRESA=? ",
          cli.getNombre(),cli.getEmail(),cli.getTelefono(),cli.getComuna(),cli.getRegion(),cli.getDireccion(),rut);
-         return new ModelAndView("redirect:/cliente.htm");
+         return new ModelAndView("redirect:cliente.htm");
         }
        
     }

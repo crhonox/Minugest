@@ -11,7 +11,7 @@
         <div class="container">
         <h1 align="center">Minugest</h1>
         <ol class="breadcrumb">
-                <li><a href="<c:url value="/cliente.htm" />">Listado de clientes</a></li>
+                <li><a href="<c:url value="cliente.htm" />">Listado de clientes</a></li>
                 <li class="active"> Aaaaa</li>
             </ol>
         <br>
@@ -33,7 +33,7 @@
                         <tr>
                             <td><c:out value="${dato.NOMBRE_CASINO}"/></td>                                                      
                             <td><c:out value="${dato.NOMBRE_EMPRESA}"/></td>
-                            <td><a href="EditarCasino.htm?cod=${dato.CODIGO_CASINO}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
+                            <td><a href="editarCasino.htm?cod=${dato.CODIGO_CASINO}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
                             <!--<a href="eliminarCasino.htm?cod=${dato.CODIGO_CASINO}" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>  --> </td> 
                         </tr>
                     </c:forEach>

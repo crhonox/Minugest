@@ -62,7 +62,7 @@ class UsereditController {
             this.jdbcTemplate.update("UPDATE USUARIO SET CODIGO_CASINO=?, CODIGO_PERFIL=?, NOMBRE_USUARIO=?, CORREO_USUARIO=?, PASS_USUARIO=?, APELLIDO_USUARIO=? WHERE CODIGO_USUARIO=?"
                                     ,user.getCod_casino(),user.getCod_perfil(),user.getNombre(),user.getCorreo(),user.getPass(),user.getApellido(),user.getRut());
        
-        return new ModelAndView("redirect:/listaUsuario.htm?rut="+user.getRutEmpresa());
+        return new ModelAndView("redirect:listaUsuario.htm?rut="+user.getRutEmpresa());
         }
         
     }

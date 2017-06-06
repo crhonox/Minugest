@@ -34,7 +34,7 @@ public class UsuarioController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-     @RequestMapping(value = "infoCliente.htm") 
+     @RequestMapping(value = "Administracion/infoCliente.htm") 
     public ModelAndView infoCliente(HttpServletRequest request)
     {
         ModelAndView mav=new ModelAndView();
@@ -45,7 +45,7 @@ public class UsuarioController {
         return mav;
     }
        
-    @RequestMapping(value = "listaUsuario.htm")
+    @RequestMapping(value = "Administracion/listaUsuario.htm")
     public ModelAndView listaUsuario(HttpServletRequest request)
     {
        ModelAndView mav= new ModelAndView();
@@ -59,7 +59,7 @@ public class UsuarioController {
         return mav;
     }
     
-    @RequestMapping(value="AñadirUsuario.htm",method = RequestMethod.GET)
+    @RequestMapping(value="Administracion/AñadirUsuario.htm",method = RequestMethod.GET)
     public ModelAndView añadirUsuario(HttpServletRequest request)
     {   
         ModelAndView mav = new ModelAndView();
@@ -75,7 +75,7 @@ public class UsuarioController {
         return mav;
     }
     
-    @RequestMapping(value="AñadirUsuario.htm",method = RequestMethod.POST)
+    @RequestMapping(value="Administracion/AñadirUsuario.htm",method = RequestMethod.POST)
     public ModelAndView form(@ModelAttribute ("usuario") Usuario user,BindingResult result, SessionStatus status  )
     {
         this.usuarioValidate.validate(user, result);
@@ -90,7 +90,7 @@ public class UsuarioController {
             this.jdbcTemplate.update("INSERT INTO USUARIO (CODIGO_USUARIO, CODIGO_CASINO, CODIGO_PERFIL, NOMBRE_USUARIO, CORREO_USUARIO, PASS_USUARIO, APELLIDO_USUARIO) VALUES (?,?,?,?,?,?,?)"
                                     ,user.getRut(),user.getCod_casino(),user.getCod_perfil(),user.getNombre(),user.getCorreo(),user.getPass(),user.getApellido());
        
-        return new ModelAndView("redirect:/listaUsuario.htm?rut="+user.getRutEmpresa());
+        return new ModelAndView("redirect:listaUsuario.htm?rut="+user.getRutEmpresa());
         }
         
     }

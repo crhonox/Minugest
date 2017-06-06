@@ -32,7 +32,7 @@ public class CasinoController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping(value = "listaCasino.htm")
+    @RequestMapping(value = "Administracion/listaCasino.htm")
     public ModelAndView listadoCasinoEMPRESA(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         String rut= request.getParameter("rut");
@@ -45,7 +45,7 @@ public class CasinoController {
     }
     
     
-    @RequestMapping(value = "AñadirCasino.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "Administracion/AñadirCasino.htm",method = RequestMethod.GET)
     public ModelAndView añadirCasino(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         String rut = request.getParameter("rutemp");
@@ -55,7 +55,7 @@ public class CasinoController {
         return mav;
     }
     
-    @RequestMapping(value = "AñadirCasino.htm",method = RequestMethod.POST)
+    @RequestMapping(value = "Administracion/AñadirCasino.htm",method = RequestMethod.POST)
     public ModelAndView form(@ModelAttribute ("casino") Casino cas,BindingResult result, SessionStatus status  )
     {
         this.casinoValidate.validate(cas, result);
@@ -70,7 +70,7 @@ public class CasinoController {
             this.jdbcTemplate.update("INSERT INTO CASINO (RUT_EMPRESA,NOMBRE_CASINO) VALUES (?,?)"
                                       ,cas.getRutEmpresa(),cas.getNombreCasino());
        
-        return new ModelAndView("redirect:/listaCasino.htm?rut="+cas.getRutEmpresa());
+        return new ModelAndView("redirect:listaCasino.htm?rut="+cas.getRutEmpresa());
         }
         
     }

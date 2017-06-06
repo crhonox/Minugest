@@ -79,9 +79,38 @@
                 
 
 	</sec:authorize>
+                <sec:authorize access="hasRole('Supervisor')">
+		<!-- For login user -->
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<script>
+			function formSubmit() {
+				document.getElementById("logoutForm").submit();
+			}
+		</script>
+
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<h2>
+				User : ${pageContext.request.userPrincipal.name} | <a
+					href="javascript:formSubmit()"> Logout</a>
+                                        
+			</h2>
+                                        <h1>ESTE ROL ES EL Supervisor</h1>
+                <ul>          
+            <li><a href="Supervisor/Solicitudes.htm">Solicitudes</a></li>
+            
+     
+             </ul>
+		</c:if>
                 
+
+	</sec:authorize>
                 
-                 <sec:authorize access="hasRole('Encargado')">
+                 
+                                        <sec:authorize access="hasRole('Encargado')">
 		<!-- For login user -->
 		<c:url value="/j_spring_security_logout" var="logoutUrl" />
 		<form action="${logoutUrl}" method="post" id="logoutForm">
