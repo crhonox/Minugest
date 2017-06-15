@@ -12,7 +12,8 @@
         <h1 align="center">Minugest</h1>
         <ol class="breadcrumb">
                 <li><a href="<c:url value="cliente.htm" />">Listado de clientes</a></li>
-                <li class="active"> Aaaaa</li>
+                <li class="active"><a href="<c:url value="infoCliente.htm?rut=${rutEmp}" />"> ${nomEmp}</a></li>
+                <li class="active">Listado de Casinos</li>
             </ol>
         <br>
         <hr/>
@@ -24,6 +25,10 @@
                     <tr>
                 
                 <th>Nombre Casino</th>
+                <th>Region Casino</th>
+                <th>Provincia Casino</th>
+                <th>Comuna Casino</th>
+                <th>Direccion Casino</th>
                 <th>Empresa</th>
                 <th>Acciones</th>
                 </tr>
@@ -31,8 +36,12 @@
                 <tbody>
                     <c:forEach items="${datos}" var="dato" >
                         <tr>
-                            <td><c:out value="${dato.NOMBRE_CASINO}"/></td>                                                      
-                            <td><c:out value="${dato.NOMBRE_EMPRESA}"/></td>
+                            <td><a href="DetalleCasino.htm?cod=${dato.CODIGO_CASINO}"><c:out value="${dato.NOMBRE_CASINO}"/></a></td>                                                      
+                            <td><c:out value="${dato.REGION_NOMBRE}"/></td>                                                      
+                            <td><c:out value="${dato.PROVINCIA_NOMBRE}"/></td>                                                      
+                            <td><c:out value="${dato.COMUNA_NOMBRE}"/></td>                                                      
+                            <td><c:out value="${dato.DIRECCION_CASINO}"/></td>                                                      
+                            <td><c:out value="${dato.NOMBRE_EMPRESA}"/></td>                                                      
                             <td><a href="editarCasino.htm?cod=${dato.CODIGO_CASINO}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
                             <!--<a href="eliminarCasino.htm?cod=${dato.CODIGO_CASINO}" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>  --> </td> 
                         </tr>

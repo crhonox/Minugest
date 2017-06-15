@@ -42,13 +42,9 @@ public class ClienteController {
         String rut=request.getParameter("rut");
         Cliente datos=this.selectCliente(rut);
         List regiones= this.jdbcTemplate.queryForList("select REGION_ID, REGION_NOMBRE from region");
-        List comunas= this.jdbcTemplate.queryForList("select COMUNA_ID, COMUNA_NOMBRE from comuna");
-        List clicom= this.jdbcTemplate.queryForList("SELECT COMUNA_NOMBRE,REGION_NOMBRE,COMUNA_ID,REGION_ID FROM region  inner join provincia on REGION_ID = PROVINCIA_REGION_ID inner join comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join EMPRESA on COMUNA_EMPRESA = COMUNA_ID WHERE RUT_EMPRESA='"+rut+"'");
         mav.addObject("regiones",regiones);
-        mav.addObject("comunas",comunas);
-        mav.addObject("clicoms",clicom);
         mav.setViewName("Administracion/editarCliente");
-        mav.addObject("cliente",new Cliente(rut,datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
+        mav.addObject("cliente",new Cliente(rut,datos.getNombre(),datos.getNombreLargo(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getProvincia(),datos.getRegion(),datos.getDireccion()));
         return mav;
     }
     
@@ -61,23 +57,13 @@ public class ClienteController {
                 HttpServletRequest request
         )
     {
-        this.clienteValidate.validate(cli, result);
-        if(result.hasErrors())
-        {
-            ModelAndView mav=new ModelAndView();
-            String rut=request.getParameter("rut");
-            Cliente datos=this.selectCliente(rut);
-            mav.setViewName("Administracion/editarCliente");
-            mav.addObject("cliente",new Cliente(rut,datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
-            return mav;
-        }else
-        {
+        
             String rut=request.getParameter("rut");
             this.jdbcTemplate.update(
-                    "update EMPRESA set NOMBRE_EMPRESA=?,CORREO_EMPRESA=?,TELEFONO_EMPRESA=?,COMUNA_EMPRESA=? ,REGION_EMPRESA=? ,DIRECCION_EMPRESA=? where RUT_EMPRESA=? ",
-         cli.getNombre(),cli.getEmail(),cli.getTelefono(),cli.getComuna(),cli.getRegion(),cli.getDireccion(),rut);
+                    "update EMPRESA set NOMBRE_EMPRESA=?,RAZON_SOCIAL=?,CORREO_EMPRESA=?,TELEFONO_EMPRESA=?,COMUNA_EMPRESA=? ,REGION_EMPRESA=?,ProvinciaEmpresa=? ,DIRECCION_EMPRESA=? where RUT_EMPRESA=? ",
+         cli.getNombre(),cli.getNombreLargo(),cli.getEmail(),cli.getTelefono(),cli.getComuna(),cli.getRegion(),cli.getProvincia(),cli.getDireccion(),rut);
          return new ModelAndView("redirect:cliente.htm");
-        }
+        
        
     }
     
@@ -88,11 +74,12 @@ public class ClienteController {
         String quer="SELECT\n" +
 "   COMUNA_NOMBRE,COMUNA_ID,\n" +
 "    REGION_NOMBRE,REGION_ID,\n" +
+"    PROVINCIA_NOMBRE,PROVINCIA_ID,\n" +
 "    RUT_EMPRESA,\n" +
 "    NOMBRE_EMPRESA,\n" +
 "    TELEFONO_EMPRESA,\n" +
 "    CORREO_EMPRESA,\n" +
-"    DIRECCION_EMPRESA\n" +
+"    DIRECCION_EMPRESA,RAZON_SOCIAL\n" +
 "FROM\n" +
 "    region  inner join\n" +
 "    provincia on REGION_ID = PROVINCIA_REGION_ID inner join\n" +
@@ -108,9 +95,11 @@ public class ClienteController {
                     if (rs.next()) 
                     {
                         cliente.setNombre(rs.getString("Nombre_EMPRESA"));
+                        cliente.setNombreLargo(rs.getString("RAZON_SOCIAL"));
                         cliente.setEmail(rs.getString("CORREO_EMPRESA"));
                         cliente.setTelefono(rs.getString("TELEFONO_EMPRESA"));
                         cliente.setComuna(rs.getString("COMUNA_ID"));
+                        cliente.setProvincia(rs.getString("PROVINCIA_ID"));
                         cliente.setDireccion(rs.getString("DIRECCION_EMPRESA"));
                         cliente.setRegion(rs.getString("REGION_ID"));
                         

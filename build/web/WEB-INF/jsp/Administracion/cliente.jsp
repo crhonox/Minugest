@@ -35,9 +35,11 @@
                     <tr>
                 <th>Rut</th>
                 <th>Nombre</th>
+                <th>Razon Social</th>
                 <th>Telefono</th>
                 <th>Correo</th>
                 <th>Region</th>
+                <th>Provincia</th>
                 <th>Comuna</th>
                 <th>Direccion</th>
                 <th>Acciones</th>
@@ -49,9 +51,11 @@
                         <tr>
                             <td><c:out value="${dato.RUT_EMPRESA}"/></td>
                             <td><a href="infoCliente.htm?rut=${dato.RUT_EMPRESA}"><c:out value="${dato.NOMBRE_EMPRESA}"/></a></td>
+                            <td><c:out value="${dato.RAZON_SOCIAL}"/></td>
                             <td><c:out value="${dato.TELEFONO_EMPRESA}"/></td>
                             <td><c:out value="${dato.CORREO_EMPRESA}"/></td>
                             <td><c:out value="${dato.REGION_NOMBRE}"/></td>
+                            <td><c:out value="${dato.PROVINCIA_NOMBRE}"/></td>
                             <td><c:out value="${dato.COMUNA_NOMBRE}"/></td>
                             <td><c:out value="${dato.Direccion_EMPRESA}"/></td>
                             <td><a href="editarCliente.htm?rut=${dato.RUT_EMPRESA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>     

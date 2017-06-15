@@ -11,7 +11,7 @@
         <div class="container">
             
             <ol class="breadcrumb">
-                <li><a href="<c:url value="/cliente.htm" />">Listado de clientes</a></li>
+                <li><a href="<c:url value="cliente.htm" />">Listado de clientes</a></li>
                 <li class="active">${cliente.nombre}</li>
             </ol>
             <div class="panel panel-primary">
@@ -24,9 +24,11 @@
                             <form:errors path="*" element="div" cssClass="alert alert-danger" />
                             <p><form:label path="rut">Rut  : ${cliente.rut}</form:label></p>
                             <p><form:label path="Nombre">Nombre  : ${cliente.nombre}</form:label></p>
+                            <p><form:label path="Nombre">Razon Social  : ${cliente.nombreLargo}</form:label></p>
                             <p><form:label path="email">E-mail  : ${cliente.email}</form:label></p>
                             <p><form:label path="Telefono">Telefono  : ${cliente.telefono}</form:label></p>
                             <p><form:label path="Region">Region  : ${cliente.region}</form:label></p>
+                            <p><form:label path="Provincia">Provincia  : ${cliente.provincia}</form:label></p>
                             <p><form:label path="Comuna">Comuna  : ${cliente.comuna}</form:label></p>
                         <p><form:label path="Direccion">Direccion  : ${cliente.direccion}</form:label></p>
                             <hr />

@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="rec" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"   %>
+<%@taglib  prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
    <head>
@@ -14,11 +16,17 @@
         <br>
         <hr/>
          <h1>Recetas</h1>
+         <h1></h1>
+         <form:form commandName="receta" method="POST">
+             <p> <form:label path="nombreReceta">Buscar Receta</form:label></p>
+             <form:input path="nombreReceta" cssClass="form-control"/>
+             <p><form:button class="btn btn-danger">Buscar</form:button> <a href="receta.htm" class="btn btn-success">Mostrar Todo</a></p>
+         </form:form>
           <div class="row">
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                <th>N°</th>
+                
                 <th>Nombre</th>
                 <th>Categoria</th>
                 <th>Descripción</th>
@@ -31,7 +39,7 @@
                 <tbody>
                     <rec:forEach items="${datos}" var="dato" >
                         <tr>
-                            <td><rec:out value="${dato.CODIGO_RECETA}"/></td>
+                            
                             <td><a href="DetalleReceta.htm?COD=${dato.CODIGO_RECETA}"><rec:out value="${dato.NOMBRE_RECETA}"/></a></td>
                             <td><rec:out value="${dato.NOMBRE_CATEGORIA}"/></td>
                             <td><rec:out value="${dato.DESCRIPCION_RECETA}"/></td>

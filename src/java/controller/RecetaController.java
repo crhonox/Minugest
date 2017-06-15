@@ -182,19 +182,30 @@ public class RecetaController {
              public ModelAndView recetaEnc()
     {
           ModelAndView mav= new ModelAndView();
-        String sql ="SELECT\n"
-                + "     CODIGO_RECETA,\n"
-                + "     NOMBRE_CATEGORIA,\n"
-                + "     NOMBRE_RECETA,\n"
-                + "     DESCRIPCION_RECETA,\n"
-                + "     CANTIDAD_PORCION\n"
-                + "FROM\n"
-                + "RECETA inner join\n"
-                + " CATEGORIA on CATEGORIA.CODIGO_CATEGORIA = RECETA.CODIGO_CATEGORIA";
+        String sql ="SELECT CODIGO_RECETA, NOMBRE_CATEGORIA, NOMBRE_RECETA,  DESCRIPCION_RECETA, CANTIDAD_PORCION\n"
+                + "FROM RECETA inner join\n"
+                + " CATEGORIA on CATEGORIA.CODIGO_CATEGORIA = RECETA.CODIGO_CATEGORIA "
+                + "";
         
         List datos=this.jdbcTemplate.queryForList(sql);
         mav.addObject("datos",datos);
-
+        mav.addObject("receta",new Receta());
+        mav.setViewName("Encargado/receta");
+        return mav;
+    }
+             
+             @RequestMapping(value = "Encargado/receta.htm",method = RequestMethod.POST)
+             public ModelAndView BuscarrecetaEnc(@ModelAttribute("receta") Receta rec, BindingResult result, SessionStatus status)
+    {
+          ModelAndView mav= new ModelAndView();
+        String sql ="SELECT CODIGO_RECETA, NOMBRE_CATEGORIA, NOMBRE_RECETA,  DESCRIPCION_RECETA, CANTIDAD_PORCION\n"
+                + "FROM RECETA inner join\n"
+                + " CATEGORIA on CATEGORIA.CODIGO_CATEGORIA = RECETA.CODIGO_CATEGORIA "
+                + "Where NOMBRE_RECETA regexp '" + rec.getNombreReceta() + "'";
+        
+        List datos=this.jdbcTemplate.queryForList(sql);
+        mav.addObject("datos",datos);
+        mav.addObject("receta",new Receta());
         mav.setViewName("Encargado/receta");
         return mav;
     }
@@ -258,13 +269,16 @@ public class RecetaController {
     {
         this.recetaValidate.validate(rec, result);
         if(result.hasErrors())
-        {
-             ModelAndView mav=new ModelAndView();
-            String idReceta  = request.getParameter("idReceta");
-            Receta datos = this.selectReceta(idReceta);
-            mav.setViewName("Encargado/editarReceta");
-            mav.addObject("receta",new Receta(idReceta, datos.getNombreReceta(), datos.getIdCategoria(), datos.getDescripcionReceta(), datos.getPorcionReceta()));
-            return mav;
+        { 
+            ModelAndView mav = new ModelAndView();
+        String idReceta  = request.getParameter("idReceta");
+        Receta datos = this.selectReceta(idReceta);
+        List idCategoria = this.jdbcTemplate.queryForList("select CODIGO_CATEGORIA, NOMBRE_CATEGORIA from CATEGORIA");
+        mav.addObject("idCategoria",idCategoria);
+        
+        mav.setViewName("Encargado/editarReceta");
+        mav.addObject("receta",new Receta(idReceta, datos.getNombreReceta(), datos.getIdCategoria(), datos.getDescripcionReceta(), datos.getPorcionReceta()));
+        return mav;
         }
         else
         {

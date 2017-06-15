@@ -26,6 +26,7 @@ public class ClienteValidate implements Validator{
         Cliente cliente = (Cliente) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Nombre", "required.Nombre","El campo Nombre es obligatorio");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Rut", "required.Rut","El campo Rut es obligatorio");
+        
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Direccion", "required.Direccion","El campo Direccion es obligatorio");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required.email","El campo E-mail es obligatorio");
          if (!(cliente.getEmail()!= null && cliente.getEmail().isEmpty()))
