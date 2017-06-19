@@ -16,9 +16,19 @@ public class Receta
     private String porcionReceta;
     private Integer remove; // boolean flag
     private Minuta  minuta;
+    private List<Ingrediente> ingredientes;
     private List<String>  combobox;
     private List<String> Cantidad;
 
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    
     public List<String> getCombobox() {
         return combobox;
     }
