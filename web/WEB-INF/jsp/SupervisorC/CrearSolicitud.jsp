@@ -14,7 +14,7 @@
         <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
-        <title>Minugest</title>
+        <title>Supervisor</title>
     </head>
      <body>
           
