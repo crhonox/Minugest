@@ -1,13 +1,19 @@
 
 package controller;
 import Modelos.Conexion;
+import Modelos.JSONValid;
 import Modelos.Receta;
 import Modelos.RecetaValidate;
+import com.google.gson.Gson;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -16,6 +22,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 /**
@@ -225,23 +233,12 @@ public class RecetaController {
  @RequestMapping(value="Encargado/AñadirReceta.htm" ,method = RequestMethod.POST)
     public ModelAndView formEnc (@ModelAttribute("receta") Receta rec, BindingResult result, SessionStatus status)  
     {
-    this.recetaValidate.validate(rec, result);
-        if(result.hasErrors())
-        {
-                ModelAndView mav = new ModelAndView();
-                mav.setViewName("Encargado/AñadirReceta");
-                mav.addObject("receta",new Receta());
-                return mav;
-        }else
-        {
-           
+ 
             this.jdbcTemplate.update("insert into RECETA (CODIGO_CATEGORIA, "
                     + "NOMBRE_RECETA, DESCRIPCION_RECETA, CANTIDAD_PORCION) "
                     + "values (?,?,?,?)" , rec.getIdCategoria(), rec.getNombreReceta(), rec.getDescripcionReceta(), rec.getPorcionReceta());
             return new ModelAndView("redirect:/Encargado/receta.htm");
-         } 
- 
-    
+   
     }
     
       @RequestMapping(value="Encargado/editarReceta.htm",method=RequestMethod.GET)
@@ -351,6 +348,30 @@ public class RecetaController {
         String Query = "DELETE FROM 'Minugest'.'RECETAINGREDIENTE' WHERE CODIGO_RECETA='"+CodigoR+"' AND CODIGO_INGREDIENTE='"+CodigoI+"'";
         this.jdbcTemplate.execute(Query);
         return new ModelAndView("redirect:/Encargado/DetalleReceta.htm?COD="+CodigoR);
+    }
+    
+    @RequestMapping(value = "Encargado/ValidarReceta.do", method = RequestMethod.GET)
+    @ResponseBody
+    public void ValidarIngrediente(@RequestParam(value = "nombreReceta") String Ingrediente, HttpServletRequest request,
+            HttpServletResponse response) {
+        String Nombre= request.getParameter("nombreReceta");
+        JSONValid valida= new JSONValid();
+        int ingrediente = this.jdbcTemplate.queryForObject("SELECT COUNT(NOMBRE_RECETA) from RECETA where NOMBRE_RECETA='"+Nombre+"'", Integer.class);
+        Boolean valid = true;
+        if (ingrediente != 0) {
+            valid=false;
+        }
+        valida.setValid(valid);
+        String json = null;
+        json = new Gson().toJson(valida);
+        response.setContentType("Encargado/AñadirReceta");
+        try {
+            response.getWriter().write(json);
+            System.out.println("Ingrediente="+ingrediente);
+        } catch (IOException ex) {
+            Logger.getLogger(AdministracionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
         public Receta selectRecetaEnc(String idReceta) 

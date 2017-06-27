@@ -155,8 +155,11 @@
          <form:form commandName="receta" method="POST">
              <p> <form:label path="nombreReceta">Buscar Receta</form:label></p>
              <form:input path="nombreReceta" cssClass="form-control"/>
-             <p><form:button class="btn btn-danger">Buscar</form:button> <a href="receta.htm" class="btn btn-success">Mostrar Todo</a></p>
+             <p></p>
+             <form:button class="btn btn-danger">Buscar</form:button> <a href="receta.htm" class="btn btn-success">Mostrar Todo</a> <a href="AñadirReceta.htm" class="btn btn-success">Añadir Receta</a>
          </form:form>
+             <p></p>
+             
           <div class="row">
             <table class="table table-bordered table-hover">
                 <thead>
@@ -186,7 +189,7 @@
                     </rec:forEach>
                 </tbody>
             </table>
-                <a href="AñadirReceta.htm" class="btn btn-success">Añadir Receta</a>
+               
             
         </div>
         </div>

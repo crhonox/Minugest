@@ -159,7 +159,7 @@
                     <form:input path="nombreIngrediente" cssClass="form-control"/></p>
 
             <form:button class="btn btn-danger" > Buscar</form:button>
-            <a href="ingrediente.htm" class="btn btn-success">Mostrar todo</a>
+            <a href="ingrediente.htm" class="btn btn-success">Mostrar todo</a> <a href="AñadirIngrediente.htm" class="btn btn-success">Añadir Ingrediente</a>
             
             <hr>
         </form:form>
@@ -167,7 +167,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                <th>N°</th>
+                
                 <th>Nombre</th>
                 <th>Unidad de Medida</th>
                 <th>Acciones</th>
@@ -177,7 +177,7 @@
                 <tbody>
                     <ingr:forEach items="${datos}" var="dato" >
                         <tr>
-                            <td><ingr:out value="${dato.CODIGO_INGREDIENTE}"/></td>
+                            
                             <td><ingr:out value="${dato.NOMBRE_INGREDIENTE}"/></td>
                             <td><ingr:out value="${dato.NOMBRE_UNIDAD}"/></td>
                             <td><a href="editarIngrediente.htm?idIngrediente=${dato.CODIGO_INGREDIENTE}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>     
@@ -187,7 +187,7 @@
                     </ingr:forEach>
                 </tbody>
             </table>
-                <a href="AñadirIngrediente.htm" class="btn btn-success">Añadir Ingrediente</a>
+                
             
         </div>
         </div>

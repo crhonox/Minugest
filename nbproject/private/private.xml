@@ -14,8 +14,17 @@
             <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/controller/ClienteController.java</file>
             <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Administracion/editarCliente.jsp</file>
             <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Administracion/UsuarioCasino.jsp</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/SupervisorC/DetalleSolicitud.jsp</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/controller/AdministracionController.java</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/home.jsp</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Encargado/DetalleSolicitud.jsp</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/controller/MinutaController.java</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/controller/homeController.java</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/controller/SolicitudController.java</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Encargado/Solicitudes.jsp</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/SupervisorC/Solicitudes.jsp</file>
             <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Administracion/AñadirCliente.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Administracion/editarCasino.jsp</file>
+            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/Modelos/Minuta.java</file>
         </group>
     </open-files>
 </project-private>

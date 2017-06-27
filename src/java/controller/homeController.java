@@ -1,5 +1,10 @@
     package controller;
 
+import Modelos.Conexion;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
     import org.springframework.stereotype.Controller;
     import org.springframework.validation.BindingResult;
     import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,11 +15,29 @@
 
     @Controller
     public class homeController {
-
-        @RequestMapping(value = {"/", "/home**", "/welcome**"}, method = RequestMethod.GET)
+        private JdbcTemplate jdbcTemplate;
+        
+        public homeController(){
+            Conexion con= new Conexion();
+            this.jdbcTemplate=new JdbcTemplate(con.conectar());
+        }
+        
+        @RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
         public ModelAndView home() {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("home");
+            return mav;
+        }
+        
+        @RequestMapping(value = { "/welcome"}, method = RequestMethod.GET)
+        public ModelAndView home2() {
+            ModelAndView mav = new ModelAndView();
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            UserDetails userDetail = (UserDetails) auth.getPrincipal();
+            String user=userDetail.getUsername();
+            int mensajes = this.jdbcTemplate.queryForObject("SELECT count(*) from SOLICITUD where visto = 0 and DESTINO ='"+user+"' ", Integer.class);
+            mav.addObject("mensaje",mensajes);
+            mav.setViewName("home_1");
             return mav;
         }
 

@@ -150,7 +150,7 @@
         <div class="menu-conte-wra">
         <h1>Solicitudes</h1>
         <div class="row">
-            <a href="CrearSolicitud.htm">Crear Solicitud</a>
+            <a href="CrearSolicitud.htm" class="btn btn-success">Crear Solicitud</a>
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -159,16 +159,18 @@
                 <th>Fecha</th>
                 <th>Contenido</th>
                 <th>Estado</th>
+                <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${solicitud}" var="dato" >
                         <tr>
-                            <td><c:out value="${dato.ASUNTO}"/></td>
+                            <td><a href="DetalleSolicitud.htm?idSolicitud=${dato.idSOLICITUD}"><c:out value="${dato.ASUNTO}"/></a></td>
                             <td><c:out value="${dato.Nombre}"/></td>
                             <td><c:out value="${dato.TIEMPO}"/></td>
                             <td><c:out value="${dato.CONTENIDO}"/></td>
                             <td><c:out value="${dato.ESTADO}"/></td>
+                            <td><a href="EliminarSolicitud.htm?idSolicitud=${dato.idSOLICITUD}" onclick="return confirm('Esta seguro que quiere eliminar esta Solicitud?');">Eliminar</a></td>
                                 
                         </tr>
                     </c:forEach>

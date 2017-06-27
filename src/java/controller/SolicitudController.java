@@ -8,6 +8,7 @@ import Modelos.SolicitudValidate;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,6 +46,19 @@ public class SolicitudController {
         return mav;
     }
     
+    @RequestMapping(value = "Supervisor/DetalleSolicitud.htm",method = RequestMethod.GET)
+    public ModelAndView DetalleSolicitud(HttpServletRequest request)
+    {
+        ModelAndView mav = new ModelAndView();
+        String Codigo = request.getParameter("idSolicitud");
+        mav.setViewName("SupervisorC/DetalleSolicitud");
+        List solicitud = this.jdbcTemplate.queryForList("select *,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO where idSolicitud='"+Codigo+"'");
+        
+        mav.addObject("solicitud",solicitud);
+        
+        return mav;
+    }
+    
      @RequestMapping(value = "Supervisor/CrearSolicitud.htm",method = RequestMethod.GET)
     public ModelAndView CrearSolicitud()
     {
@@ -62,6 +76,14 @@ public class SolicitudController {
         return mav;
     }
     
+     @RequestMapping(value = "Supervisor/EliminarSolicitud.htm",method = RequestMethod.GET)
+    public ModelAndView EliminarReceta(HttpServletRequest request){
+        String Codigo = request.getParameter("idSolicitud");
+        
+        String Query = "DELETE FROM SOLICITUD WHERE idSolicitud='"+Codigo+"'";
+        this.jdbcTemplate.execute(Query);
+        return new ModelAndView("redirect:/Supervisor/Solicitudes.htm");
+    }
     
      @RequestMapping(value = "Supervisor/CrearSolicitud.htm",method = RequestMethod.POST)
     public ModelAndView CrearSolicitudPost(@ModelAttribute("Solicitud") Solicitud sol, BindingResult result, SessionStatus status)
@@ -94,5 +116,32 @@ public class SolicitudController {
                     + "values (?,?,?,?,?)" , fecha, sol.getAsunto(), sol.getContenido(), sol.getDestino(),sol.getCodigo_usuario());
             return new ModelAndView("redirect:Solicitudes.htm");
         }
+    }
+    /*------------------  Encargado  ----------------------------*/
+    @RequestMapping(value = "Encargado/Solicitudes.htm",method = RequestMethod.GET)
+    public ModelAndView ListarSolicitudesEncargado()
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Encargado/Solicitudes");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String rut_user=userDetail.getUsername();
+        List solicitud = this.jdbcTemplate.queryForList("select *,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO where SOLICITUD.DESTINO = '"+rut_user+"'");
+        mav.addObject("solicitud",solicitud);
+        
+        return mav;
+    }
+    
+    @RequestMapping(value = "Encargado/DetalleSolicitud.htm",method = RequestMethod.GET)
+    public ModelAndView DetalleSolicitudEncargado(HttpServletRequest request)
+    {
+        ModelAndView mav = new ModelAndView();
+        String Codigo = request.getParameter("idSolicitud");
+        mav.setViewName("Encargado/DetalleSolicitud");
+        List solicitud = this.jdbcTemplate.queryForList("select *,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.CODIGO_USUARIO where idSolicitud='"+Codigo+"'");
+        
+        mav.addObject("solicitud",solicitud);
+        
+        return mav;
     }
 }

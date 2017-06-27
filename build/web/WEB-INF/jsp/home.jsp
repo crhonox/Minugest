@@ -90,6 +90,36 @@
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		</form>
+                <script>
+                    $(document).ready(function() {
+                        var rut_usuario = ${pageContext.request.userPrincipal.name};
+                        $.ajax({
+                            type:'GET',
+                            url:'pendientes.do',
+                            data:{rutUser: rut_usuario},
+
+                             headers: {
+                              Accept: 'application/json'
+                             },
+                            dataType: 'json',
+
+                            success:function(response){
+
+                             var select = $('#Provincia');
+                         select.find('option').remove();
+                         $('#Provincia').html('<option value="">Seleccione</option>');
+                           $.each(response, function(i,data) {
+                              var div_data="<option value="+data.ProvinciaId+">"+data.ProvinciaName+"</option>";
+                             $(div_data).appendTo('#Provincia');
+                           //$('#Provincia').append($('<option></option>').val(response).html(vartext.ProvinciaName));
+                           //$('<option>').val(varvalue.ProvinciaId).html(vartext.ProvinciaName).appendTo(select);
+                       });
+
+                            }
+
+                        });
+                    });
+                </script>
 		<script>
 			function formSubmit() {
 				document.getElementById("logoutForm").submit();

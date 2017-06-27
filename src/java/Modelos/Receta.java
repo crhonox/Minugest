@@ -1,5 +1,6 @@
 package Modelos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public class Receta
     private String porcionReceta;
     private Integer remove; // boolean flag
     private Minuta  minuta;
-    private List<Ingrediente> ingredientes;
+    private List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
     private List<String>  combobox;
     private List<String> Cantidad;
 
@@ -27,7 +28,11 @@ public class Receta
     public void setIngredientes(List<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
     }
-
+    
+    public void addIngrediente(Ingrediente newCourse)
+    {
+        this.ingredientes.add(newCourse);
+    }
     
     public List<String> getCombobox() {
         return combobox;

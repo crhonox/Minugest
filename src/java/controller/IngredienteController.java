@@ -3,9 +3,14 @@ package controller;
 import Modelos.Conexion;
 import Modelos.Ingrediente;
 import Modelos.IngredienteValidate;
+import Modelos.JSONValid;
+import com.google.gson.Gson;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class IngredienteController 
@@ -209,8 +217,9 @@ public class IngredienteController
                 + "     NOMBRE_UNIDAD,\n"
                 + "     NOMBRE_INGREDIENTE\n"
                 + "FROM\n"
-                + "INGREDIENTE inner join\n"
-                + " UNIDAD_DE_MEDIDA on UNIDAD_DE_MEDIDA.CODIGO_UNIDAD = INGREDIENTE.CODIGO_UNIDAD";
+                + " INGREDIENTE "
+                + " inner join\n"
+                + " UNIDAD_DE_MEDIDA on UNIDAD_DE_MEDIDA.CODIGO_UNIDAD = INGREDIENTE.CODIGO_UNIDAD ORDER BY NOMBRE_INGREDIENTE";
         
         List datos=this.jdbcTemplate.queryForList(sql);
         mav.addObject("datos",datos);
@@ -269,19 +278,11 @@ public class IngredienteController
     @RequestMapping(value="Encargado/AñadirIngrediente.htm" ,method = RequestMethod.POST)
     public ModelAndView formEnc (@ModelAttribute("ingrediente") Ingrediente ing, BindingResult result, SessionStatus status)  
     {
-        this.ingredienteValidate.validate(ing, result);
-        if(result.hasErrors())
-        {
-                ModelAndView mav = new ModelAndView();
-                mav.setViewName("Encargado/AñadirIngrediente");
-                mav.addObject("ingrediente",new Ingrediente());
-                return mav;
-        }else
-        {
+        
            
             this.jdbcTemplate.update("insert into INGREDIENTE (CODIGO_UNIDAD, NOMBRE_INGREDIENTE) values (?,?)" , ing.getUnidadMedida() ,ing.getNombreIngrediente());
             return new ModelAndView("redirect:/Encargado/ingrediente.htm");
-        }
+        
         
     }
     
@@ -309,30 +310,40 @@ public class IngredienteController
                 HttpServletRequest request
         )
     {
-        this.ingredienteValidate.validate(ing, result);
-        if(result.hasErrors())
-        {
-             ModelAndView mav=new ModelAndView();
-              String idIngrediente = request.getParameter("idIngrediente");
-            //int idIngrediente = Integer.parseInt(request.getParameter("idIngrediente"));
-            Ingrediente datos=this.selectIngrediente(idIngrediente);
-            mav.setViewName("Encargado/editarIngrediente");
-            
-            mav.addObject("ingrediente",new Ingrediente(idIngrediente,datos.getNombreIngrediente(), datos.getUnidadMedida()));
-            return mav;
-        }
-        else
-        {
+        
              String idIngrediente = request.getParameter("idIngrediente");
              //int idIngrediente = Integer.parseInt(request.getParameter("idIngrediente"));
              this.jdbcTemplate.update( //REVISAR ORDEN UPDATE 
                     "update INGREDIENTE set NOMBRE_INGREDIENTE=?,CODIGO_UNIDAD=? where CODIGO_INGREDIENTE=? ",
          ing.getNombreIngrediente(),ing.getUnidadMedida(),idIngrediente);
          return new ModelAndView("redirect:/Encargado/ingrediente.htm");
-        }
+        
        
     }
-    
+        
+    @RequestMapping(value = "Encargado/ValidarIngrediente.do", method = RequestMethod.GET)
+    @ResponseBody
+    public void ValidarIngrediente(@RequestParam(value = "nombreIngrediente") String Ingrediente, HttpServletRequest request,
+            HttpServletResponse response) {
+        String Nombre= request.getParameter("nombreIngrediente");
+        JSONValid valida= new JSONValid();
+        int ingrediente = this.jdbcTemplate.queryForObject("SELECT COUNT(NOMBRE_INGREDIENTE) from INGREDIENTE where NOMBRE_INGREDIENTE='"+Nombre+"'", Integer.class);
+        Boolean valid = true;
+        if (ingrediente != 0) {
+            valid=false;
+        }
+        valida.setValid(valid);
+        String json = null;
+        json = new Gson().toJson(valida);
+        response.setContentType("Encargado/AñadirIngrediente");
+        try {
+            response.getWriter().write(json);
+            System.out.println("Ingrediente="+ingrediente);
+        } catch (IOException ex) {
+            Logger.getLogger(AdministracionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     
     
       public Ingrediente selectIngredienteEnc(String idIngrediente) 
