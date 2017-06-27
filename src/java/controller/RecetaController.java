@@ -305,7 +305,7 @@ public class RecetaController {
         return mav;
     }
     
-    @RequestMapping(value = "/Encargado/AñadirIngredienteReceta.htm",method = RequestMethod.POST)
+    @RequestMapping(value = "Encargado/AñadirIngredienteReceta.htm",method = RequestMethod.POST)
     public ModelAndView IngredienteInsertReceta (@ModelAttribute("Receta") Receta receta, BindingResult result, SessionStatus status,HttpServletRequest request)  
     {
              String Codigo = request.getParameter("idReceta");
@@ -345,7 +345,7 @@ public class RecetaController {
     public ModelAndView EliminarReceta(HttpServletRequest request){
         String CodigoR = request.getParameter("CODR");
         String CodigoI = request.getParameter("CODI");
-        String Query = "DELETE FROM `Minugest`.`RECETAINGREDIENTE` WHERE CODIGO_RECETA='"+CodigoR+"' AND CODIGO_INGREDIENTE='"+CodigoI+"'";
+        String Query = "DELETE FROM 'Minugest'.'RECETAINGREDIENTE' WHERE CODIGO_RECETA='"+CodigoR+"' AND CODIGO_INGREDIENTE='"+CodigoI+"'";
         this.jdbcTemplate.execute(Query);
         return new ModelAndView("redirect:/Encargado/DetalleReceta.htm?COD="+CodigoR);
     }

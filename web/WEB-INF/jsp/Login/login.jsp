@@ -25,7 +25,7 @@
 }
 
 #login-box {
-	width: 300px;
+	width: 150px;
 	padding: 20px;
 	margin: 100px auto;
 	background: #fff;

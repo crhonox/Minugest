@@ -1,5 +1,5 @@
 package controller;
-
+ 
 import Modelos.Cliente;
 import Modelos.Provincia;
 import Modelos.ClienteValidate;
@@ -22,7 +22,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import org.springframework.stereotype.Controller;
-
+ 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-
+ 
 @Controller
 public class AdministracionController {
 
@@ -194,7 +194,7 @@ public class AdministracionController {
                 + " WHERE RUT_EMPRESA='" + rut+"'";
         return (Cliente) jdbcTemplate.query
         (
-                quer, new ResultSetExtractor<Cliente>() 
+                quer, new ResultSetExtractor<Cliente>()
             {
                 public Cliente extractData(ResultSet rs) throws SQLException, DataAccessException 
                 {
@@ -212,10 +212,11 @@ public class AdministracionController {
                     }
                     return cliente;
                 }
-
-
+ 
+ 
             }
         );
     }
 
 }
+ 
