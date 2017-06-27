@@ -181,7 +181,8 @@
                         <input type="number" id="porcionReceta" name="porcionReceta" cssClass="form-control"/>
          </p>
          
-            <form:button class="btn btn-danger" >Enviar</form:button>
+            <form:button class="btn btn-success" >Enviar</form:button>
+            <a href="receta.htm" class="btn btn-danger">Volver</a>
         </form:form>
                     </div>
                 </div>

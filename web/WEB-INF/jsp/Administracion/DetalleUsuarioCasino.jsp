@@ -213,7 +213,7 @@
                             </c:forEach>
                             </table>
                             <a href="CasinoUsuario.htm?rutUser=${rut}" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Asignar Casino</a>
-    
+                    <a href="listaUsuario.htm?rut=${rutEmp}" class="btn btn-danger">Volver</a>
                     </div>
                 </div>
             </div>

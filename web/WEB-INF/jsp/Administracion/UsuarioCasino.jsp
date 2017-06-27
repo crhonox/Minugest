@@ -6,6 +6,10 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -56,7 +60,7 @@
   </script>
        </p>
        
-       <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
         <title>Minugest</title>
@@ -157,6 +161,40 @@
                 </div>
             </div>
        </div>
+        <div class="barra-contenido">
+           <div class="conta">
+               <div class="espacio2">
+            </div>
+                <div class="navbar">
+                    <div class="navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/Minugest/home" style="color: #fff;"> Inicio </a></li>
+                            <li><a href="/Minugest/compañia.htm" style="color: #fff;">Compañia</a></li>
+                            <li><a href="/Minugest/soluciones.htm" style="color: #fff;">Soluciones</a></li>
+                            <li><a href="/Minugest/socios.htm" style="color: #fff;">Socios</a></li>
+                        </ul> 
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div id="sidebara" class="nav-collapse">
+            <div class="leftside-navigation" style="overflow: hidden; outline: none;" tabinex="4000">
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <sec:authorize access="hasRole('AdministradorA')">
+                    <li><a href="cliente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Clientes</a></li>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('Supervisor')">
+                    <li><a href="Supervisor/Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('Encargado')">
+                    <li><a href="Encargado/Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
+                    <li><a href="Encargado/receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="Encargado/ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
+                    </sec:authorize>
+                </ul>
+            </div>
+        </div> 
          
         
         <div class="menu-conte-wra">
@@ -195,7 +233,8 @@
                     
                     
                     
-            <form:button class="btn btn-danger" >Enviar</form:button>
+            <form:button class="btn btn-success" >Enviar</form:button>
+            <a href="DetalleCasino.htm?cod=${cod}" class="btn btn-danger">Volver</a>
         </form:form>
                     </div>
                 </div>

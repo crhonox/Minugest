@@ -197,8 +197,8 @@
                                 </c:forEach>                            
                     </form:select>
                      </div>
-            <form:button class="btn btn-danger" >Enviar</form:button>
-            
+            <form:button class="btn btn-success" >Enviar</form:button>
+            <a href="listaUsuario.htm?rut=${usuario.getRutEmpresa()}" class="btn btn-danger">Volver</a>
         </form:form>
             
              <script>

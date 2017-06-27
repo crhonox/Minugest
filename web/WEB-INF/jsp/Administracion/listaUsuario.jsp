@@ -189,6 +189,7 @@
             </table>
             <form:form method="post" commandName="cliente">
                 <a href="AñadirUsuario.htm?rutEmpresa=${cliente.rut}" class="btn btn-success">Añadir Usuario</a>
+            <a href="infoCliente.htm?rut=${cliente.rut}" class="btn btn-danger">Volver</a>
             </form:form>
              
             </div>

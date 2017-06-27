@@ -202,6 +202,7 @@
                             </c:forEach>
                             </table>
                             <a href="AñadirIngredienteReceta.htm?idReceta=${codigo}" ><span class="glyphicon glyphicon-plus" aria-hidden="true">Añadir</span></a>
+                            <a href="receta.htm" class="btn btn-danger">Volver</a>
     
                     </div>
                 </div>

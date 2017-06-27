@@ -149,9 +149,9 @@
                     <li><a href="Supervisor/Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Encargado/Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
-                    <li><a href="Encargado/receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
-                    <li><a href="Encargado/ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
+                    <li><a href="Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
+                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     </sec:authorize>
                 </ul>
             </div>
@@ -194,7 +194,8 @@
         </script>
     </div> 
     <input id="Codigo_User" name="Codigo_User" class="form-control" type="hidden" value="${pageContext.request.userPrincipal.name}" />
-            <form:button class="btn btn-danger" >Enviar</form:button>
+            <form:button class="btn btn-success" >Enviar</form:button>
+            <a href="Minutas.htm" class="btn btn-danger">Cancelar</a>
         </form:form>
                     </div>
                 </div>

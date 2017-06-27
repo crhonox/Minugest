@@ -79,12 +79,10 @@
   </script>
        
                             
-                            
-                                 
-                                    
-                                                        
-                        </p>
-        <title>Encargado</title>
+                 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+        <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
+        <title>Minugest</title>
     </head>
      <body>
           <div class="logo_gest">
@@ -210,9 +208,9 @@
                     <li><a href="Supervisor/Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Encargado/Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
-                    <li><a href="Encargado/receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
-                    <li><a href="Encargado/ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
+                    <li><a href="Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
+                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     </sec:authorize>
                 </ul>
             </div>
@@ -255,11 +253,8 @@
                    
                                  </div>
 
-
-                    
-                    
-                    
-            <form:button class="btn btn-danger" >Enviar</form:button>
+            <form:button class="btn btn-success" >Enviar</form:button>
+            <a href="DetalleMinuta.htm?COD=${COD}" class="btn btn-danger">Volver</a>
         </form:form>
                     </div>
                 </div>

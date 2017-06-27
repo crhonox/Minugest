@@ -174,7 +174,8 @@
             
                         
                             <hr />
-                            <input type="submit" value="Enviar" class="btn btn-danger" />
+                            <input type="submit" value="Enviar" class="btn btn-success" />
+                            <a href="ingrediente.htm" class="btn btn-danger">Cancelar</a>
                         </form:form>
                 </div>
             </div>

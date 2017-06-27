@@ -153,7 +153,7 @@ public class UsuarioController {
         Usuario datos=this.selectUsuario(rutUser);
         List casino = this.jdbcTemplate.queryForList("SELECT CODIGO_CASINO,NOMBRE_CASINO from CASINO where RUT_EMPRESA='"+datos.getRutEmpresa()+"'");
         mav.addObject("Casino",casino);
-       
+        mav.addObject("rutEmp", datos.getRutEmpresa());
         mav.setViewName("Administracion/CasinoUsuario");
         mav.addObject("Usuario",new Usuario(rutUser,datos.getRutEmpresa()));
         return mav;

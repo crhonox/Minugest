@@ -162,7 +162,7 @@
         
         <div class="menu-conte-wra">
             <ol class="breadcrumb">
-                <li><a href="<c:url value="/cliente.htm" />">Listado de clientes</a></li>
+                <li><a href="<c:url value="/Administracion/cliente.htm" />">Listado de clientes</a></li>
                 <li class="active">Editar</li>
             </ol>
             <div class="panel panel-primary">

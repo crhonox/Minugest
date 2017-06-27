@@ -153,7 +153,7 @@
             </div>
         </div> 
         
-        <div id="sidebar" class="nav-collapse">
+        <div id="sidebara" class="nav-collapse">
             <div class="leftside-navigation" style="overflow: hidden; outline: none;" tabinex="4000">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <sec:authorize access="hasRole('AdministradorA')">
@@ -225,8 +225,8 @@
             <form:label path="Telefono">Telefono Representante :</form:label>
             <form:input path="Telefono" cssClass="form-control"/>
             </div>
-            <form:button class="btn btn-danger" >Enviar</form:button>
-            
+            <form:button class="btn btn-success" >Enviar</form:button>
+            <a href="/Minugest/Administracion/cliente.htm" class="btn btn-danger" >Cancelar</a>
         </form:form>
             
             <script>

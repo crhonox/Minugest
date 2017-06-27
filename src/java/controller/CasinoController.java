@@ -156,6 +156,8 @@ public class CasinoController {
         Casino datos=this.selectCasino(cod);
         List usuario = this.jdbcTemplate.queryForList("SELECT CODIGO_USUARIO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre from USUARIO where RUT_EMPRESA_USUARIO='"+datos.getRutEmpresa()+"'");
         mav.addObject("usuario",usuario);
+        mav.addObject("rutEmp", datos.getRutEmpresa());
+        mav.addObject("cod", cod);
        Casino formc = new Casino();
        formc.setCodigoCasino(cod);
        formc.setNombreCasino(datos.getNombreCasino());

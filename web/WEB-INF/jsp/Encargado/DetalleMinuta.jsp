@@ -161,7 +161,7 @@
                    
                     <div class="panel-heading"> 
                         <ol class="breadcrumb">
-                <li><a href="<c:url value="Minuta.htm" />">Listado de Minutas</a></li>
+                <li><a href="<c:url value="Minutas.htm" />">Listado de Minutas</a></li>
                 <li class="active"> Detalle de Minuta</li>
                 </ol>
                     </div>
@@ -203,7 +203,7 @@
                             </c:forEach>
                             </table>
                             <a href="RecetaMinuta.htm?COD=${CODM}" ><span class="glyphicon glyphicon-plus" aria-hidden="true">Añadir</span></a>
-    
+                            <a href="Minutas.htm" class="btn btn-danger">Volver</a>
                     </div>
                 </div>
             </div>

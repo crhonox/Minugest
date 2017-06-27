@@ -217,7 +217,7 @@
                             </c:forEach>
                             </table>
                             <a href="UsuarioCasino.htm?cod=${cod}" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Asignar Usuarios</a>
-    
+                            <a href="listaCasino.htm?rut=${rutEmp}" class="btn btn-danger">Volver</a>
                     </div>
                 </div>
             </div>

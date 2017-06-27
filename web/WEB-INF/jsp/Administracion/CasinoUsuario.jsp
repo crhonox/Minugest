@@ -226,10 +226,8 @@
                                  </div>
 
 
-                    
-                    
-                    
             <form:button class="btn btn-danger" >Enviar</form:button>
+            <a href="listaUsuario.htm?rut=${rutEmp}" class="btn btn-danger">Volver</a>
         </form:form>
                     </div>
                 </div>

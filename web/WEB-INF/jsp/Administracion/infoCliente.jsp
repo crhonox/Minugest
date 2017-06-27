@@ -173,6 +173,7 @@
                         <p><form:label path="Direccion">Direccion  : ${cliente.direccion}</form:label></p>
                             <hr />
                                 <a href="listaUsuario.htm?rut=${cliente.rut}" class="btn btn-success">Lista de Usuarios</a> <a href="listaCasino.htm?rut=${cliente.rut}" class="btn btn-success">Lista de Casinos</a>
+                        <a href="cliente.htm" class="btn btn-danger">Volver</a>
                         </form:form>
                 </div>
             </div>

@@ -9,7 +9,6 @@ import Modelos.Tag;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -146,7 +145,7 @@ public class MinutaController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         String user=userDetail.getUsername();
-        String rut_emp= this.jdbcTemplate.queryForObject("SELECT RUT_EMPRESA from USUARIO inner join CASINO on USUARIO.CODIGO_CASINO = CASINO.CODIGO_CASINO where CODIGO_USUARIO='"+user+"'", String.class);
+        String rut_emp= this.jdbcTemplate.queryForObject("SELECT RUT_EMPRESA_USUARIO from USUARIO where CODIGO_USUARIO='"+user+"'", String.class);
         List casino = this.jdbcTemplate.queryForList("select CODIGO_CASINO, NOMBRE_CASINO from CASINO where RUT_EMPRESA='"+rut_emp+"'");
         mav.addObject("casino",casino);
         mav.addObject("Minuta",new Minuta(datos.getNombre_Min(),Codigo,datos.getCodigo_Casi(),datos.getFecha_Min()));
@@ -190,6 +189,7 @@ public class MinutaController {
         Minuta datos = selectMinuta(Codigo);
         List Recetas= this.jdbcTemplate.queryForList("SELECT CODIGO_RECETA,NOMBRE_RECETA FROM RECETA");
         mav.addObject("Receta",Recetas);
+        mav.addObject("COD", Codigo);
         mav.addObject("Minuta",new Minuta(datos.getNombre_Min(),Codigo,datos.getCodigo_Casi(),datos.getFecha_Min()));
         return mav;
     }

@@ -189,6 +189,7 @@
             </table>
             <form:form method="post" commandName="cliente">
                 <a href="AñadirCasino.htm?rutemp=${cliente.rut}" class="btn btn-success">Añadir Casino</a>
+                <a href="infoCliente.htm?rut=${rutEmp}" class="btn btn-danger">Volver</a>
             </form:form>
             </div>
         </div>
