@@ -14,25 +14,7 @@
         <title>Minugest</title>
     </head>
     <body>
-        <div class="agile_header">
-        <div class="contai"> 
-            <div class="espacio1">
-                
-            </div>
-            <div class="agile-login">
-                 
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
+        
         
        <div class="logo_gest">
             <div class="conta">
@@ -139,7 +121,7 @@
             </div>
         </div> 
         
-        <div id="sidebar" class="nav-collapse">
+        <div id="sidebara" class="nav-collapse">
             <div class="leftside-navigation" style="overflow: hidden; outline: none;" tabinex="4000">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <sec:authorize access="hasRole('AdministradorA')">
@@ -181,9 +163,11 @@
                     <tr>
                 <th>Rut</th>
                 <th>Nombre</th>
+                <th>Razon Social</th>
                 <th>Telefono</th>
                 <th>Correo</th>
                 <th>Region</th>
+                <th>Provincia</th>
                 <th>Comuna</th>
                 <th>Direccion</th>
                 <th>Acciones</th>
@@ -195,9 +179,11 @@
                         <tr>
                             <td><c:out value="${dato.RUT_EMPRESA}"/></td>
                             <td><a href="infoCliente.htm?rut=${dato.RUT_EMPRESA}"><c:out value="${dato.NOMBRE_EMPRESA}"/></a></td>
+                            <td><c:out value="${dato.RAZON_SOCIAL}"/></td>
                             <td><c:out value="${dato.TELEFONO_EMPRESA}"/></td>
                             <td><c:out value="${dato.CORREO_EMPRESA}"/></td>
                             <td><c:out value="${dato.REGION_NOMBRE}"/></td>
+                            <td><c:out value="${dato.PROVINCIA_NOMBRE}"/></td>
                             <td><c:out value="${dato.COMUNA_NOMBRE}"/></td>
                             <td><c:out value="${dato.Direccion_EMPRESA}"/></td>
                             <td><a href="editarCliente.htm?rut=${dato.RUT_EMPRESA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>     

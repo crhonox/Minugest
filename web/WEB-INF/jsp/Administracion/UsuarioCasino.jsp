@@ -1,0 +1,207 @@
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="rec" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+
+        <script type="text/javascript" src="<c:url value="/resources/js/jquery.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
+
+  <script type="text/javascript" src="<c:url value="/resources/js/moment.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js"/>"></script>
+  
+  
+
+  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>" />
+  <link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>" />
+
+  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" />
+  
+ 
+
+        
+  
+   <script type="text/javascript">
+     $(document).ready(function() {
+    var max_fields      = 20; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div><table>\n\
+<tr><td><select id="combobox" name="combobox" class="form-control" style="width:600px"><option value="0">Seleccione...</option><rec:forEach items="${usuario}" var="cas"> <option value="${cas.CODIGO_USUARIO}"> ${cas.Nombre}</option></rec:forEach></select></td><td><a href="#" class="remove_field">Remove</a></td>\n\
+<td>&nbsp;</td></tr></table></div>');//add input box
+        }
+        
+
+    });
+
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).closest('div').remove(); x--;
+    });
+    
+});
+  </script>
+       </p>
+       
+       <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+        <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
+        <title>Minugest</title>
+    </head>
+     <body>
+         <div class="logo_gest">
+            <div class="conta">
+                <div class="contacto-gest">
+                    <a href="/Minugest/home">Volver al inicio</a>
+                </div>
+                <div class="logo-gest-center">
+                    <h1 align="center">MinuGest</h1>
+                     <br>
+                </div>
+                <div class="logo-gest-left">
+     <sec:authorize access="hasRole('AdministradorA')">
+		<!-- For login user -->
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<script>
+			function formSubmit() {
+				document.getElementById("logoutForm").submit();
+			}
+		</script>
+
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<h4>
+				User : ${pageContext.request.userPrincipal.name} | <a
+					href="javascript:formSubmit()"> Logout</a>
+                                        
+			</h4>
+                                        <h4>ESTE ROL ES EL ADMINISTRADOR</h4>
+		</c:if>
+                </sec:authorize>
+                
+                <sec:authorize access="hasRole('Supervisor')">
+		<!-- For login user -->
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<script>
+			function formSubmit() {
+				document.getElementById("logoutForm").submit();
+			}
+		</script>
+
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<h4>
+				User : ${pageContext.request.userPrincipal.name} | <a
+					href="javascript:formSubmit()"> Logout</a>
+                                        
+			</h4>
+                                        <h4>ESTE ROL ES EL Supervisor</h4>
+		</c:if>
+                
+
+	</sec:authorize>
+                
+                 
+                                        <sec:authorize access="hasRole('Encargado')">
+		<!-- For login user -->
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<script>
+			function formSubmit() {
+				document.getElementById("logoutForm").submit();
+			}
+		</script>
+
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<h4>
+				User : ${pageContext.request.userPrincipal.name} | <a
+					href="javascript:formSubmit()"> Logout</a>
+                                        
+			</h4>
+                                        <h4>ESTE ROL ES EL ENCARGADO</h4>
+                </c:if>
+                
+
+	</sec:authorize>
+        <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+            <div class="icon-login">
+                <ul>
+                    <ul>
+                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+                    </ul>
+                </ul>
+            </div>
+            </sec:authorize>                                
+                </div>
+            </div>
+       </div>
+         
+        
+        <div class="menu-conte-wra">
+            <div class="row">
+                <div class="panel panel-primary"> 
+                    <div class="panel-heading">Agregar usuario a casino</div>
+                    <div class="panel-body">
+       <form:form  method="POST" commandName="Casino">
+                    <h1></h1>
+       <form:errors path="*" element="div" cssClass="alert alert-danger" />
+                    <p>
+                        <form:label path="NombreCasino">Nombre Casino:</form:label>
+                        <form:input path="NombreCasino" cssClass="form-control" readonly="true"/>
+                        <form:hidden path="RutEmpresa" cssClass="form-control" readonly="true"/>
+                        <form:hidden path="CodigoCasino" cssClass="form-control" readonly="true"/>
+                    </p>
+                    
+                    <p> <form:label path="combobox">Usuario:</form:label>
+                         
+                        <div class="input_fields_wrap">
+                           
+                         <button class="add_field_button">Agregar a mas Usuarios</button>
+                         <p></p>
+                              <select id="combobox" name="combobox" class="form-control" style="width:600px"  >
+                            
+                            <option value="0">Seleccione...</option>
+                                <rec:forEach items="${usuario}" var="cas">   
+                                    <option value="${cas.CODIGO_USUARIO}"> ${cas.Nombre}</option>
+                                </rec:forEach>                            
+                        </select></p>
+                             
+                   
+                                 </div>
+
+
+                    
+                    
+                    
+            <form:button class="btn btn-danger" >Enviar</form:button>
+        </form:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </body>
+</html>

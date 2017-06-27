@@ -12,25 +12,7 @@
         <title>Minugest</title>
     </head>
 <body>
-    <div class="agile_header">
-        <div class="container2"> 
-            <div class="espacio1">
-            </div>
-            <div class="agile-login">
-                
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
-    
+       
     <div class="logo_gest">
             <div class="conta">
                 <div class="contacto-gest">
@@ -117,7 +99,15 @@
                 
 
 	</sec:authorize>
-                                        
+                    <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+            <div class="icon-login">
+                <ul>
+                    <ul>
+                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+                    </ul>
+                </ul>
+            </div>
+            </sec:authorize>                                
                 </div>
             </div>
             

@@ -17,25 +17,6 @@
         <title>Minugest</title>
     </head>
     <body>
-        <div class="agile_header">
-        <div class="container2"> 
-            <div class="espacio1">
-            </div>
-            <div class="agile-login">
-                
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
-        
         <div class="logo_gest">
             <div class="conta">
                 <div class="contacto-gest">
@@ -122,7 +103,15 @@
                 
 
 	</sec:authorize>
-                                        
+          <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+            <div class="icon-login">
+                <ul>
+                    <ul>
+                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+                    </ul>
+                </ul>
+            </div>
+            </sec:authorize>                
                 </div>
             </div>
             
@@ -147,12 +136,22 @@
         
         <div class="menu-conte-wra">
             <p>
-            <center> Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                 Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                  Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                  Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                  Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                  Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
+            <center>
+            <center>Misión</center>
+            <center>
+     InfoQuest es una empresa emergente en la comercialización del producto MinuGest, satisface las necesidades de las empresas del rubro de la alimentación de la Región Metropolitana, brindando un servicio excelente y de calidad. Tiene como objetivo el crecimiento continuo de la empresa y el desarrollo profesional de sus trabajadores.
+            </center>     
+            <br>
+            <center> Visión </center>
+            <center>
+   InfoQuest busca consolidar el liderazgo de MinuGest en el mercado nacional, a través de la confianza y las buenas prácticas con nuestros clientes, expandiendo el servicio a todas las empresas del rubro de la alimentación, situándonos como una de las empresas con el mejor sistema de gestión y planificación dedicado a minutas de alimentos. 
+            </center>
+            <br>
+            <center> Valores </center>
+            <center>
+     Los valores de InfoQuest reflejan la empresa que aspiran ser, estos valores describirán el comportamiento de InfoQuest en el futuro: la valentía de modelar soluciones de distintos rubros, cuidar de los clientes, hablar con la verdad y transparencia en todo momento, responsabilidad y pasión en el trabajo realizado.
+            </center>
+                
             </center>
             </p>
             <p>

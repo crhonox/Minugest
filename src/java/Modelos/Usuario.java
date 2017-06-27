@@ -1,5 +1,7 @@
 package Modelos;
 
+import java.util.List;
+
 /**
  *
  * @author Sir Lekxas
@@ -13,9 +15,14 @@ public class Usuario {
     private String correo;
     private String pass;
     private String apellido;
+    private List<String>  combobox;
     
     
     public Usuario (){}
+    public Usuario (String rut,String RutEmpresa){
+        this.rut=rut;
+        this.RutEmpresa=RutEmpresa;
+    }
     
     public Usuario(String RutEmpresa,String rut, String codigo_casino, String codigo_perfil, String Nombre, String Correo, String Pass, String Apellido)
     {  
@@ -29,6 +36,20 @@ public class Usuario {
         this.apellido= Apellido;
         
     
+    }
+
+    public Usuario(String RutEmpresa,String rut, String codigo_perfil, String Nombre, String Correo, String Pass, String Apellido) {
+        this.RutEmpresa= RutEmpresa;
+        this.rut = rut;
+        this.cod_perfil = codigo_perfil;
+        this.nombre = Nombre;
+        this.correo = Correo;
+        this.pass = Pass;
+        this.apellido= Apellido;
+    }
+
+    public Usuario(String rut, String cod_perfil, String nombre, String correo, String pass, String apellido) {
+        
     }
 
     public String getRutEmpresa() {
@@ -93,6 +114,14 @@ public class Usuario {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public List<String> getCombobox() {
+        return combobox;
+    }
+
+    public void setCombobox(List<String> combobox) {
+        this.combobox = combobox;
     }
     
     

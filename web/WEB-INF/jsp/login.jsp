@@ -12,24 +12,7 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
 </head>
 <body onload='document.loginForm.username.focus();'>
-<div class="agile_header">
-        <div class="container2"> 
-            <div class="espacio1">
-            </div>
-            <div class="agile-login">
-                
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
+
     
 	<div class="logo_gest">
             <div class="conta">
@@ -141,12 +124,16 @@
         </div>
     
              <div class="menu-conte-wra">
+               
                  <div class="row">
-                <div class="panel panel-primary"> 
-	
-                    <div class="panel-heading"><center>Inicio de Sesion</center></div>
+                     <center><div class="panel panel-primary" style="width: 400px;"> 
+	                     
+                              
+                    <div class="panel-heading" ><center>Inicio de Sesion</center></div>
+                 
+                         <center><table> 
                     <div class="panel-body">
-		
+		   
                 
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
@@ -154,7 +141,7 @@
 		<c:if test="${not empty msg}">
 			<div class="msg">${msg}</div>
 		</c:if>
-
+<td> 
 		<form name='loginForm'
 		  action="<c:url value='/j_spring_security_check' />" method='POST'>
                     
@@ -168,15 +155,22 @@
 			<p></p>
 				<input name="submit" type="submit" value="Ingresar" class="btn btn-danger" />
 			
-		  
-
+		  </td>
+                    
 		  <input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
-
+<td>
+                        <center>
+                            <img src="resources/image/secury.jpg">
+                        </center>
+                     </td>
 		</form>
                     </div>
                         </div>
                         </div>
-             </div>
+                        
+                    
+                 </table></center>
+                         </div></center>
 </body>
 </html> 

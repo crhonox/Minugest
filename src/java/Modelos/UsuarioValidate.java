@@ -40,6 +40,7 @@ public class UsuarioValidate implements Validator{
                   "El Correo electrónico "+usuario.getCorreo()+" no es válido");
                }
         }
+         
         
     }
     

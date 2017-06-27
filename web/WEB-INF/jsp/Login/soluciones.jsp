@@ -18,25 +18,6 @@
     </head>
     <body>
         
-        <div class="agile_header">
-        <div class="container2"> 
-            <div class="espacio1">
-            </div>
-            <div class="agile-login">
-                
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
-        
         <div class="logo_gest">
             <div class="conta">
                 <div class="contacto-gest">
@@ -123,7 +104,15 @@
                 
 
 	</sec:authorize>
-                                        
+         <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+            <div class="icon-login">
+                <ul>
+                    <ul>
+                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+                    </ul>
+                </ul>
+            </div>
+            </sec:authorize>                               
                 </div>
             </div>
             
@@ -148,11 +137,10 @@
         
         <div class="menu-conte-wra">
             <p>
-            <center> Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                 Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                  Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                  Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                  Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
+            <center> Minugest </center>
+            <br>
+            <center>
+                MinuGest es una aplicación web desarrollada en Java, JSP con framework Spring Modelo vista controlador. Esta solución permite gestionar y planificar sus minutas de forma estandarizada para la industria de servicios de alimentación.
             </center>
             </p>
             <p>

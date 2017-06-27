@@ -16,28 +16,7 @@
         <title>Minugest</title>
     </head>
     <body>
-        
-        <div class="agile_header">
-        <div class="contai"> 
-            <div class="espacio1">
-                
-            </div>
-            <div class="agile-login">
-                 
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
-        
-       <div class="logo_gest">
+        <div class="logo_gest">
             <div class="conta">
                 <div class="contacto-gest">
                     <a href="/Minugest/home">Volver al inicio</a>
@@ -120,7 +99,15 @@
                 
 
 	</sec:authorize>
-                                        
+         <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+            <div class="icon-login">
+                <ul>
+                    <ul>
+                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+                    </ul>
+                </ul>
+            </div>
+            </sec:authorize>                               
                 </div>
             </div>
        </div>
@@ -142,7 +129,7 @@
             </div>
         </div> 
         
-        <div id="sidebar" class="nav-collapse">
+        <div id="sidebara" class="nav-collapse">
             <div class="leftside-navigation" style="overflow: hidden; outline: none;" tabinex="4000">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <sec:authorize access="hasRole('AdministradorA')">
@@ -164,7 +151,8 @@
         <div class="menu-conte-wra">
         <ol class="breadcrumb">
                 <li><a href="<c:url value="cliente.htm" />">Listado de clientes</a></li>
-                <li class="active"> Lista de Casinos</li>
+                <li class="active"><a href="<c:url value="infoCliente.htm?rut=${rutEmp}" />"> ${nomEmp}</a></li>
+                <li class="active">Listado de Casinos</li>
             </ol>
         <br>
         <hr/>
@@ -176,6 +164,10 @@
                     <tr>
                 
                 <th>Nombre Casino</th>
+                <th>Region Casino</th>
+                <th>Provincia Casino</th>
+                <th>Comuna Casino</th>
+                <th>Direccion Casino</th>
                 <th>Empresa</th>
                 <th>Acciones</th>
                 </tr>
@@ -183,8 +175,12 @@
                 <tbody>
                     <c:forEach items="${datos}" var="dato" >
                         <tr>
-                            <td><c:out value="${dato.NOMBRE_CASINO}"/></td>                                                      
-                            <td><c:out value="${dato.NOMBRE_EMPRESA}"/></td>
+                            <td><a href="DetalleCasino.htm?cod=${dato.CODIGO_CASINO}"><c:out value="${dato.NOMBRE_CASINO}"/></a></td>                                                      
+                            <td><c:out value="${dato.REGION_NOMBRE}"/></td>                                                      
+                            <td><c:out value="${dato.PROVINCIA_NOMBRE}"/></td>                                                      
+                            <td><c:out value="${dato.COMUNA_NOMBRE}"/></td>                                                      
+                            <td><c:out value="${dato.DIRECCION_CASINO}"/></td>                                                      
+                            <td><c:out value="${dato.NOMBRE_EMPRESA}"/></td>                                                      
                             <td><a href="editarCasino.htm?cod=${dato.CODIGO_CASINO}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
                             <!--<a href="eliminarCasino.htm?cod=${dato.CODIGO_CASINO}" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>  --> </td> 
                         </tr>

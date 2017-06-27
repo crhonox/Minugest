@@ -9,7 +9,18 @@ public class Ingrediente
     private String idIngrediente; 
     private String nombreIngrediente;
     private String unidadMedida;
+    private String cantidadIngrediente;
 
+    public String getCantidadIngrediente() {
+        return cantidadIngrediente;
+    }
+
+    public void setCantidadIngrediente(String cantidadIngrediente) {
+        this.cantidadIngrediente = cantidadIngrediente;
+    }
+
+    
+    
     public Ingrediente() {}
 
     public Ingrediente(String idIngrediente, String nombreIngrediente, String unidadMedida) {

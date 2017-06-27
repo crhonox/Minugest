@@ -17,25 +17,7 @@
         <title>Minugest</title>
     </head>
     <body>
-        <div class="agile_header">
-        <div class="container2"> 
-            <div class="espacio1">
-            </div>
-            <div class="agile-login">
-                
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
-        
+       
         <div class="logo_gest">
             <div class="conta">
                 <div class="contacto-gest">
@@ -122,7 +104,15 @@
                 
 
 	</sec:authorize>
-                                        
+         <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+            <div class="icon-login">
+                <ul>
+                    <ul>
+                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+                    </ul>
+                </ul>
+            </div>
+            </sec:authorize>                               
                 </div>
             </div>
             
@@ -147,16 +137,19 @@
         
         <div class="menu-conte-wra">
             <p>
-            <center> Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                 Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                  Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                  Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
-                  Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla <br>
+            <center>Apunto</center>    
+            <br>
+            <center> 
+            Apunto es una empresa con más de 20 años de experiencia en el mercado, es una empresa consolidada en el área de atención y servicios de alimentación a organizaciones e instituciones. Apunto ha alcanzado los más altos entandares gastronómicos, lo que permite ser la empresa de Servicios de Alimentación más emergente en los últimos años.    
             </center>
-            </p>
-            <p>
+            <center><table>
+            <td>
+            <center><img src="resources/image/ap.jpg"></center>
+            </td>
+            <td>
                 <center><img src="resources/image/soci.jpg"></center>
-            </p>
+            </td>
+            </table></center>
         </div> 
     </body>
 </html>

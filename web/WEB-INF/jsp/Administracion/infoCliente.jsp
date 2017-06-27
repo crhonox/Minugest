@@ -15,28 +15,7 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
         <title>Minugest</title>
     </head>
-    <body>
-        
-        <div class="agile_header">
-        <div class="contai"> 
-            <div class="espacio1">
-                
-            </div>
-            <div class="agile-login">
-                 
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
-        
+    <body> 
        <div class="logo_gest">
             <div class="conta">
                 <div class="contacto-gest">
@@ -120,7 +99,15 @@
                 
 
 	</sec:authorize>
-                                        
+         <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+            <div class="icon-login">
+                <ul>
+                    <ul>
+                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+                    </ul>
+                </ul>
+            </div>
+            </sec:authorize>                               
                 </div>
             </div>
        </div>
@@ -142,7 +129,7 @@
             </div>
         </div> 
         
-        <div id="sidebar" class="nav-collapse">
+        <div id="sidebara" class="nav-collapse">
             <div class="leftside-navigation" style="overflow: hidden; outline: none;" tabinex="4000">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <sec:authorize access="hasRole('AdministradorA')">
@@ -164,7 +151,7 @@
         <div class="menu-conte-wra">
             
             <ol class="breadcrumb">
-                <li><a href="<c:url value="/Administracion/cliente.htm" />">Listado de clientes</a></li>
+                <li><a href="<c:url value="cliente.htm" />">Listado de clientes</a></li>
                 <li class="active">${cliente.nombre}</li>
             </ol>
             <div class="panel panel-primary">
@@ -177,9 +164,11 @@
                             <form:errors path="*" element="div" cssClass="alert alert-danger" />
                             <p><form:label path="rut">Rut  : ${cliente.rut}</form:label></p>
                             <p><form:label path="Nombre">Nombre  : ${cliente.nombre}</form:label></p>
+                            <p><form:label path="Nombre">Razon Social  : ${cliente.nombreLargo}</form:label></p>
                             <p><form:label path="email">E-mail  : ${cliente.email}</form:label></p>
                             <p><form:label path="Telefono">Telefono  : ${cliente.telefono}</form:label></p>
                             <p><form:label path="Region">Region  : ${cliente.region}</form:label></p>
+                            <p><form:label path="Provincia">Provincia  : ${cliente.provincia}</form:label></p>
                             <p><form:label path="Comuna">Comuna  : ${cliente.comuna}</form:label></p>
                         <p><form:label path="Direccion">Direccion  : ${cliente.direccion}</form:label></p>
                             <hr />

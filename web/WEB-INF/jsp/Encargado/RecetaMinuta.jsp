@@ -87,28 +87,7 @@
         <title>Encargado</title>
     </head>
      <body>
-         
-         <div class="agile_header">
-        <div class="contai"> 
-            <div class="espacio1">
-                
-            </div>
-            <div class="agile-login">
-                 
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
-        
-       <div class="logo_gest">
+          <div class="logo_gest">
             <div class="conta">
                 <div class="contacto-gest">
                     <a href="/Minugest/home">Volver al inicio</a>
@@ -191,7 +170,15 @@
                 
 
 	</sec:authorize>
-                                        
+        <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+            <div class="icon-login">
+                <ul>
+                    <ul>
+                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+                    </ul>
+                </ul>
+            </div>
+            </sec:authorize>                                
                 </div>
             </div>
        </div>
@@ -213,7 +200,7 @@
             </div>
         </div> 
         
-        <div id="sidebar" class="nav-collapse">
+        <div id="sidebara" class="nav-collapse">
             <div class="leftside-navigation" style="overflow: hidden; outline: none;" tabinex="4000">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <sec:authorize access="hasRole('AdministradorA')">
@@ -251,13 +238,13 @@
                          <button class="add_field_button">Agregar mas recetas</button>
                         
                              <tr>
-                                 <td> <form:select path="combobox" cssClass="form-control combobox" cssStyle="width:600px">
+                                 <td> <select id="combobox" name="combobox" class="form-control combobox" style="width:600px">
                             
-                            <form:option value="0">Seleccione...</form:option>
+                            <option value="0">Seleccione...</option>
                                 <rec:forEach items="${Receta}" var="res">   
-                                    <form:option value="${res.CODIGO_RECETA}"> ${res.NOMBRE_RECETA}</form:option>
+                                    <option value="${res.CODIGO_RECETA}"> ${res.NOMBRE_RECETA}</option>
                                 </rec:forEach>                            
-                        </form:select></p>
+                        </select></p>
                              </td>
                              <td>       </td>
                              <td><form:label path="Cantidad">Porciones: </td>

@@ -1,9 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="rec" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
+
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- Importar funciones de spring jstl -->
+<%@taglib  prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
    <head>
@@ -15,27 +17,7 @@
         <title>Encargado</title>
     </head>
     <body>
-      
-        <div class="agile_header">
-        <div class="contai"> 
-            <div class="espacio1">
-                
-            </div>
-            <div class="agile-login">
-                 
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
-        
+       
        <div class="logo_gest">
             <div class="conta">
                 <div class="contacto-gest">
@@ -119,7 +101,15 @@
                 
 
 	</sec:authorize>
-                                        
+         <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+            <div class="icon-login">
+                <ul>
+                    <ul>
+                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+                    </ul>
+                </ul>
+            </div>
+            </sec:authorize>                               
                 </div>
             </div>
        </div>
@@ -141,7 +131,7 @@
             </div>
         </div> 
         
-        <div id="sidebar" class="nav-collapse">
+        <div id="sidebara" class="nav-collapse">
             <div class="leftside-navigation" style="overflow: hidden; outline: none;" tabinex="4000">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <sec:authorize access="hasRole('AdministradorA')">
@@ -151,9 +141,9 @@
                     <li><a href="Supervisor/Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Encargado/Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
-                    <li><a href="Encargado/receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
-                    <li><a href="Encargado/ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
+                    <li><a href="Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
+                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     </sec:authorize>
                 </ul>
             </div>
@@ -161,11 +151,17 @@
         
         <div class="menu-conte-wra">
          <h1>Recetas</h1>
+         <h1></h1>
+         <form:form commandName="receta" method="POST">
+             <p> <form:label path="nombreReceta">Buscar Receta</form:label></p>
+             <form:input path="nombreReceta" cssClass="form-control"/>
+             <p><form:button class="btn btn-danger">Buscar</form:button> <a href="receta.htm" class="btn btn-success">Mostrar Todo</a></p>
+         </form:form>
           <div class="row">
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                <th>N°</th>
+                
                 <th>Nombre</th>
                 <th>Categoria</th>
                 <th>Descripción</th>
@@ -178,7 +174,7 @@
                 <tbody>
                     <rec:forEach items="${datos}" var="dato" >
                         <tr>
-                            <td><rec:out value="${dato.CODIGO_RECETA}"/></td>
+                            
                             <td><a href="DetalleReceta.htm?COD=${dato.CODIGO_RECETA}"><rec:out value="${dato.NOMBRE_RECETA}"/></a></td>
                             <td><rec:out value="${dato.NOMBRE_CATEGORIA}"/></td>
                             <td><rec:out value="${dato.DESCRIPCION_RECETA}"/></td>

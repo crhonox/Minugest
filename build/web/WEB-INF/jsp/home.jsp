@@ -21,25 +21,6 @@
         --%>
 
     <body>
-        <div class="agile_header">
-        <div class="container2"> 
-            <div class="espacio1">
-            </div>
-            <div class="agile-login">
-                
-            </div>
-            <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
-            <div class="icon-login">
-                <ul>
-                    <ul>
-                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
-                    </ul>
-                </ul>
-            </div>
-            </sec:authorize>
-       </div>
-       </div>
-        
         <div class="logo_gest">
             <div class="conta">
                 <div class="contacto-gest">
@@ -126,7 +107,16 @@
                 
 
 	</sec:authorize>
-                                        
+                        
+        <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+            <div class="icon-login">
+                <ul>
+                    <ul>
+                        <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
+                    </ul>
+                </ul>
+            </div>
+            </sec:authorize>
                 </div>
             </div>
             
@@ -168,29 +158,12 @@
 		});
 </script>
             
-            <ul class="slide-navs" style="margin-left: -24px">
-                <li class="slide-nav-0"></li>
-                <li class="slide-nav-1"></li>
-                <li class="slide-nav-2"></li>
-            </ul>
-                <a class="prev"></a>
-                <a class="next"></a>
-                <a class="play-control pause" style="display: none;"></a>
+            
             
         </div></sec:authorize>
         
-        <sec:authorize access="hasRole('AdministradorA')">
-            
-            
-                
-            
-        </sec:authorize>
-        
-        
-        
-        
            
-        <div id="sidebar" class="nav-collapse">
+        <div id="sidebara" class="nav-collapse">
             <div class="leftside-navigation" style="overflow: hidden; outline: none;" tabinex="4000">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <sec:authorize access="hasRole('AdministradorA')">
@@ -200,7 +173,7 @@
                     <li><a href="Supervisor/Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Encargado/Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
+                    <li><a href="Encargado/Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
                     <li><a href="Encargado/receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
                     <li><a href="Encargado/ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     </sec:authorize>
@@ -208,6 +181,68 @@
             </div>
         </div>
             
+        
+        <sec:authorize access="hasRole('AdministradorA')">
             
+            <div class="menu-conte-wra">
+                <center>
+                    <table>
+                        
+                        <td style="width: 350px;">
+                        <center>Administrador</center><br>
+                        <center>Descripción del Administrador</center>
+                        </td>
+                        <td><p><br></p></td>
+                        <td>
+                        <center><img src="resources/image/A1.jpg"></center>
+                        </td>
+                
+                </table>
+            </center>
+            </div>
+            
+        </sec:authorize>
+         
+        <sec:authorize access="hasRole('Supervisor')">
+            
+            <div class="menu-conte-wra">
+                <center>
+                    <table>
+                        
+                        <td style="width: 350px;">
+                        <center>Supervisor</center><br>
+                        <center>Descripción del Supervisor</center>
+                        </td>
+                        <td><p><br></p></td>
+                        <td>
+                        <center><img src="resources/image/A2.jpg"></center>
+                        </td>
+                
+                </table>
+            </center>
+            </div>
+            
+        </sec:authorize>
+        
+        <sec:authorize access="hasRole('Encargado')">
+            
+            <div class="menu-conte-wra">
+                <center>
+                    <table>
+                        
+                        <td style="width: 350px;">
+                        <center>Encargado de Minutas</center><br>
+                        <center>Descripción del Encargado de Minutas</center>
+                        </td>
+                        <td><p><br></p></td>
+                        <td>
+                        <center><img src="resources/image/A3.jpg"></center>
+                        </td>
+                
+                </table>
+            </center>
+            </div>
+            
+        </sec:authorize>
     </body>
 </html>
