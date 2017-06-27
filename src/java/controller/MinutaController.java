@@ -242,10 +242,10 @@ public class MinutaController {
         return mav;
     }
    
-    @RequestMapping(value = "/Encargado/DetalleMinuta.htm",method = RequestMethod.GET)
+    @RequestMapping(value = "/Encargado/test.htm",method = RequestMethod.GET)
     public ModelAndView CalculoReceta(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("Encargado/DetalleMinuta");
+        mav.setViewName("Encargado/test");
         String Codigo = request.getParameter("COD");
         Minuta datos = selectMinuta(Codigo);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

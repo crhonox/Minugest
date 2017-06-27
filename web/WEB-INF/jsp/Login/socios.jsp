@@ -143,11 +143,11 @@
             Apunto es una empresa con más de 20 años de experiencia en el mercado, es una empresa consolidada en el área de atención y servicios de alimentación a organizaciones e instituciones. Apunto ha alcanzado los más altos entandares gastronómicos, lo que permite ser la empresa de Servicios de Alimentación más emergente en los últimos años.    
             </center>
             <center><table>
-            <td>
+                    <td style="width: 500px;">
             <center><img src="resources/image/ap.jpg"></center>
             </td>
             <td>
-                <center><img src="resources/image/soci.jpg"></center>
+                <center><img src="resources/image/soci1.jpg"></center>
             </td>
             </table></center>
         </div> 
