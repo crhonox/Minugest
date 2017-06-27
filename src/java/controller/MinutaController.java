@@ -246,6 +246,7 @@ public class MinutaController {
         ModelAndView mav= new ModelAndView();
         String fechaInicio= request.getParameter("fechaInicio");
         String fechaFin= request.getParameter("fechaFin");
+        
         final List<Map<String, Object>> rows  = this.jdbcTemplate.queryForList("SELECT * from MINUTA where\n" +
 "FECHA_MINUTA BETWEEN  '"+fechaInicio+"' and '"+fechaFin+"' order by FECHA_MINUTA");
         for (Map<String, Object> row : rows) {
@@ -264,11 +265,11 @@ public class MinutaController {
         Minuta datos = selectMinuta(Codigo);
         String Nombre=datos.getNombre_Min();
         String fecha=datos.getFecha_Min();
-        List<Listado> listado = new ArrayList<Listado>();
+        
         
         List<Receta> rec = getReceta(Codigo);
         List<Receta> RecetaMinuta = new ArrayList<Receta>();
-        Listado list = new Listado();
+        
         for (int i = 0; i < rec.size(); i++) {
             Receta receta = new Receta();
             String cantidadOriginalS = this.jdbcTemplate.queryForObject("SELECT CANTIDAD_PORCION from RECETA where CODIGO_RECETA ='"+rec.get(i).getIdReceta()+"'", String.class);
@@ -288,13 +289,11 @@ public class MinutaController {
             }
             receta.setIdReceta(rec.get(i).getIdReceta());
             receta.setNombreReceta(rec.get(i).getNombreReceta());
-            list.addRecetas(receta);
+            
             RecetaMinuta.add(receta);
         }
         
-        list.setCodigo_Minuta(Integer.parseInt(Codigo));
-        list.setNombre_Minuta(Nombre);
-        listado.add(list);
+       
         
         mav.addObject("REC",RecetaMinuta);
         mav.addObject("NombreMinuta",Nombre);
