@@ -9,18 +9,18 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
- 
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.dao.DataAccessException;
- 
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
- 
+
 import org.springframework.stereotype.Controller;
  
 import org.springframework.validation.BindingResult;
@@ -34,17 +34,17 @@ import org.springframework.web.servlet.ModelAndView;
  
 @Controller
 public class AdministracionController {
- 
+
     private final ClienteValidate clienteValidate;
- 
+
     private final JdbcTemplate jdbcTemplate;
- 
+
     public AdministracionController() {
         this.clienteValidate = new ClienteValidate(); //Implementar Validator
         Conexion con = new Conexion();
         this.jdbcTemplate = new JdbcTemplate(con.conectar());
     }
- 
+
     @RequestMapping(value = "Administracion/cliente.htm", method = RequestMethod.GET)
     public ModelAndView cliente() {
         ModelAndView mav = new ModelAndView();
@@ -55,10 +55,10 @@ public class AdministracionController {
         mav.setViewName("Administracion/cliente");
         return mav;
     }
- 
+
     @RequestMapping(value = "Administracion/cliente.htm", method = RequestMethod.POST)
     public ModelAndView formBuscarAdm( @ModelAttribute("cliente") Cliente cli, BindingResult result, SessionStatus status) {
- 
+
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Administracion/cliente");
         String sql = "SELECT COMUNA_NOMBRE,REGION_NOMBRE,RUT_EMPRESA,NOMBRE_EMPRESA,TELEFONO_EMPRESA,CORREO_EMPRESA,DIRECCION_EMPRESA FROM region inner join  provincia on REGION_ID = PROVINCIA_REGION_ID inner join comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join EMPRESA on COMUNA_EMPRESA = COMUNA_ID where NOMBRE_EMPRESA regexp '" + cli.getNombre() + "'";
@@ -68,10 +68,10 @@ public class AdministracionController {
         mav.addObject("NomEmp", Nombre);
         mav.addObject("cliente", new Cliente());
         return mav;
- 
+
     }
-   
-     @RequestMapping(value = "Administracion/infoCliente.htm")
+    
+     @RequestMapping(value = "Administracion/infoCliente.htm") 
     public ModelAndView infoCliente(HttpServletRequest request)
     {
         ModelAndView mav=new ModelAndView();
@@ -81,21 +81,21 @@ public class AdministracionController {
         mav.addObject("cliente",new Cliente(rut,datos.getNombre(),datos.getNombreLargo(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getProvincia(),datos.getDireccion()));
         return mav;
     }
- 
+
     @RequestMapping(value = "receta.htm")
     public ModelAndView receta() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Administracion/receta");
         return mav;
     }
- 
+
     @RequestMapping(value = "ingrediente.htm")
     public ModelAndView ingrediente() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Administracion/ingrediente");
         return mav;
     }
- 
+
     @RequestMapping(value = "Administracion/AñadirCliente.htm", method = RequestMethod.GET)
     public ModelAndView añadirCliente() {
         ModelAndView mav = new ModelAndView();
@@ -107,7 +107,7 @@ public class AdministracionController {
         mav.addObject("cliente", new Cliente());
         return mav;
     }
- 
+
     @RequestMapping(value = "Administracion/buscarProvincia.do", method = RequestMethod.GET)
     @ResponseBody
     public void buscarProvincia(@RequestParam(value = "regionID") String region, HttpServletRequest request,
@@ -123,7 +123,7 @@ public class AdministracionController {
                 return c;
             }
         });
- 
+
         //List<Provincia> provincia= this.jdbcTemplate.queryForObject("SELECT PROVINCIA_ID,PROVINCIA_NOMBRE FROM provincia where PROVINCIA_REGION_ID="+region+" ",Provincia);
         String json = null;
         json = new Gson().toJson(provincias);
@@ -133,13 +133,13 @@ public class AdministracionController {
         } catch (IOException ex) {
             Logger.getLogger(AdministracionController.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
+
     }
- 
+
     @RequestMapping(value = "Administracion/buscarComuna.do", method = RequestMethod.GET)
     public void buscarComuna(@RequestParam(value = "provinciaID") String provincia, HttpServletRequest request,
             HttpServletResponse response) {
- 
+
         String sql = "select COMUNA_ID, COMUNA_NOMBRE from comuna where COMUNA_PROVINCIA_ID=" + provincia + " ";
         List<Comuna> comunas = jdbcTemplate.query(
                 sql, new RowMapper<Comuna>() {
@@ -151,7 +151,7 @@ public class AdministracionController {
                 return c;
             }
         });
- 
+
         String json = null;
         json = new Gson().toJson(comunas);
         response.setContentType("Administracion/AñadirCliente");
@@ -160,21 +160,21 @@ public class AdministracionController {
         } catch (IOException ex) {
             Logger.getLogger(AdministracionController.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
+
     }
- 
+
     @RequestMapping(value = "Administracion/AñadirCliente.htm", method = RequestMethod.POST)
     public ModelAndView form(@ModelAttribute("cliente") Cliente cli, BindingResult result, SessionStatus status) {
-       
+        
             this.jdbcTemplate.update("insert into EMPRESA (RUT_EMPRESA,NOMBRE_EMPRESA,RAZON_SOCIAL,TELEFONO_EMPRESA,CORREO_EMPRESA,Region_Empresa,ProvinciaEmpresa,Comuna_Empresa,Direccion_Empresa) values (?,?,?,?,?,?,?,?,?)",
                      cli.getRut(), cli.getNombre(), cli.getNombreLargo(), cli.getTelefono(), cli.getEmail(), cli.getRegion(), cli.getProvincia(), cli.getComuna(), cli.getDireccion());
- 
+
             return new ModelAndView("redirect:cliente.htm");
-       
- 
+        
+
     }
-   
-     public Cliente selectCliente(String rut)
+    
+     public Cliente selectCliente(String rut) 
     {
         final Cliente cliente = new Cliente();
        // String quer = "SELECT * FROM EMPRESA WHERE RUT_EMPRESA='" + rut+"'";
@@ -196,9 +196,9 @@ public class AdministracionController {
         (
                 quer, new ResultSetExtractor<Cliente>()
             {
-                public Cliente extractData(ResultSet rs) throws SQLException, DataAccessException
+                public Cliente extractData(ResultSet rs) throws SQLException, DataAccessException 
                 {
-                    if (rs.next())
+                    if (rs.next()) 
                     {
                         cliente.setNombre(rs.getString("Nombre_EMPRESA"));
                         cliente.setEmail(rs.getString("CORREO_EMPRESA"));
@@ -208,7 +208,7 @@ public class AdministracionController {
                         cliente.setRegion(rs.getString("REGION_NOMBRE"));
                         cliente.setProvincia(rs.getString("PROVINCIA_NOMBRE"));
                         cliente.setNombreLargo(rs.getString("RAZON_SOCIAL"));
-                       
+                        
                     }
                     return cliente;
                 }
@@ -217,5 +217,6 @@ public class AdministracionController {
             }
         );
     }
+
 }
  
