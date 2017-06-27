@@ -61,7 +61,7 @@
 					close: function(event, ui) {
 						input.attr("menustatus","closed");
 					},
-					minLength: 0
+					minLength: 3
 				});
 			input.addClass("ui-widget ui-widget-content ui-corner-left");
 			// initialise text with what's currently selected

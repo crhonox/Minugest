@@ -13,7 +13,7 @@
   <script type="text/javascript" src="<c:url value="/resources/js/moment.min.js"/>"></script>
   <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js"/>"></script>
   
-  
+   <script type="text/javascript" src="<c:url value="/resources/js/validator.js"/>"></script>
 
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>" />
@@ -55,16 +55,18 @@
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
             $(wrapper).append('<div><table>\n\
-<tr><td><select id="combobox" name="combobox" class="form-control combobox" style="width:600px"><option value="0">Seleccione...</option><rec:forEach items="${ingrediente}" var="ing"> <option value="${ing.CODIGO_INGREDIENTE}"> ${ing.NOMBRE_INGREDIENTE}</option></rec:forEach></select></td><td><a href="#" class="remove_field">Remove</a></td>\n\
-<td>&nbsp;</td><td><label for="Cantidad">Cantidad :</label> </td><td><input id="Cantidad" name="Cantidad" class="form-control" type="text" value=""/></td></tr></table></div>');//add input box
+<tr><td><div class="form-group"><select id="combobox" name="combobox" class="form-control combobox" style="width:600px" required><option value="0">Seleccione...</option><rec:forEach items="${ingrediente}" var="ing"> <option value="${ing.CODIGO_INGREDIENTE}"> ${ing.NOMBRE_INGREDIENTE}</option></rec:forEach></select></td><td><a href="#" class="remove_field">Remove</a></div></td>\n\
+<td>&nbsp;</td><td><div class="form-group"><label for="Cantidad">Cantidad :</label> </td><td><input id="Cantidad" name="Cantidad" class="form-control" type="text" value="" required/></div></td></tr></table></div>');//add input box
         }
         
 	    $(".combobox").combobox();
+            $('#receta').validator('update');
 
     });
 
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).closest('div').remove(); x--;
+        $('#receta').validator('update');
     });
     
 });
@@ -85,7 +87,7 @@
             </ol></div>
                 <div class="panel-body">
                    
-                        <form:form method="post" commandName="receta">
+                        <form:form method="post" commandName="receta" data-toggle="validator">
                            
                             
                             <form:errors path="*" element="div" cssClass="alert alert-danger" />
@@ -105,18 +107,23 @@
                          <button class="add_field_button">Agregar mas ingredientes</button>
                         
                              <tr>
-                                 <td> <form:select path="combobox" cssClass="form-control combobox" cssStyle="width:600px" multiple="false">
-                            
-                            <form:option value="0">Seleccione...</form:option>
+                                 <td> 
+                                     <div class="form-group">
+                           <form:select path="combobox" cssClass="form-control combobox" cssStyle="width:600px" multiple="false" required="required" >
+                            <form:option value="">Seleccione...</form:option>
                                 <rec:forEach items="${ingrediente}" var="ing">   
                                     <form:option value="${ing.CODIGO_INGREDIENTE}"> ${ing.NOMBRE_INGREDIENTE}</form:option>
                                 </rec:forEach>                            
-                        </form:select></p>
+                           </form:select></p></div>
+                                     <div class="help-block with-errors"></div>
                              </td>
                              <td>       </td>
-                             <td><form:label path="Cantidad">Cantidad   : </td>
-                                 <td></form:label><form:input path="Cantidad" cssClass="form-control"/></td>
-                                 
+                             
+                             <td>  
+                             <form:label path="Cantidad">Cantidad   : </td></form:label>
+                             <td><form:input path="Cantidad" cssClass="form-control" required="required"/></td>
+                             
+                                 </div>
                              </tr>
 
                     </table>
@@ -126,6 +133,35 @@
                             <hr />
                             <input type="submit" value="Enviar" class="btn btn-danger" />
                         </form:form>
+                            
+                            <script>
+                $('#receta').validator({
+                    excluded: ':disabled',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        combobox: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Debe agregar uno o mas ingredientes '
+                                }
+                                
+                            }
+                        },
+                        Cantidad: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'La cantidad es requerida y no puede ser vacío'
+                                }
+                            }
+                        }
+                    }, 
+                        
+                });
+        </script>
                 </div>
             </div>
         </div>

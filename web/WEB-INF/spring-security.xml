@@ -22,7 +22,7 @@
 			authentication-failure-url="/login?error"
 			username-parameter="CODIGO_USUARIO"
 			password-parameter="PASS_USUARIO" />
-		<logout logout-success-url="/welcome" />
+		<logout logout-success-url="/" />
 		<!-- enable csrf protection -->
 		<csrf/>
 	</http>

@@ -10,6 +10,7 @@ package Modelos;
  * @author crhonox
  */
 public class Solicitud {
+    
     private String tiempo;
     private String asunto;
     private String contenido;

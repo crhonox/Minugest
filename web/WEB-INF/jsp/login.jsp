@@ -9,7 +9,7 @@
 <body onload='document.loginForm.username.focus();'>
 
 	
-            <br><a href="home">Volver al inicio</a> </h1>
+            <br><a href="/Minugest">Volver al inicio</a> </h1>
             <div id="titulocenter"><h1 align="center">Minugest</h1></div>
             
              <div class="container">

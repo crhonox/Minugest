@@ -43,7 +43,7 @@
                             </tr>
                             <tr>
                                 <td><label>Porciones: </label></td>
-                                <td><c:out value="${casino}"/></td>
+                                <td><c:out value="${porciones}"/></td>
                             </tr>
                            
                             
