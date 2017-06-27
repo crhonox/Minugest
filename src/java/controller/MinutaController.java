@@ -10,7 +10,6 @@ import Modelos.Tag;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -80,7 +79,7 @@ public class MinutaController {
 		return result;
 	}       
   //---------------------------FIN-CODIGO DE PUREBA--------------------------//  
-    @RequestMapping(value = "/Encargado/Minuta.htm")
+    @RequestMapping(value = "/Encargado/Minutas.htm")
     public ModelAndView Minuta(){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Encargado/Minutas");
@@ -249,6 +248,8 @@ public class MinutaController {
         final List<Map<String, Object>> rows  = this.jdbcTemplate.queryForList("SELECT * from MINUTA where\n" +
 "FECHA_MINUTA BETWEEN  '"+fechaInicio+"' and '"+fechaFin+"' order by FECHA_MINUTA");
         for (Map<String, Object> row : rows) {
+            Listado lista = new Listado();
+            lista.setCodigo_Minuta((int) row.get("CODIGO_MINUTA"));
             
         }
         return mav;
