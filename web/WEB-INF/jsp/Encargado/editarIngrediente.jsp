@@ -25,8 +25,7 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.combobox.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-        <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
+
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
     </head>
     <body>
@@ -165,7 +164,7 @@
         
         <div class="menu-conte-wra">
             <ol class="breadcrumb">
-                <li><a href="<ingr:url value="/ingrediente.htm" />">Listado de Ingredientes</a></li>
+                <li><a href="<ingr:url value="ingrediente.htm" />">Listado de Ingredientes</a></li>
                 <li class="active">Editar</li>
             </ol>
             <div class="panel panel-primary">
@@ -182,7 +181,7 @@
                             </div>
                                 <div class="form-group"><p><form:label path="unidadMedida">Unidad de Medida  :</form:label>
                                <form:select path="unidadMedida" cssClass="form-control">
-                                <form:option value="0">Seleccione...</form:option>
+                                <form:option value="">Seleccione...</form:option>
                                 <ingr:forEach items="${unidadMedida}" var="um">   
                                     <form:option value="${um.CODIGO_UNIDAD}">${um.NOMBRE_UNIDAD}</form:option>
                                 </ingr:forEach>                            

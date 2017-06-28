@@ -17,9 +17,6 @@
   <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datetimepicker.min.js"/>"></script>
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-        <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
         <title>Encargado</title>
     </head>
@@ -182,10 +179,34 @@
                                 <td><label>Contenido: </label></td>
                                 <td><c:out value="${dato.CONTENIDO}"/></td>
                             </tr>
-                            
+                            <tr><td> <a href="AñadirMinutas.htm?idSolicitud=${dato.idSolicitud}" class="btn btn-success">Crear minuta</a> </td></tr>
                              </c:forEach>
                         </table>
-                        <a href="AñadirMinuta.htm?codigo_solicitud=${dato.idSOlicitud}" class="btn btn-success">Crear minuta</a>
+                        
+                        <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                <th>Nombre de Minuta</th>
+                <th>Casino</th>
+                <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${minutas}" var="dato" >
+                        <tr>
+                            <td><a href="DetalleMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><c:out value="${dato.NOMBRE_MINUTA}"/></a></td>
+                            <td><c:out value="${dato.NOMBRE_CASINO}"/></td>
+                            <td><c:out value="${dato.FECHA_MINUTA}"/></td>   
+                            <td><a href="ModificarMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
+                            <a href="CalculoIngrediente.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>     
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+               
+            </div>
+                        
                            
     
                     </div>

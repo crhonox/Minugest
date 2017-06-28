@@ -12,19 +12,17 @@
     <head>
         <meta charset="UTF-8"/>
 
-  <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
   <script type="text/javascript" src="<c:url value="/resources/js/moment.min.js"/>"></script>
   <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/resources/js/bootstrapValidator.js"/>"></script>
   <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datetimepicker.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/js/bootstrapValidator.js"/>"></script>
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" />
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
-        
-  
-        <title>Encargado</title>
+       <title>Encargado</title>
     </head>
-     <body>  
+     <body> 
        <div class="logo_gest">
             <div class="conta">
                 <div class="contacto-gest">
@@ -108,7 +106,7 @@
                 
 
 	</sec:authorize>
-          <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+        <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
             <div class="icon-login">
                 <ul>
                     <ul>
@@ -116,7 +114,7 @@
                     </ul>
                 </ul>
             </div>
-            </sec:authorize>                              
+            </sec:authorize>                                
                 </div>
             </div>
        </div>
@@ -157,15 +155,19 @@
             </div>
         </div>
          
-         <div class="menu-conte-wra">
+        <div class="menu-conte-wra">
             <div class="row">
                 <div class="panel panel-primary"> 
                     <div class="panel-heading">Formulario de Minuta</div>
                     <div class="panel-body">
-       <form:form  method="POST" commandName="Minuta">
+       <form:form modelAttribute="Minuta" method="POST" commandName="Minuta">
                     <h1></h1>
        <form:errors path="*" element="div" cssClass="alert alert-danger" />
-                    <p><div class="form-group">
+       
+                        <form:label path="idSolicitud">idSolicitud</form:label>
+                        <form:input path="idSolicitud" cssClass="form-control" readonly="true" value="${idSolicitud}"/>             
+       <p><div class="form-group">
+                        
                         <form:label path="Nombre_Min">Nombre de Minuta:</form:label>
                         <form:input path="Nombre_Min" cssClass="form-control"/>
                     </div> </p>
@@ -182,23 +184,24 @@
          <form:label path="Fecha_Min">Fecha:</form:label> 
 <div class="input-group date" id="datetimepicker3" >
     
-    <input id="Fecha_Min" name  ="Fecha_Min" type="text" class="form-control" value="" /></p>
+    <input id="Fecha_Min" name="Fecha_Min" type="text" class="form-control" value="" /></p>
 
-<span class="input-group-addon" >
-    <span class="glyphicon glyphicon-calendar" />
-</span>
     <script type="text/javascript">
             $(function () {
                 $('#Fecha_Min').datetimepicker({
                     format: 'YYYY-MM-DD'
+                    
                 });
+                $('#Fecha_Min').focus();
+        $('#Fecha_Min').blur();
             });
         </script>
     </div> 
 </div>
     <input id="Codigo_User" name="Codigo_User" class="form-control" type="hidden" value="${pageContext.request.userPrincipal.name}" />
-            <form:button class="btn btn-success" >Enviar</form:button>
-            <a href="Minutas.htm" class="btn btn-danger">Cancelar</a>
+                    
+                
+            <form:button class="btn btn-danger" >Enviar</form:button>
         </form:form>
              <script>
                 $('#Minuta').bootstrapValidator({

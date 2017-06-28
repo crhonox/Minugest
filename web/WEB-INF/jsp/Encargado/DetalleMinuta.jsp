@@ -168,6 +168,7 @@
                     </div>
                     <div class="panel-body">
                         <table>
+                            
                             <tr>
                                 <td><label>Nombre de Minuta: </label></td>
                                 <td><c:out value="${nombre}"/></td>

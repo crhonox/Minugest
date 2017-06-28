@@ -16,10 +16,9 @@
   <script type="text/javascript" src="<c:url value="/resources/js/moment.min.js"/>"></script>
   <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
   <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datetimepicker.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/js/bootstrapValidator.js"/>"></script>
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" />
-    <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-        <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
        <title>Encargado</title>
     </head>
@@ -181,11 +180,8 @@
          <form:label path="Fecha_Min">Fecha:</form:label> 
 <div class="input-group date" id="datetimepicker3" >
     
-    <input id="Fecha_Min" name  ="Fecha_Min" type="text" class="form-control" value="" /></p>
+    <input id="Fecha_Min" name="Fecha_Min" type="text" class="form-control" value="" /></p>
 
-<span class="input-group-addon" >
-    <span class="glyphicon glyphicon-calendar" />
-</span>
     <script type="text/javascript">
             $(function () {
                 $('#Fecha_Min').datetimepicker({

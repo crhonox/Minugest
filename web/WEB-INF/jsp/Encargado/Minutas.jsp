@@ -150,6 +150,10 @@
         
         <div class="menu-conte-wra">
         <h1>Lista De Minutas</h1>
+        <br>
+         <a href="AñadirMinuta.htm" class="btn btn-success">Crear Minuta</a>
+         <a href="GenerarListado.htm" class="btn btn-success">Generar Listado de insumos</a>
+         <p></p>
         <div class="row">
             <table class="table table-bordered table-hover">
                 <thead>
@@ -177,7 +181,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-                <a href="AñadirMinuta.htm" class="btn btn-success">Crear Minuta</a>
+               
             </div>
         </div>
     </body>

@@ -157,7 +157,8 @@
             
             <hr>
         </form:form>
-            
+            <a href="AñadirCliente.htm" class="btn btn-success">Añadir cliente</a>
+            <p></p>
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -191,7 +192,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-                <a href="AñadirCliente.htm" class="btn btn-success">Añadir cliente</a>
+                
             </div>
         </div>
         

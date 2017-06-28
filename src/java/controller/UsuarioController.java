@@ -5,14 +5,20 @@ package controller;
 import Modelos.Cliente;
 import Modelos.ClienteValidate;
 import Modelos.Conexion;
+import Modelos.JSONValid;
 import Modelos.Usuario;
 import Modelos.UsuarioCasinoValidate;
 import Modelos.UsuarioValidate;
+import com.google.gson.Gson;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -21,6 +27,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -84,6 +92,31 @@ public class UsuarioController {
         mav.setViewName("Administracion/DetalleUsuarioCasino");
         return mav;
     }
+    
+    
+    @RequestMapping(value = "Administracion/ValidarUsuario.do", method = RequestMethod.GET)
+    @ResponseBody
+    public void ValidarClienteRut(@RequestParam(value = "rut") String Ingrediente, HttpServletRequest request,
+            HttpServletResponse response) {
+        String Nombre= request.getParameter("rut");
+        JSONValid valida= new JSONValid();
+        int ingrediente = this.jdbcTemplate.queryForObject("SELECT COUNT(*) from USUARIO where CODIGO_USUARIO='"+Nombre+"'", Integer.class);
+        Boolean valid = true;
+        if (ingrediente != 0) {
+            valid=false;
+        }
+        valida.setValid(valid);
+        String json = null;
+        json = new Gson().toJson(valida);
+        response.setContentType("Administracion/AñadirUsuario");
+        try {
+            response.getWriter().write(json);
+        } catch (IOException ex) {
+            Logger.getLogger(AdministracionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
     
     @RequestMapping(value="Administracion/AñadirUsuario.htm",method = RequestMethod.GET)
     public ModelAndView añadirUsuario(HttpServletRequest request)

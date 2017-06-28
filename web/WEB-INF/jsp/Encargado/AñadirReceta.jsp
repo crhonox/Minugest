@@ -16,8 +16,8 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/bootstrapValidator.js"/>"></script>
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
        <title>Encargado</title>
