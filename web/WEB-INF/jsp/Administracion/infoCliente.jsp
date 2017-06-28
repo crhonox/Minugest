@@ -126,7 +126,7 @@
                     <div class="navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="/Minugest/home" style="color: #fff;"> Inicio </a></li>
-                            <li><a href="/Minugest/compañia.htm" style="color: #fff;">Compañia</a></li>
+                            <li><a href="/Minugest/compañia.htm" style="color: #fff;">Compañía</a></li>
                             <li><a href="/Minugest/soluciones.htm" style="color: #fff;">Soluciones</a></li>
                             <li><a href="/Minugest/socios.htm" style="color: #fff;">Socios</a></li>
                         </ul> 
@@ -170,13 +170,13 @@
                             <form:errors path="*" element="div" cssClass="alert alert-danger" />
                             <p><form:label path="rut">Rut  : ${cliente.rut}</form:label></p>
                             <p><form:label path="Nombre">Nombre  : ${cliente.nombre}</form:label></p>
-                            <p><form:label path="Nombre">Razon Social  : ${cliente.nombreLargo}</form:label></p>
+                            <p><form:label path="Nombre">Razón Social  : ${cliente.nombreLargo}</form:label></p>
                             <p><form:label path="email">E-mail  : ${cliente.email}</form:label></p>
-                            <p><form:label path="Telefono">Telefono  : ${cliente.telefono}</form:label></p>
-                            <p><form:label path="Region">Region  : ${cliente.region}</form:label></p>
+                            <p><form:label path="Telefono">Teléfono  : ${cliente.telefono}</form:label></p>
+                            <p><form:label path="Region">Región  : ${cliente.region}</form:label></p>
                             <p><form:label path="Provincia">Provincia  : ${cliente.provincia}</form:label></p>
                             <p><form:label path="Comuna">Comuna  : ${cliente.comuna}</form:label></p>
-                        <p><form:label path="Direccion">Direccion  : ${cliente.direccion}</form:label></p>
+                        <p><form:label path="Direccion">Dirección  : ${cliente.direccion}</form:label></p>
                             <hr />
                                 <a href="listaUsuario.htm?rut=${cliente.rut}" class="btn btn-success">Lista de Usuarios</a> <a href="listaCasino.htm?rut=${cliente.rut}" class="btn btn-success">Lista de Casinos</a>
                         <a href="cliente.htm" class="btn btn-danger">Volver</a>

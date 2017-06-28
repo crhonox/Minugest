@@ -206,8 +206,8 @@
                      </div>
             
             
-            <form:button class="btn btn-danger" >Enviar</form:button>
-            
+            <form:button class="btn btn-success" >Enviar</form:button>
+            <a href="listaUsuario.htm?rut=${rutEmpresa}" class="btn btn-danger">Volver</a>
         </form:form>
             
              <script>

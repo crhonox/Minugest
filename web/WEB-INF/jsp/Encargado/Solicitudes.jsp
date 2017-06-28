@@ -165,7 +165,6 @@
                 <th>Fecha</th>
                 <th>Contenido</th>
                 <th>Estado</th>
-                <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -175,7 +174,7 @@
                             <td><c:out value="${dato.Nombre}"/></td>
                             <td><c:out value="${dato.TIEMPO}"/></td>
                             <td><c:out value="${dato.CONTENIDO}"/></td>
-                            <td><c:out value="${dato.ESTADO}"/></td>
+                            <td><c:out value="Pendiente"/></td>
                                 
                         </tr>
                     </c:forEach>

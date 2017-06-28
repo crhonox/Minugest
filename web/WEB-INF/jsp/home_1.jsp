@@ -28,7 +28,7 @@
                        <ul>
                            <br>
                            <br>
-                           <a><span class="glyphicons glyphicons-address-book" aria-hidden="true"></span>Contactenos (+56) 97597708</a>
+                           <a><span class="glyphicons glyphicons-address-book" aria-hidden="true"></span>Contáctenos (+56) 97597708</a>
                        </ul>
                    </ul>
                 </div>
@@ -36,6 +36,8 @@
                     <center><img src="resources/image/p3.jpg"></center>
                 </div>
                 <div class="logo-gest-left">
+                    <br>
+                    <br>
      <sec:authorize access="hasRole('AdministradorA')">
 		<!-- For login user -->
 		<c:url value="/j_spring_security_logout" var="logoutUrl" />
@@ -164,7 +166,7 @@
                     <div class="navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="home" style="color: #fff;"> Inicio </a></li>
-                            <li><a href="compañia.htm" style="color: #fff;">Compañia</a></li>
+                            <li><a href="compañia.htm" style="color: #fff;">Compañía</a></li>
                             <li><a href="soluciones.htm" style="color: #fff;">Soluciones</a></li>
                             <li><a href="socios.htm" style="color: #fff;">Socios</a></li>
                         </ul> 
@@ -210,6 +212,7 @@
                     <li><a href="Encargado/Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
                     <li><a href="Encargado/receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
                     <li><a href="Encargado/ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
+                    <li><a href="Encargado/Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li>
                     </sec:authorize>
                 </ul>
             </div>

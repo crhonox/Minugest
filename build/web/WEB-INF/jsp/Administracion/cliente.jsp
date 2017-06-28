@@ -115,7 +115,7 @@
                     <div class="navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="/Minugest/home" style="color: #fff;"> Inicio </a></li>
-                            <li><a href="/Minugest/compañia.htm" style="color: #fff;">Compañia</a></li>
+                            <li><a href="/Minugest/compañia.htm" style="color: #fff;">Compañía</a></li>
                             <li><a href="/Minugest/soluciones.htm" style="color: #fff;">Soluciones</a></li>
                             <li><a href="/Minugest/socios.htm" style="color: #fff;">Socios</a></li>
                         </ul> 
@@ -167,13 +167,13 @@
                     <tr>
                 <th>Rut</th>
                 <th>Nombre</th>
-                <th>Razon Social</th>
-                <th>Telefono</th>
+                <th>Razón Social</th>
+                <th>Teléfono</th>
                 <th>Correo</th>
-                <th>Region</th>
+                <th>Región</th>
                 <th>Provincia</th>
                 <th>Comuna</th>
-                <th>Direccion</th>
+                <th>Dirección</th>
                 <th>Acciones</th>
                 
                     </tr>

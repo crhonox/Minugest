@@ -28,7 +28,7 @@
                        <ul>
                            <br>
                            <br>
-                           <a><span class="glyphicons glyphicons-address-book" aria-hidden="true"></span>Contactenos (+56) 97597708</a>
+                           <a><span class="glyphicons glyphicons-address-book" aria-hidden="true"></span>Contáctenos (+56) 97597708</a>
                        </ul>
                    </ul>
                 </div>
@@ -166,7 +166,7 @@
                     <div class="navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="home" style="color: #fff;"> Inicio </a></li>
-                            <li><a href="compañia.htm" style="color: #fff;">Compañia</a></li>
+                            <li><a href="compañia.htm" style="color: #fff;">Compañía</a></li>
                             <li><a href="soluciones.htm" style="color: #fff;">Soluciones</a></li>
                             <li><a href="socios.htm" style="color: #fff;">Socios</a></li>
                             
@@ -210,8 +210,8 @@
                     <li><a href="Supervisor/Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Encargado/Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
-                    <li><a href="Encargado/receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="Encargado/Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificación de Minutas</a></li>
+                    <li><a href="Encargado/receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestión de Recetas</a></li>
                     <li><a href="Encargado/ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Encargado/Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li>
                     </sec:authorize>

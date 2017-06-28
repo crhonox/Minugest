@@ -195,6 +195,7 @@
                 <th>Nombre de Minuta</th>
                 <th>Casino</th>
                 <th>Fecha</th>
+                <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -204,7 +205,7 @@
                             <td><c:out value="${dato.NOMBRE_CASINO}"/></td>
                             <td><c:out value="${dato.FECHA_MINUTA}"/></td>   
                             <td><a href="ModificarMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
-                            <a href="CalculoIngrediente.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>     
+                            </td>     
                         </tr>
                     </c:forEach>
                 </tbody>

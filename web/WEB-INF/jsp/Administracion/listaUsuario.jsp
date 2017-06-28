@@ -123,7 +123,7 @@
                     <div class="navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="/Minugest/home" style="color: #fff;"> Inicio </a></li>
-                            <li><a href="/Minugest/compañia.htm" style="color: #fff;">Compañia</a></li>
+                            <li><a href="/Minugest/compañia.htm" style="color: #fff;">Compañía</a></li>
                             <li><a href="/Minugest/soluciones.htm" style="color: #fff;">Soluciones</a></li>
                             <li><a href="/Minugest/socios.htm" style="color: #fff;">Socios</a></li>
                         </ul> 

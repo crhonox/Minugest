@@ -126,7 +126,7 @@
                     <div class="navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="home" style="color: #fff;"> Inicio </a></li>
-                            <li><a href="compañia.htm" style="color: #fff;">Compañia</a></li>
+                            <li><a href="compañia.htm" style="color: #fff;">Compañía</a></li>
                             <li><a href="soluciones.htm" style="color: #fff;">Soluciones</a></li>
                             <li><a href="socios.htm" style="color: #fff;">Socios</a></li>
                         </ul> 
