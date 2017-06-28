@@ -139,7 +139,8 @@ public class SolicitudController {
         String Codigo = request.getParameter("idSolicitud");
         mav.setViewName("Encargado/DetalleSolicitud");
         List solicitud = this.jdbcTemplate.queryForList("select *,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.CODIGO_USUARIO where idSolicitud='"+Codigo+"'");
-        
+        List Minutas = this.jdbcTemplate.queryForList("SELECT MINUTA.*,CASINO.* FROM Minugest.MINUTA inner join CASINO on MINUTA.CODIGO_CASINO=CASINO.CODIGO_CASINO where CODIGO_SOLICITUD='"+Codigo+"'");
+        mav.addObject("minutas",Minutas);
         mav.addObject("solicitud",solicitud);
         
         return mav;

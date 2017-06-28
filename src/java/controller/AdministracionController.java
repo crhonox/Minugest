@@ -5,6 +5,7 @@ import Modelos.Provincia;
 import Modelos.ClienteValidate;
 import Modelos.Comuna;
 import Modelos.Conexion;
+import Modelos.JSONValid;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public class AdministracionController {
     @RequestMapping(value = "Administracion/cliente.htm", method = RequestMethod.GET)
     public ModelAndView cliente() {
         ModelAndView mav = new ModelAndView();
-        String sql = "SELECT COMUNA_NOMBRE,REGION_NOMBRE,PROVINCIA_NOMBRE,RUT_EMPRESA,NOMBRE_EMPRESA,RAZON_SOCIAL,TELEFONO_EMPRESA,CORREO_EMPRESA,DIRECCION_EMPRESA FROM region inner join  provincia on REGION_ID = PROVINCIA_REGION_ID inner join comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join EMPRESA on COMUNA_EMPRESA = COMUNA_ID";
+        String sql = "SELECT COMUNA_NOMBRE,REGION_NOMBRE,PROVINCIA_NOMBRE,RUT_EMPRESA,NOMBRE_EMPRESA,RAZON_SOCIAL,TELEFONO_EMPRESA,CORREO_EMPRESA,DIRECCION_EMPRESA FROM region inner join  provincia on REGION_ID = PROVINCIA_REGION_ID inner join comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join EMPRESA on COMUNA_EMPRESA = COMUNA_ID order by NOMBRE_EMPRESA";
         List datos = this.jdbcTemplate.queryForList(sql);
         mav.addObject("datos", datos);
         mav.addObject("cliente", new Cliente());
@@ -171,6 +172,29 @@ public class AdministracionController {
 
             return new ModelAndView("redirect:cliente.htm");
         
+
+    }
+    
+    @RequestMapping(value = "Administracion/ValidarCliente.do", method = RequestMethod.GET)
+    @ResponseBody
+    public void ValidarClienteRut(@RequestParam(value = "rut") String Ingrediente, HttpServletRequest request,
+            HttpServletResponse response) {
+        String Nombre= request.getParameter("rut");
+        JSONValid valida= new JSONValid();
+        int ingrediente = this.jdbcTemplate.queryForObject("SELECT COUNT(*) from EMPRESA where RUT_EMPRESA='"+Nombre+"'", Integer.class);
+        Boolean valid = true;
+        if (ingrediente != 0) {
+            valid=false;
+        }
+        valida.setValid(valid);
+        String json = null;
+        json = new Gson().toJson(valida);
+        response.setContentType("Administracion/AñadirCliente");
+        try {
+            response.getWriter().write(json);
+        } catch (IOException ex) {
+            Logger.getLogger(AdministracionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
     

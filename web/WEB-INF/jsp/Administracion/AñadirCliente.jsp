@@ -22,8 +22,7 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.combobox.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" />
-        <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-        <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
+
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
         <title>Minugest</title>    
     </head>
@@ -317,6 +316,13 @@
                                 stringLength: {
                                     min: 9,
                                     message: 'El Rut debe contener al menos 9 caracteres'
+                                },remote:{
+                                    
+                        type: 'GET',
+                        url: 'ValidarCliente.do',
+                        message: 'El rut de empresa ya existe',
+                        delay: 1000
+                       
                                 }
                             }
                         },
