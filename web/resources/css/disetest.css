@@ -62,7 +62,7 @@ a2{
 }
 
 .logo_gest {
-    padding: 2em 0;
+    padding: 1em 0;
     height: 100px;
     
 }
@@ -71,11 +71,12 @@ a2{
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    margin-top: auto;
     width: 1170px;
 }
 .contacto-gest {
     float: left;
-    margin-top: 0.6em;
+    margin-top: 2em;
     width: 33%;
 }
 

@@ -17,20 +17,20 @@
         <title>Minugest</title>
     </head>
     <body>
-        <div class="logo_gest">
+        <div class="logo_gest" style="height: 150px; margin-top: 1px;">
             <div class="conta">
-                <div class="contacto-gest">
-                   <ul> 
-                       <ul>
-                           <a><span class="glyphicons glyphicons-address-book" aria-hidden="true"></span>Contactenos (+56) 97597708</a>
-                       </ul>
-                   </ul>
+                <div class="contacto-gest" float="right">
+               
+                           <center><img src="resources/image/p3b.jpg"></center>
+                 
                 </div>
                 <div class="logo-gest-center">
+                    <br>
+                    <br>
                     <h1 align="center">Nosotros</h1>
                 </div>
                 <div class="logo-gest-left">
-     <sec:authorize access="hasRole('AdministradorA')">
+     <sec:authorize access="hasRole('AdministradorA')"> 
 		<!-- For login user -->
 		<c:url value="/j_spring_security_logout" var="logoutUrl" />
 		<form action="${logoutUrl}" method="post" id="logoutForm">
@@ -51,7 +51,7 @@
 			</h4>
                                         <h4>ESTE ROL ES EL ADMINISTRADOR</h4>
 		</c:if>
-                </sec:authorize>
+                </sec:authorize> 
                 
                 <sec:authorize access="hasRole('Supervisor')">
 		<!-- For login user -->
@@ -106,7 +106,8 @@
           <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
             <div class="icon-login">
                 <ul>
-                    <ul>
+                    <ul><br>
+                           <br>
                         <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
                     </ul>
                 </ul>
@@ -134,29 +135,37 @@
             </div>
         </div>
         
-        <div class="menu-conte-wra">
+        <div class="menu-conte-wra" style="width: 1000px;">
             <p>
-            <center>
-            <center>Misión</center>
-            <center>
+            <table> <td>
+         <div class="row" style="width: 550px;">
+             <center><div class="panel panel-primary" style="width: 500px;"> 
+             <center><table>
+                     <div class="panel-heading" ><center><label>Misión</label></center></div>
+                     <div class="panel-body"><center>
+            
      InfoQuest es una empresa emergente en la comercialización del producto MinuGest, satisface las necesidades de las empresas del rubro de la alimentación de la Región Metropolitana, brindando un servicio excelente y de calidad. Tiene como objetivo el crecimiento continuo de la empresa y el desarrollo profesional de sus trabajadores.
-            </center>     
+            </center></div>     
             <br>
-            <center> Visión </center>
+            <center><label>Visión</label></center>
             <center>
    InfoQuest busca consolidar el liderazgo de MinuGest en el mercado nacional, a través de la confianza y las buenas prácticas con nuestros clientes, expandiendo el servicio a todas las empresas del rubro de la alimentación, situándonos como una de las empresas con el mejor sistema de gestión y planificación dedicado a minutas de alimentos. 
             </center>
             <br>
-            <center> Valores </center>
+            <center><label>Valores</label></center>
             <center>
      Los valores de InfoQuest reflejan la empresa que aspiran ser, estos valores describirán el comportamiento de InfoQuest en el futuro: la valentía de modelar soluciones de distintos rubros, cuidar de los clientes, hablar con la verdad y transparencia en todo momento, responsabilidad y pasión en el trabajo realizado.
             </center>
-                
-            </center>
+                </table>
+            </center> 
+         
+         </div></center>
+         </div></td>
             </p>
             <p>
-                <center><img src="resources/image/admi.jpg"></center>
-            </p>
+            <td>
+                <center><img src="resources/image/admi.jpg"></center></td>
+            </p></table>
         </div> 
 
         

@@ -18,16 +18,16 @@
     </head>
     <body>
         
-        <div class="logo_gest">
+        <div class="logo_gest" style="height: 150px; margin-top: 1px;">
             <div class="conta">
-                <div class="contacto-gest">
-                   <ul> 
-                       <ul>
-                           <a><span class="glyphicons glyphicons-address-book" aria-hidden="true"></span>Contactenos (+56) 97597708</a>
-                       </ul>
-                   </ul>
+                <div class="contacto-gest" float="right">
+               
+                           <center><img src="resources/image/p3b.jpg"></center>
+                 
                 </div>
                 <div class="logo-gest-center">
+                    <br>
+                    <br>
                     <h1 align="center">Soluciones</h1>
                 </div>
                 <div class="logo-gest-left">
@@ -108,6 +108,8 @@
             <div class="icon-login">
                 <ul>
                     <ul>
+                        <br>
+                    <br>
                         <a href="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Iniciar sesión</a>
                     </ul>
                 </ul>

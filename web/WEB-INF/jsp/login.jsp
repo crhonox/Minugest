@@ -14,17 +14,19 @@
 <body onload='document.loginForm.username.focus();'>
 
     
-	<div class="logo_gest">
+	<div class="logo_gest" style="height: 180px; margin-top: 1px;" >
             <div class="conta">
                 <div class="contacto-gest">
                    <ul> 
                        <ul>
+                           <br>
+                           <br>
                            <a><span class="glyphicons glyphicons-address-book" aria-hidden="true"></span>Contactenos (+56) 97597708</a>
                        </ul>
                    </ul>
                 </div>
-                <div class="logo-gest-center">
-                    <h1 align="center">Minugest</h1>
+                <div class="logo-gest-center" >
+                    <center><img src="resources/image/p3.jpg"></center>
                 </div>
                 <div class="logo-gest-left">
      <sec:authorize access="hasRole('AdministradorA')">
