@@ -28,16 +28,22 @@
         <title>Minugest</title>
     </head>
     <body>
-       <div class="logo_gest">
+       <div class="logo_gest" style="height: 150px; margin-top: 1px;">
             <div class="conta">
-                <div class="contacto-gest">
-                    <a href="/Minugest/home">Volver al inicio</a>
+                <div class="contacto-gest" float="right">
+               
+                           <center><img src="../resources/image/p3b.jpg"></center>
+                 
                 </div>
                 <div class="logo-gest-center">
-                    <h1 align="center">MinuGest</h1>
+                    <br>
+                    <br>
+                    <center><img src="../resources/image/p3c.jpg"></center>
                      <br>
                 </div>
                 <div class="logo-gest-left">
+                    <br>
+                    <br> 
      <sec:authorize access="hasRole('AdministradorA')">
 		<!-- For login user -->
 		<c:url value="/j_spring_security_logout" var="logoutUrl" />
