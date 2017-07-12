@@ -211,7 +211,7 @@
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
+                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
                     <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li> 
@@ -231,6 +231,21 @@
                     <p>
                         <form:label path="Codigo_Min">ID de Minuta:</form:label>
                         <form:input path="Codigo_Min" cssClass="form-control" readonly="true"/>
+                        <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                <th><label>Recetas asignadas </label></th>
+                                <th><label>Porciones </label></th>
+                                    </tr>
+                            </thead>
+                            <c:forEach items="${Recetas}" var="dato" >
+                                <tr>
+                                <td><c:out value="${dato.NOMBRE_RECETA}"/></td>
+                                <td><c:out value="${dato.CANTIDAD_PORCION}"/></td>
+                                
+                            </tr>
+                            </c:forEach>
+                            </table>
                     </p>
                     
                     <p> <form:label path="combobox">Receta:</form:label>

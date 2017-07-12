@@ -52,7 +52,28 @@
                                         <h4>ESTE ROL ES EL ADMINISTRADOR</h4>
 		</c:if>
                 </sec:authorize> 
-                
+                <sec:authorize access="hasRole('AdministradorB')">
+		<!-- For login user -->
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<script>
+			function formSubmit() {
+				document.getElementById("logoutForm").submit();
+			}
+		</script>
+
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<h4>
+				User : ${pageContext.request.userPrincipal.name} | <a
+					href="javascript:formSubmit()"> Logout</a>
+                                        
+			</h4>
+                                        <h4>ESTE ROL ES EL ADMINISTRADOR CLIENTE</h4>
+		</c:if>
+                </sec:authorize>
                 <sec:authorize access="hasRole('Supervisor')">
 		<!-- For login user -->
 		<c:url value="/j_spring_security_logout" var="logoutUrl" />
@@ -103,7 +124,7 @@
                 
 
 	</sec:authorize>
-          <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+          <sec:authorize access="!hasAnyRole('AdministradorA','AdministradorB','Supervisor','Encargado')">
             <div class="icon-login">
                 <ul>
                     <ul><br>

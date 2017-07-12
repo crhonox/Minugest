@@ -140,7 +140,7 @@
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
+                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
                     <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li> 
@@ -155,6 +155,7 @@
         <div class="row">
                     
                             <label>Listado de insumos</label>
+                            <form:form method="post" commandName="pdf" >
                             <table class="table table-bordered table-hover">
                             <thead>
                                  <th>Ingrediente</th>
@@ -165,13 +166,16 @@
                             
                             <c:forEach items="${insumos}" var="ing">
                             <tr>
-                                <td>  <c:out value="${ing.getNombreIngrediente()}" /> </td>
-                                <td>  <c:out value="${ing.getCantidadIngrediente()}" /> </td>
-                                <td>  <c:out value="${ing.getUnidadMedida()}" /> </td>
+                                
+                                <td><input id="ingrediente" name="ingrediente" class="form-control" type="hidden" value="${ing.getNombreIngrediente()}"> <c:out value="${ing.getNombreIngrediente()}" /> </td>
+                                <td><input id="cantidad" name="cantidad" class="form-control" type="hidden" value="${ing.getCantidadIngrediente()}">  <c:out value="${ing.getCantidadIngrediente()}" /> </td>
+                                <td><input id="unidad" name="unidad" class="form-control" type="hidden" value="${ing.getUnidadMedida()}"><c:out value="${ing.getUnidadMedida()}" /> </td>
                             </tr>
                             </c:forEach>
                             </tbody>
                             </table>
+                            <input type="submit" value="Descargar PDF" class="btn btn-success" />
+                            </form:form>
                     
          </div>
         </div>

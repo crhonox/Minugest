@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -258,4 +261,199 @@ public class CasinoController {
             }
         );
     }
+    
+    
+    public Usuario selectUsuario(String rut) 
+    {
+        final Usuario usuario = new Usuario();
+       // String quer = "SELECT * FROM EMPRESA WHERE RUT_EMPRESA='" + rut+"'";
+        String quer="SELECT RUT_EMPRESA_USUARIO,CODIGO_USUARIO, PERFIL.CODIGO_PERFIL, NOMBRE_USUARIO, APELLIDO_USUARIO, CORREO_USUARIO, PASS_USUARIO "
+                + "from USUARIO  inner join PERFIL on USUARIO.CODIGO_PERFIL = PERFIL.CODIGO_PERFIL"
+                + " Where CODIGO_USUARIO='" + rut+"'";
+        return (Usuario) jdbcTemplate.query
+        (
+                quer, new ResultSetExtractor<Usuario>() 
+            {
+                public Usuario extractData(ResultSet rs) throws SQLException, DataAccessException 
+                {
+                    if (rs.next()) 
+                    {
+                        usuario.setRutEmpresa(rs.getString("RUT_EMPRESA_USUARIO"));
+                        usuario.setRut(rs.getString("CODIGO_USUARIO"));
+                        usuario.setNombre(rs.getString("NOMBRE_USUARIO"));
+                        usuario.setApellido(rs.getString("APELLIDO_USUARIO"));
+                        usuario.setPass(rs.getString("PASS_USUARIO"));
+                        usuario.setCorreo(rs.getString("CORREO_USUARIO"));
+                        
+                        usuario.setCod_perfil(rs.getString("CODIGO_PERFIL"));
+                        
+                    }
+                    return usuario;
+                }
+
+
+            }
+        );
+    
+    }
+    /*------------------ Encargado ----------------------*/
+    @RequestMapping(value = "AdministracionCliente/Casinos.htm")
+    public ModelAndView listadoCasinoEMPRESACliente(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String rutUser=userDetail.getUsername();
+        Usuario usuario=this.selectUsuario(rutUser);
+        List datos2=this.jdbcTemplate.queryForList("SELECT COMUNA_NOMBRE,REGION_NOMBRE,PROVINCIA_NOMBRE,CASINO.CODIGO_CASINO,CASINO.RUT_EMPRESA,NOMBRE_CASINO,DIRECCION_CASINO,NOMBRE_EMPRESA FROM region  inner join  provincia on REGION_ID = PROVINCIA_REGION_ID inner join comuna on PROVINCIA_ID = COMUNA_PROVINCIA_ID inner join CASINO on COMUNA_CASINO = COMUNA_ID inner join EMPRESA on CASINO.RUT_EMPRESA = EMPRESA.RUT_EMPRESA where CASINO.RUT_EMPRESA = '"+usuario.getRutEmpresa()+"'");
+        mav.addObject("datos",datos2);
+        String NombreEmpresa=this.jdbcTemplate.queryForObject("SELECT NOMBRE_EMPRESA from EMPRESA where RUT_EMPRESA='"+usuario.getRutEmpresa()+"'", String.class);
+        mav.addObject("rutEmp",usuario.getRutEmpresa());
+        mav.addObject("nomEmp",NombreEmpresa);
+        Cliente datos=this.selectCliente(usuario.getRutEmpresa());
+        mav.addObject("cliente",new Cliente(usuario.getRutEmpresa(),datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
+        mav.setViewName("Administracion2/listaCasino");
+        return mav;
+    }
+    
+    
+    @RequestMapping(value = "AdministracionCliente/AñadirCasino.htm",method = RequestMethod.GET)
+    public ModelAndView añadirCasinoCliente(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String rutUser=userDetail.getUsername();
+        Usuario usuario=this.selectUsuario(rutUser);
+        String rut = usuario.getRutEmpresa();
+        mav.setViewName("Administracion2/AñadirCasino");
+        List regiones= this.jdbcTemplate.queryForList("select REGION_ID, REGION_NOMBRE from region");
+        mav.addObject("regiones",regiones);
+        mav.addObject("rutemp",rut);
+        mav.addObject("casino", new Casino());  
+        return mav;
+    }
+    
+    @RequestMapping(value = "AdministracionCliente/AñadirCasino.htm",method = RequestMethod.POST)
+    public ModelAndView formCliente(@ModelAttribute ("casino") Casino cas,BindingResult result, SessionStatus status ,HttpServletRequest request )
+    {
+        
+        this.jdbcTemplate.update("INSERT INTO CASINO (RUT_EMPRESA,NOMBRE_CASINO,REGION_CASINO,PROVINCIA_CASINO,COMUNA_CASINO,DIRECCION_CASINO) VALUES (?,?,?,?,?,?)"
+                                      ,cas.getRutEmpresa(),cas.getNombreCasino(),cas.getRegionCasino(),cas.getProvinciaCasino(),cas.getComunaCasino(),cas.getDireccionCasino());
+       
+        return new ModelAndView("redirect:Casinos.htm");
+        
+        
+    }
+    
+    @RequestMapping(value = "AdministracionCliente/eliminarCasino.htm") 
+    public ModelAndView eliminarCasinoCliente(HttpServletRequest request){
+        
+         String cod=request.getParameter("cod");
+         Casino datos=this.selectCasino(cod);
+         this.jdbcTemplate.update(
+                    "DELETE FROM CASINO WHERE CODIGO_CASINO=?",
+                    cod);
+         return new ModelAndView("redirect:listaCasino.htm?rut="+datos.getRutEmpresa());
+    }
+     
+     @RequestMapping(value ="AdministracionCliente/editarCasino.htm" ,method=RequestMethod.GET) 
+    public ModelAndView editarCasinoCliente(HttpServletRequest request)
+    {
+        ModelAndView mav=new ModelAndView();
+        String cod=request.getParameter("cod");
+        Casino datos=this.selectCasino(cod);
+        List regiones= this.jdbcTemplate.queryForList("select REGION_ID, REGION_NOMBRE from region");
+        mav.addObject("regiones",regiones);
+        mav.addObject("COD",datos.getRutEmpresa());
+        mav.setViewName("Administracion2/editarCasino");
+        mav.addObject("casino",new Casino(datos.getRutEmpresa(),datos.getNombreCasino(),datos.getRegionCasino(),datos.getProvinciaCasino(),datos.getComunaCasino(),datos.getDireccionCasino()));
+        return mav;
+    }
+    
+     @RequestMapping(value ="AdministracionCliente/DetalleCasino.htm" ,method=RequestMethod.GET) 
+    public ModelAndView detalleCasinoCliente(HttpServletRequest request)
+    {
+        ModelAndView mav=new ModelAndView();
+        String cod=request.getParameter("cod");
+        Casino datos=this.selectCasino(cod);
+        List usuarios =this.jdbcTemplate.queryForList("SELECT RUT_USUARIO,ID_CASINO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre,USUARIO.CODIGO_PERFIL,NOMBE_PERFIL,CORREO_USUARIO from USUARIO_CASINO inner join USUARIO on RUT_USUARIO=CODIGO_USUARIO inner join PERFIL on USUARIO.CODIGO_PERFIL=PERFIL.CODIGO_PERFIL "
+                + "where ID_CASINO='"+cod+"'");
+        mav.addObject("usuarios",usuarios);
+        mav.addObject("nomcas",datos.getNombreCasino());
+        mav.addObject("casreg",datos.getRegionCasino());
+        mav.addObject("caspro",datos.getProvinciaCasino());
+        mav.addObject("cascom",datos.getComunaCasino());
+        mav.addObject("casdir",datos.getDireccionCasino());
+        mav.addObject("rutEmp",datos.getRutEmpresa());
+        mav.addObject("cod",cod);
+        mav.setViewName("Administracion2/DetalleCasino");
+        mav.addObject("casino",new Casino(datos.getRutEmpresa(),datos.getNombreCasino(),datos.getRegionCasino(),datos.getProvinciaCasino(),datos.getComunaCasino(),datos.getDireccionCasino()));
+        return mav;
+    }
+    @RequestMapping(value="AdministracionCliente/DesasignarUsuario.htm",method = RequestMethod.GET)
+    public ModelAndView formdeleteCasinoCliente(@ModelAttribute ("usuario") Usuario user,BindingResult result, SessionStatus status , HttpServletRequest request )
+    {
+        String rutUser=request.getParameter("RUT");
+        String COD=request.getParameter("COD");
+        String Query = "DELETE FROM `Minugest`.`USUARIO_CASINO` WHERE `ID_CASINO`='"+COD+"' and`RUT_USUARIO`='"+rutUser+"';";
+        this.jdbcTemplate.execute(Query);
+        return new ModelAndView("redirect:DetalleCasino.htm?cod="+COD+"");
+    }
+    
+    @RequestMapping(value ="AdministracionCliente/editarCasino.htm" ,method=RequestMethod.POST)
+    public ModelAndView formEditCasinoCliente
+        (
+                @ModelAttribute("casino") Casino cas,
+                BindingResult result,
+                SessionStatus status,
+                HttpServletRequest request
+        )
+    {
+        
+            String cod=request.getParameter("cod");
+            this.jdbcTemplate.update(
+                    "UPDATE CASINO SET NOMBRE_CASINO=?,REGION_CASINO=?,PROVINCIA_CASINO=?,COMUNA_CASINO=?,DIRECCION_CASINO=? WHERE CODIGO_CASINO=?",
+         cas.getNombreCasino(),cas.getRegionCasino(),cas.getProvinciaCasino(),cas.getComunaCasino(),cas.getDireccionCasino(),cod);
+         return new ModelAndView("redirect:Casinos.htm");
+        
+       
+    }
+        
+        @RequestMapping(value="AdministracionCliente/UsuarioCasino.htm",method=RequestMethod.GET) 
+    public ModelAndView UsuarioCasinoCliente(HttpServletRequest request)
+    {
+        ModelAndView mav=new ModelAndView();
+        String cod=request.getParameter("cod");
+        Casino datos=this.selectCasino(cod);
+        List usuario = this.jdbcTemplate.queryForList("SELECT CODIGO_USUARIO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre from USUARIO where RUT_EMPRESA_USUARIO='"+datos.getRutEmpresa()+"'");
+        mav.addObject("usuario",usuario);
+        mav.addObject("rutEmp", datos.getRutEmpresa());
+        mav.addObject("cod", cod);
+       Casino formc = new Casino();
+       formc.setCodigoCasino(cod);
+       formc.setNombreCasino(datos.getNombreCasino());
+        mav.setViewName("Administracion2/UsuarioCasino");
+        mav.addObject("Casino",formc);
+        return mav;
+    }
+    
+     @RequestMapping(value="AdministracionCliente/UsuarioCasino.htm",method=RequestMethod.POST) 
+    public ModelAndView UsuarioCasinoPostCliente(@ModelAttribute("Casino") Casino cas, BindingResult result, SessionStatus status,HttpServletRequest request)
+    {
+       
+      
+             List<String> lista = new ArrayList<>();
+             lista =cas.getCombobox();
+             for (int i = 0; i < lista.size(); i++) {
+            this.jdbcTemplate.update("insert into USUARIO_CASINO (RUT_USUARIO, "
+                    + "ID_CASINO)"
+                    + "values (?,?)", lista.get(i),cas.getCodigoCasino());
+        }
+             
+              
+            return new ModelAndView("redirect:DetalleCasino.htm?cod="+cas.getCodigoCasino()+"");
+        
+ 
+    }
+    
+    
 }

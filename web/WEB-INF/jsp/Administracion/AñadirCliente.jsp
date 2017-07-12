@@ -162,7 +162,7 @@
         
             <div class="row">
                 <div class="panel panel-primary"> 
-                    <div class="panel-heading"><center>Formulario</center></div>
+                    <div class="panel-heading"><center>Agregar Empresa</center></div>
                     <div class="panel-body">
                 <form:form method="POST" commandName="cliente">
                     

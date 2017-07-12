@@ -36,7 +36,7 @@ public LoginController(){
 
 		ModelAndView model = new ModelAndView();
 		if (error != null) {
-			model.addObject("error", "Usuario y Contraseña invalidos!");
+			model.addObject("error", "Usuario y Contraseña inválidos!");
 		}
 
 		if (logout != null) {

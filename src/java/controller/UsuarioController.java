@@ -22,6 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -124,7 +127,7 @@ public class UsuarioController {
         ModelAndView mav = new ModelAndView();
         String rut=request.getParameter("rutEmpresa");
         mav.setViewName("Administracion/AñadirUsuario");
-        List perfiles= this.jdbcTemplate.queryForList("SELECT * FROM Minugest.PERFIL");
+        List perfiles= this.jdbcTemplate.queryForList("SELECT * FROM Minugest.PERFIL where CODIGO_PERFIL != 1");
         mav.addObject("rutEmpresa",rut);
         mav.addObject("perfiles",perfiles);
         mav.addObject("usuario",new Usuario());
@@ -287,6 +290,173 @@ public class UsuarioController {
             }
         );
     }
+    /*------------ADMINISTRACION CLIENTE-----------------------*/
+    @RequestMapping(value = "AdministracionCliente/Usuarios.htm")
+    public ModelAndView listaUsuarioC(HttpServletRequest request)
+    {
+       ModelAndView mav= new ModelAndView();
+       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String rutUser=userDetail.getUsername();
+        Usuario datosU=this.selectUsuario(rutUser);
+       Cliente datos=this.selectCliente(datosU.getRutEmpresa());
+        String sql ="SELECT CODIGO_USUARIO,NOMBE_PERFIL, NOMBRE_USUARIO, APELLIDO_USUARIO, CORREO_USUARIO, PASS_USUARIO from USUARIO inner join PERFIL on USUARIO.CODIGO_PERFIL = PERFIL.CODIGO_PERFIL where RUT_EMPRESA_USUARIO='"+datosU.getRutEmpresa()+"'";
+        List datos2=this.jdbcTemplate.queryForList(sql);
+        String NombreEmpresa=this.jdbcTemplate.queryForObject("SELECT NOMBRE_EMPRESA from EMPRESA where RUT_EMPRESA='"+datosU.getRutEmpresa()+"'", String.class);
+        mav.addObject("datos",datos2);
+        mav.addObject("rutEmp",datosU.getRutEmpresa());
+        mav.addObject("nomEmp",NombreEmpresa);
+        mav.setViewName("Administracion2/listaUsuario");
+        mav.addObject("cliente",new Cliente(datosU.getRutEmpresa(),datos.getNombre(),datos.getEmail(),datos.getTelefono(),datos.getComuna(),datos.getRegion(),datos.getDireccion()));
+        return mav;
+    }
+    
+    @RequestMapping(value = "AdministracionCliente/DetalleUsuarioCasino.htm")
+    public ModelAndView listaUsuarioCasinoc(HttpServletRequest request)
+    {
+       ModelAndView mav= new ModelAndView();
+       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String rutUser=userDetail.getUsername();
+        Usuario datos=this.selectUsuario(rutUser);
+        List datos2=this.jdbcTemplate.queryForList("SELECT RUT_USUARIO,NOMBRE_CASINO,ID_CASINO from USUARIO_CASINO inner join CASINO on ID_CASINO=CODIGO_CASINO where RUT_USUARIO='"+rutUser+"'");
+        String perfiles= this.jdbcTemplate.queryForObject("SELECT NOMBE_PERFIL FROM Minugest.PERFIL inner join USUARIO on USUARIO.CODIGO_PERFIL = PERFIL.CODIGO_PERFIL where CODIGO_USUARIO='"+rutUser+"'",String.class);
+        mav.addObject("nombre",datos.getNombre());
+        mav.addObject("apellido",datos.getApellido());
+        mav.addObject("rut",datos.getRut());
+        mav.addObject("perfil",perfiles);
+        mav.addObject("correo",datos.getCorreo());
+        mav.addObject("pass",datos.getPass());
+        mav.addObject("rutEmp",datos.getRutEmpresa());
+        mav.addObject("datos2",datos2);
+        mav.setViewName("Administracion2/DetalleUsuarioCasino");
+        return mav;
+    }
     
     
+    @RequestMapping(value = "AdministracionCliente/ValidarUsuario.do", method = RequestMethod.GET)
+    @ResponseBody
+    public void ValidarClienteRutC(@RequestParam(value = "rut") String Ingrediente, HttpServletRequest request,
+            HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String Nombre=userDetail.getUsername();
+        JSONValid valida= new JSONValid();
+        int ingrediente = this.jdbcTemplate.queryForObject("SELECT COUNT(*) from USUARIO where CODIGO_USUARIO='"+Nombre+"'", Integer.class);
+        Boolean valid = true;
+        if (ingrediente != 0) {
+            valid=false;
+        }
+        valida.setValid(valid);
+        String json = null;
+        json = new Gson().toJson(valida);
+        response.setContentType("Administracion2/AñadirUsuario");
+        try {
+            response.getWriter().write(json);
+        } catch (IOException ex) {
+            Logger.getLogger(AdministracionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    
+    @RequestMapping(value="AdministracionCliente/AñadirUsuario.htm",method = RequestMethod.GET)
+    public ModelAndView añadirUsuarioC(HttpServletRequest request)
+    {   
+        ModelAndView mav = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String rutUser=userDetail.getUsername();
+        Usuario datos=this.selectUsuario(rutUser);
+        mav.setViewName("Administracion2/AñadirUsuario");
+        List perfiles= this.jdbcTemplate.queryForList("SELECT * FROM Minugest.PERFIL");
+        mav.addObject("rutEmpresa",datos.getRutEmpresa());
+        mav.addObject("perfiles",perfiles);
+        mav.addObject("usuario",new Usuario());
+        return mav;
+    }
+    
+    @RequestMapping(value="AdministracionCliente/AñadirUsuario.htm",method = RequestMethod.POST)
+    public ModelAndView formC(@ModelAttribute ("usuario") Usuario user,BindingResult result, SessionStatus status  )
+    {
+        
+        this.jdbcTemplate.update("INSERT INTO USUARIO (CODIGO_USUARIO, CODIGO_PERFIL, NOMBRE_USUARIO, CORREO_USUARIO, PASS_USUARIO, APELLIDO_USUARIO,RUT_EMPRESA_USUARIO) VALUES (?,?,?,?,?,?,?)"
+                                    ,user.getRut(),user.getCod_perfil(),user.getNombre(),user.getCorreo(),user.getPass(),user.getApellido(),user.getRutEmpresa());
+       
+        return new ModelAndView("redirect:Usuarios.htm");
+        
+        
+    }
+    
+    @RequestMapping(value="AdministracionCliente/DesasignarCasino.htm",method = RequestMethod.GET)
+    public ModelAndView formdeleteCasinoC(@ModelAttribute ("usuario") Usuario user,BindingResult result, SessionStatus status , HttpServletRequest request )
+    {
+        String rutUser=request.getParameter("RUT");
+        String COD=request.getParameter("COD");
+        String Query = "DELETE FROM `Minugest`.`USUARIO_CASINO` WHERE `ID_CASINO`='"+COD+"' and`RUT_USUARIO`='"+rutUser+"';";
+        this.jdbcTemplate.execute(Query);
+        return new ModelAndView("redirect:DetalleUsuarioCasino.htm?rutUser="+rutUser+"");
+    }
+    
+    @RequestMapping(value="AdministracionCliente/editarUsuario.htm",method=RequestMethod.GET) 
+    public ModelAndView editarUsuarioC(HttpServletRequest request)
+    {
+        ModelAndView mav=new ModelAndView();
+        String rutUser=request.getParameter("rutUser");
+        Usuario datos=this.selectUsuario(rutUser);
+        List perfiles= this.jdbcTemplate.queryForList("SELECT * FROM Minugest.PERFIL");
+        mav.addObject("perfiles",perfiles);
+        mav.setViewName("Administracion2/editarUsuario");
+        mav.addObject("usuario",new Usuario(datos.getRutEmpresa(),datos.getRut(),datos.getCod_perfil(),datos.getNombre(),datos.getCorreo(),datos.getPass(),datos.getApellido()));
+        return mav;
+    }
+    
+    @RequestMapping(value="AdministracionCliente/editarUsuario.htm",method = RequestMethod.POST)
+    public ModelAndView formeditUsuarioC(@ModelAttribute ("usuario") Usuario user,BindingResult result, SessionStatus status  )
+    {
+        
+        this.jdbcTemplate.update("UPDATE USUARIO SET CODIGO_PERFIL=?, NOMBRE_USUARIO=?, CORREO_USUARIO=?, PASS_USUARIO=?, APELLIDO_USUARIO=? WHERE CODIGO_USUARIO=?"
+                                    ,user.getCod_perfil(),user.getNombre(),user.getCorreo(),user.getPass(),user.getApellido(),user.getRut());
+       
+        return new ModelAndView("redirect:Usuarios.htm");
+        
+        
+    }
+    
+    @RequestMapping(value="AdministracionCliente/CasinoUsuario.htm",method=RequestMethod.GET) 
+    public ModelAndView UsuarioCasinoC(HttpServletRequest request)
+    {
+        ModelAndView mav=new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String rutUser=userDetail.getUsername();
+        Usuario datos=this.selectUsuario(rutUser);
+        
+        List casino = this.jdbcTemplate.queryForList("SELECT CODIGO_CASINO,NOMBRE_CASINO from CASINO where RUT_EMPRESA='"+datos.getRutEmpresa()+"'");
+        mav.addObject("Casino",casino);
+        mav.addObject("rutEmp", datos.getRutEmpresa());
+        mav.addObject("rut", rutUser);
+        mav.setViewName("Administracion2/CasinoUsuario");
+        mav.addObject("Usuario",new Usuario(rutUser,datos.getRutEmpresa()));
+        return mav;
+    }
+    
+     @RequestMapping(value="AdministracionCliente/CasinoUsuario.htm",method=RequestMethod.POST) 
+    public ModelAndView UsuarioCasinoPostC(@ModelAttribute("Usuario") Usuario usuario, BindingResult result, SessionStatus status,HttpServletRequest request)
+    {
+       
+      
+             List<String> lista = new ArrayList<>();
+             lista =usuario.getCombobox();
+             for (int i = 0; i < lista.size(); i++) {
+            this.jdbcTemplate.update("insert into USUARIO_CASINO (RUT_USUARIO, "
+                    + "ID_CASINO)"
+                    + "values (?,?)" ,usuario.getRut() ,lista.get(i));
+        }
+             
+              
+            return new ModelAndView("redirect:DetalleUsuarioCasino.htm?rutUser="+usuario.getRut()+"");
+        
+ 
+    }
 }

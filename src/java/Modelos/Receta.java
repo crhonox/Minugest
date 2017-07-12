@@ -20,6 +20,17 @@ public class Receta
     private List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
     private List<String>  combobox;
     private List<String> Cantidad;
+    private double factor;
+
+    public double getFactor() {
+        return factor;
+    }
+
+    public void setFactor(double factor) {
+        this.factor = factor;
+    }
+    
+    
 
     public List<Ingrediente> getIngredientes() {
         return ingredientes;

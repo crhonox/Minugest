@@ -153,7 +153,7 @@
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
+                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
                     <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li>
@@ -210,7 +210,7 @@
                             </tr>
                             </c:forEach>
                             </table>
-                            <a href="RecetaMinuta.htm?COD=${CODM}" ><span class="glyphicon glyphicon-plus" aria-hidden="true">Añadir</span></a>
+                            <a href="RecetaMinuta.htm?COD=${CODM}" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true">Añadir</span></a>
                             <a href="Minutas.htm" class="btn btn-danger">Volver</a>
                     </div>
                 </div>

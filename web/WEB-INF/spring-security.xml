@@ -10,7 +10,7 @@
 
             
 		<intercept-url pattern="/Administracion/*" access="hasRole('AdministradorA')" />
-		<intercept-url pattern="/Administracion2/*" access="hasRole('AdministradorB')" />
+		<intercept-url pattern="/AdministracionCliente/*" access="hasRole('AdministradorB')" />
 		<intercept-url pattern="/Encargado/*" access="hasRole('Encargado')" />
 		<intercept-url pattern="/Supervisor/*" access="hasRole('Supervisor')" />
                 <!-- access denied page -->

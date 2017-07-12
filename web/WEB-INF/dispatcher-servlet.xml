@@ -27,13 +27,19 @@ http://www.springframework.org/schema/mvc
 
     <context:component-scan base-package="controller" />
 
-	<bean
+       <bean id="viewResolver1" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+        <property name="order" value="1"/>
+        <property name="basename" value="views"/>
+    </bean>
+        
+	<bean id="viewResolver2"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+            <property name="order" value="2"/>
 		<property name="prefix">
-			<value>/WEB-INF/jsp/</value>
+		<value>/WEB-INF/jsp/</value>
 		</property>
 		<property name="suffix">
-			<value>.jsp</value>
+		<value>.jsp</value>
 		</property>
 	</bean>
         <mvc:resources mapping="/resources/**" location="/resources/"/>

@@ -143,6 +143,7 @@
                     </sec:authorize>
                     <sec:authorize access="hasRole('Supervisor')">
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
+                    <li><a href="Estadisticas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Estadísticas</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
                     <li><a href="Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
@@ -160,9 +161,12 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
+                <th>ID Solicitud</th>
+                <th>Fecha</th>
                 <th>Asunto</th>
                 <th>Destinatario</th>
-                <th>Fecha</th>
+                <th>Tipo Solicitud</th>
+                
                 <th>Contenido</th>
                 <th>Estado</th>
                 <th>Acciones</th>
@@ -171,11 +175,19 @@
                 <tbody>
                     <c:forEach items="${solicitud}" var="dato" >
                         <tr>
+                            <td><a href="DetalleSolicitud.htm?idSolicitud=${dato.idSOLICITUD}"><c:out value="${dato.idSOLICITUD}"/></a></td>
+                            <td><c:out value="${dato.TIEMPO}"/></td>
                             <td><a href="DetalleSolicitud.htm?idSolicitud=${dato.idSOLICITUD}"><c:out value="${dato.ASUNTO}"/></a></td>
                             <td><c:out value="${dato.Nombre}"/></td>
-                            <td><c:out value="${dato.TIEMPO}"/></td>
+                            <td><c:out value="${dato.NOMBRE_TIPO}"/></td>
                             <td><c:out value="${dato.CONTENIDO}"/></td>
-                            <td><c:out value="${dato.ESTADO}"/></td>
+                            <td>
+                                <c:set var="val" value="${dato.ESTADO}"/>
+                                <c:choose>
+                                    <c:when test="${val == 1}">Aprobada</c:when>
+                                    <c:when test="${val == 0}">Pendiente </c:when>
+                                </c:choose>
+                            </td>
                             <td><a href="EliminarSolicitud.htm?idSolicitud=${dato.idSOLICITUD}" onclick="return confirm('Esta seguro que quiere eliminar esta Solicitud?');">Eliminar</a></td>
                                 
                         </tr>

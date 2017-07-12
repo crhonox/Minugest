@@ -220,8 +220,8 @@
             <form:label path="Telefono">Telefono Representante :</form:label>
             <form:input path="Telefono" cssClass="form-control"/>
             </div>
-            <form:button class="btn btn-danger" >Enviar</form:button>
-                           
+            <form:button class="btn btn-success" >Enviar</form:button>
+             <a href="cliente.htm" class="btn btn-danger">Volver</a>
                         </form:form>
                             
                             <script>

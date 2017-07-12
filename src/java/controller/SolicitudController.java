@@ -39,7 +39,10 @@ public class SolicitudController {
     {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("SupervisorC/Solicitudes");
-        List solicitud = this.jdbcTemplate.queryForList("select *,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String user=userDetail.getUsername();
+        List solicitud = this.jdbcTemplate.queryForList("select *,Tipo_Solicitud.NOMBRE_TIPO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO inner join Tipo_Solicitud on SOLICITUD.Tipo_Solicitud=Tipo_Solicitud.idTipo_Solicitud where SOLICITUD.CODIGO_USUARIO='"+user+"' order by TIEMPO");
         
         mav.addObject("solicitud",solicitud);
         
@@ -52,8 +55,9 @@ public class SolicitudController {
         ModelAndView mav = new ModelAndView();
         String Codigo = request.getParameter("idSolicitud");
         mav.setViewName("SupervisorC/DetalleSolicitud");
-        List solicitud = this.jdbcTemplate.queryForList("select *,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO where idSolicitud='"+Codigo+"'");
-        
+       List solicitud = this.jdbcTemplate.queryForList("select *,Tipo_Solicitud.NOMBRE_TIPO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO inner join Tipo_Solicitud on SOLICITUD.Tipo_Solicitud=Tipo_Solicitud.idTipo_Solicitud where idSolicitud='"+Codigo+"'");
+        List Minutas = this.jdbcTemplate.queryForList("SELECT MINUTA.*,CASINO.* FROM Minugest.MINUTA inner join CASINO on MINUTA.CODIGO_CASINO=CASINO.CODIGO_CASINO where CODIGO_SOLICITUD='"+Codigo+"'");
+        mav.addObject("minutas",Minutas);
         mav.addObject("solicitud",solicitud);
         
         return mav;
@@ -67,8 +71,10 @@ public class SolicitudController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         String user=userDetail.getUsername();
-        String rut_emp= this.jdbcTemplate.queryForObject("SELECT RUT_EMPRESA from USUARIO inner join CASINO on USUARIO.CODIGO_CASINO = CASINO.CODIGO_CASINO where CODIGO_USUARIO='"+user+"'", String.class);
-        List encargado = this.jdbcTemplate.queryForList("SELECT RUT_EMPRESA,CODIGO_USUARIO,Concat(NOMBRE_USUARIO,' ',APELLIDO_USUARIO) as Nombre from USUARIO inner join CASINO on USUARIO.CODIGO_CASINO = CASINO.CODIGO_CASINO where CODIGO_PERFIL='3' and RUT_EMPRESA='"+rut_emp+"'");
+        String rut_emp= this.jdbcTemplate.queryForObject("SELECT RUT_EMPRESA_USUARIO from USUARIO where CODIGO_USUARIO='"+user+"'", String.class);
+        List encargado = this.jdbcTemplate.queryForList("SELECT RUT_EMPRESA_USUARIO,CODIGO_USUARIO,Concat(NOMBRE_USUARIO,' ',APELLIDO_USUARIO) as Nombre from USUARIO where CODIGO_PERFIL='4' and RUT_EMPRESA_USUARIO='"+rut_emp+"'");
+        List tipo = this.jdbcTemplate.queryForList("SELECT * FROM Tipo_Solicitud");
+        mav.addObject("tipo",tipo);
         mav.addObject("encargado",encargado);
         mav.addObject("usuario",user);
         mav.addObject("Solicitud",new Solicitud());
@@ -97,8 +103,8 @@ public class SolicitudController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         String user=userDetail.getUsername();
-        String rut_emp= this.jdbcTemplate.queryForObject("SELECT RUT_EMPRESA from USUARIO inner join CASINO on USUARIO.CODIGO_CASINO = CASINO.CODIGO_CASINO where CODIGO_USUARIO='"+user+"'", String.class);
-        List encargado = this.jdbcTemplate.queryForList("SELECT RUT_EMPRESA,CODIGO_USUARIO,Concat(NOMBRE_USUARIO,' ',APELLIDO_USUARIO) as Nombre from USUARIO inner join CASINO on USUARIO.CODIGO_CASINO = CASINO.CODIGO_CASINO where CODIGO_PERFIL='3' and RUT_EMPRESA='"+rut_emp+"'");
+        String rut_emp= this.jdbcTemplate.queryForObject("SELECT RUT_EMPRESA_USUARIO from USUARIO where CODIGO_USUARIO='"+user+"'", String.class);
+        List encargado = this.jdbcTemplate.queryForList("SELECT RUT_EMPRESA_USUARIO,CODIGO_USUARIO,Concat(NOMBRE_USUARIO,' ',APELLIDO_USUARIO) as Nombre from USUARIO where CODIGO_PERFIL='4' and RUT_EMPRESA_USUARIO='"+rut_emp+"'");
         mav.addObject("encargado",encargado);
         mav.addObject("usuario",user);
         mav.addObject("Solicitud",new Solicitud());
@@ -112,11 +118,21 @@ public class SolicitudController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date resultdate = new Date(milis);
         String fecha = sdf.format(resultdate);
-         this.jdbcTemplate.update("insert into SOLICITUD  (`TIEMPO`, `ASUNTO`, `CONTENIDO`, `DESTINO`, `CODIGO_USUARIO`) "
-                    + "values (?,?,?,?,?)" , fecha, sol.getAsunto(), sol.getContenido(), sol.getDestino(),sol.getCodigo_usuario());
+         this.jdbcTemplate.update("insert into SOLICITUD  (`TIEMPO`, `ASUNTO`, `CONTENIDO`, `DESTINO`, `CODIGO_USUARIO`,Tipo_Solicitud,Fecha_Solicitada) "
+                    + "values (?,?,?,?,?,?,?)" , fecha, sol.getAsunto(), sol.getContenido(), sol.getDestino(),sol.getCodigo_usuario(),sol.getTipo_solicitud(),sol.getFecha());
             return new ModelAndView("redirect:Solicitudes.htm");
         }
     }
+    
+    @RequestMapping(value = "Supervisor/Aprobar.htm",method = RequestMethod.GET)
+    public ModelAndView AprobarReceta(HttpServletRequest request){
+        String Codigo = request.getParameter("idSolicitud");
+        
+        String Query = "UPDATE `Minugest`.`SOLICITUD` SET `ESTADO`='1' WHERE `idSOLICITUD`='"+Codigo+"';";
+        this.jdbcTemplate.update(Query);
+        return new ModelAndView("redirect:Solicitudes.htm");
+    }
+    
     /*------------------  Encargado  ----------------------------*/
     @RequestMapping(value = "Encargado/Solicitudes.htm",method = RequestMethod.GET)
     public ModelAndView ListarSolicitudesEncargado()

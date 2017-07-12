@@ -17,6 +17,8 @@ public class Solicitud {
     private String destino;
     private String estado;
     private String codigo_usuario;
+    private String fecha;
+    private String tipo_solicitud;
 
     public Solicitud(String tiempo, String asunto, String contenido, String destino, String estado, String codigo_usuario) {
         this.tiempo = tiempo;
@@ -27,7 +29,35 @@ public class Solicitud {
         this.codigo_usuario = codigo_usuario;
     }
 
+    public Solicitud(String tiempo, String asunto, String contenido, String destino, String estado, String codigo_usuario, String fecha, String tipo_solicitud) {
+        this.tiempo = tiempo;
+        this.asunto = asunto;
+        this.contenido = contenido;
+        this.destino = destino;
+        this.estado = estado;
+        this.codigo_usuario = codigo_usuario;
+        this.fecha = fecha;
+        this.tipo_solicitud = tipo_solicitud;
+    }
+
+    
     public Solicitud() {
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getTipo_solicitud() {
+        return tipo_solicitud;
+    }
+
+    public void setTipo_solicitud(String tipo_solicitud) {
+        this.tipo_solicitud = tipo_solicitud;
     }
 
     

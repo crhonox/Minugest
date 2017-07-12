@@ -203,8 +203,8 @@
               <form:label path="DireccionCasino">Direccion  :</form:label>
               <form:input path="DireccionCasino" cssClass="form-control"/>
             </div>
-            <form:button class="btn btn-danger" >Enviar</form:button>
-            
+            <form:button class="btn btn-success" >Enviar</form:button>
+            <a href="listaCasino.htm?rut=${rutemp}" class="btn btn-danger">Volver</a>
         </form:form>
                     </div>
                 </div>

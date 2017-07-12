@@ -151,6 +151,8 @@
                     </sec:authorize>
                     <sec:authorize access="hasRole('Supervisor')">
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
+                    <li><a href="Estadisticas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Estadísticas</a></li>
+                    
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
                     <li><a href="Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
@@ -168,7 +170,7 @@
                    
                     <div class="panel-heading"> 
                         <ol class="breadcrumb">
-                <li><a href="<c:url value="Solicitud.htm" />">Solicitudes</a></li>
+                <li><a href="<c:url value="Solicitudes.htm" />">Solicitudes</a></li>
                 <li class="active"> Detalle de Solicitud</li>
                 </ol>
                     </div>
@@ -184,6 +186,14 @@
                                 <td><c:out value="${dato.Nombre}"/></td>
                             </tr>
                             <tr>
+                                <td><label>Fecha solicitada: </label></td>
+                                <td><c:out value="${dato.Fecha_Solicitada}"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Tipo de Solicitud: </label></td>
+                                <td><c:out value="${dato.NOMBRE_TIPO}"/></td>
+                            </tr>
+                            <tr>
                                 <td><label>Contenido: </label></td>
                                 <td><c:out value="${dato.CONTENIDO}"/></td>
                             </tr>
@@ -191,9 +201,32 @@
                              </c:forEach>
                         </table>
                            
-                           
-    
-                    </div>
+                                         <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                <th>Nombre de Minuta</th>
+                <th>Casino</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${minutas}" var="dato" >
+                        <tr>
+                            <td><a href="DetalleMinutaSolicitud.htm?COD=${dato.CODIGO_MINUTA}" ><c:out value="${dato.NOMBRE_MINUTA}"/></a></td>
+                            <td><c:out value="${dato.NOMBRE_CASINO}"/></td>
+                            <td><c:out value="${dato.FECHA_MINUTA}"/></td>   
+                            <td><a href="ModificarMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
+                            </td>     
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+            <c:forEach items="${solicitud}" var="dato" >                        
+              <a href="Aprobar.htm?idSolicitud=${dato.idSolicitud}" class="btn btn-success" onclick="return confirm('Esta seguro que quiere aprobar esta Solicitud?');">Aprobar </a></c:forEach>     
+                  <a href="Solicitudes.htm" class="btn btn-danger">Volver</a>
+                                         </div>
                 </div>
             </div>
         </div>

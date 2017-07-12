@@ -10,9 +10,13 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-        <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
+  <script type="text/javascript" src="<c:url value="/resources/js/moment.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datetimepicker.min.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/js/bootstrapValidator.js"/>"></script>
+  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>" />
+  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" />
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/disetest.css"/>"/>
         <title>Supervisor</title>
     </head>
@@ -143,7 +147,9 @@
                     <li><a href="cliente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Clientes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Supervisor')">
-                    <li><a href="Supervisor/Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
+                    <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
+                    <li><a href="Estadisticas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Estadísticas</a></li>
+                    
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
                     <li><a href="Encargado/Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
@@ -164,16 +170,26 @@
        <form:errors path="*" element="div" cssClass="alert alert-danger" />
                     <p>
                         <form:label path="destino">Destino  :</form:label>
-                        <form:select path="destino" cssClass="form-control">
-                            <form:option value="0">Seleccione...</form:option>
+                        <form:select path="destino" cssClass="form-control" required="true">
+                            <form:option value="">Seleccione...</form:option>
                                 <rec:forEach items="${encargado}" var="cat">   
                                     <form:option value="${cat.CODIGO_USUARIO}"> ${cat.Nombre}</form:option>
                                 </rec:forEach>                            
                         </form:select></p>
                     </p>
-           
+                    <form:label path="tipo_solicitud">Tipo de solicitud</form:label>
+                    <form:select path="tipo_solicitud" cssClass="form-control" required="true">
+                        <form:option value="">Seleccione...</form:option>
+                        <rec:forEach items="${tipo}" var="tipo">   
+                                    <form:option value="${tipo.idTipo_Solicitud}"> ${tipo.NOMBRE_TIPO}</form:option>
+                                </rec:forEach>   
+                    </form:select>
+                    <form:label path="fecha">Fecha solicitada</form:label>
+                    <div class="input-group date" id="datetimepicker3" >
+                    <input id="fecha" name="fecha" type="text" class="form-control" value="" />
+                    </div>
          <p><form:label path="asunto">Asunto :</form:label>
-                        <form:input path="asunto" cssClass="form-control"/></p>
+                        <form:input path="asunto" cssClass="form-control" required="true"/></p>
 
          <p>
                 <form:label path="contenido">Solicitud :</form:label>
@@ -183,9 +199,18 @@
          
             <form:button class="btn btn-danger" >Enviar</form:button>
         </form:form>
+            
                     </div>
                 </div>
             </div>
         </div>
     </body>
+    
+            <script type="text/javascript">
+            $(function () {
+                $('#fecha').datetimepicker({
+                    format: 'YYYY-MM-DD'
+                });
+            });
+        </script>
 </html>

@@ -164,11 +164,11 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
+                <th>Codigo Minuta</th>
                 <th>Nombre de Minuta</th>
                 <th>Casino</th>
                 <th>Usuario</th>
                 <th>Fecha</th>
-                <th>Recetas</th>
                 <th>Acciones</th>
                 
                     </tr>
@@ -176,13 +176,13 @@
                 <tbody>
                     <c:forEach items="${minutas}" var="dato" >
                         <tr>
+                            <td><c:out value="${dato.CODIGO_MINUTA}"/></a></td>
                             <td><a href="DetalleMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><c:out value="${dato.NOMBRE_MINUTA}"/></a></td>
                             <td><c:out value="${dato.NOMBRE_CASINO}"/></td>
                             <td><c:out value="${dato.CODIGO_USUARIO}"/></td>
                             <td><c:out value="${dato.FECHA_MINUTA}"/></td>
-                            <td><a href="RecetaMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-plus" aria-hidden="true">Añadir</span></a></td>    
                             <td><a href="ModificarMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
-                            <a href="CalculoIngrediente.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>     
+                            </td>     
                         </tr>
                     </c:forEach>
                 </tbody>

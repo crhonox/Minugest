@@ -150,7 +150,7 @@
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
+                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
                     <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li> 
@@ -165,7 +165,7 @@
                    
                     <div class="panel-heading"> 
                         <ol class="breadcrumb">
-                <li><a href="<c:url value="Solicitud.htm" />">Solicitudes</a></li>
+                <li><a href="<c:url value="Solicitudes.htm" />">Solicitudes</a></li>
                 <li class="active"> Detalle de Solicitud</li>
                 </ol>
                     </div>
@@ -201,7 +201,7 @@
                 <tbody>
                     <c:forEach items="${minutas}" var="dato" >
                         <tr>
-                            <td><a href="DetalleMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><c:out value="${dato.NOMBRE_MINUTA}"/></a></td>
+                            <td><a href="DetalleMinutaSolicitud.htm?COD=${dato.CODIGO_MINUTA}" ><c:out value="${dato.NOMBRE_MINUTA}"/></a></td>
                             <td><c:out value="${dato.NOMBRE_CASINO}"/></td>
                             <td><c:out value="${dato.FECHA_MINUTA}"/></td>   
                             <td><a href="ModificarMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     

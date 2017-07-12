@@ -145,7 +145,7 @@
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Minuta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
+                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
                     <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li> 
@@ -160,9 +160,11 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
+                <th>Codigo Solicitud</th>
+                <th>Fecha</th>
                 <th>Asunto</th>
                 <th>Destinatario</th>
-                <th>Fecha</th>
+                
                 <th>Contenido</th>
                 <th>Estado</th>
                     </tr>
@@ -170,11 +172,17 @@
                 <tbody>
                     <c:forEach items="${solicitud}" var="dato" >
                         <tr>
+                            <td><c:out value="${dato.idSOLICITUD}"/></td>
+                            <td><c:out value="${dato.TIEMPO}"/></td>
                             <td><a href="DetalleSolicitud.htm?idSolicitud=${dato.idSOLICITUD}"><c:out value="${dato.ASUNTO}"/></a></td>
                             <td><c:out value="${dato.Nombre}"/></td>
-                            <td><c:out value="${dato.TIEMPO}"/></td>
+                            
                             <td><c:out value="${dato.CONTENIDO}"/></td>
-                            <td><c:out value="Pendiente"/></td>
+                            <td><c:set var="val" value="${dato.ESTADO}"/>
+                                <c:choose>
+                                    <c:when test="${val == 1}">Aprobada</c:when>
+                                    <c:when test="${val == 0}">Pendiente </c:when>
+                                </c:choose></td>
                                 
                         </tr>
                     </c:forEach>

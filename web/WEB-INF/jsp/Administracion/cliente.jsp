@@ -162,7 +162,7 @@
         </form:form>
             <a href="AñadirCliente.htm" class="btn btn-success">Añadir cliente</a>
             <p></p>
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover ">
                 <thead>
                     <tr>
                 <th>Rut</th>

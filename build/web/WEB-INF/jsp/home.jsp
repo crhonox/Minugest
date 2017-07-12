@@ -60,7 +60,28 @@
                                         <h4>ESTE ROL ES EL ADMINISTRADOR</h4>
 		</c:if>
                 </sec:authorize>
-                
+                <sec:authorize access="hasRole('AdministradorB')">
+		<!-- For login user -->
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<script>
+			function formSubmit() {
+				document.getElementById("logoutForm").submit();
+			}
+		</script>
+
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<h4>
+				User : ${pageContext.request.userPrincipal.name} | <a
+					href="javascript:formSubmit()"> Logout</a>
+                                        
+			</h4>
+                                        <h4>ESTE ROL ES EL ADMINISTRADOR CLIENTE</h4>
+		</c:if>
+                </sec:authorize>
                 <sec:authorize access="hasRole('Supervisor')">
 		<!-- For login user -->
 		<c:url value="/j_spring_security_logout" var="logoutUrl" />
@@ -142,7 +163,7 @@
 
 	</sec:authorize>
                         
-        <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+        <sec:authorize access="!hasAnyRole('AdministradorA','AdministradorB','Supervisor','Encargado')">
             <div class="icon-login">
                 <ul>
                     <ul>
@@ -176,7 +197,7 @@
             </div>
         </div>
         
-         <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+         <sec:authorize access="!hasAnyRole('AdministradorA','AdministradorB','Supervisor','Encargado')">
         <div class="skdslider">
             <ul id="demo1" class="slides">
                <li> <center><img src="resources/image/2s.jpg"></center> </li>
@@ -206,8 +227,14 @@
                     <sec:authorize access="hasRole('AdministradorA')">
                     <li><a href="Administracion/cliente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Clientes</a></li>
                     </sec:authorize>
+                    <sec:authorize access="hasRole('AdministradorB')">
+                    <li><a href="AdministracionCliente/Usuarios.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Usuarios</a></li>
+                    <li><a href="AdministracionCliente/Casinos.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Casinos</a></li>
+                    </sec:authorize>
                     <sec:authorize access="hasRole('Supervisor')">
                     <li><a href="Supervisor/Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
+                    <li><a href="Supervisor/Estadisticas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Estadisticas</a></li>
+                    
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
                     <li><a href="Encargado/Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificación de Minutas</a></li>
