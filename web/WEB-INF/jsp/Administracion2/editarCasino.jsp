@@ -235,7 +235,7 @@
               <form:input path="DireccionCasino" cssClass="form-control"/>
             </div>       
                             <input type="submit" value="Enviar" class="btn btn-success" />
-                        <a href="listaCasino.htm?rut=${COD}" class="btn btn-danger">Volver</a>    
+                        <a href="Casinos.htm" class="btn btn-danger">Volver</a>    
                         </form:form>
                 </div>
             </div>

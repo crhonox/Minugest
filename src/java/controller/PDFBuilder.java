@@ -1,6 +1,5 @@
 
 package controller;
-import Modelos.Book;
 import Modelos.Ingrediente;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class PDFBuilder extends AbstractITextPdfView {
         // get data model which is passed by the Spring container
         List<Ingrediente> ingredientes = (List<Ingrediente>) model.get("ingredientes");
         
-        Image logo = Image.getInstance("C:\\Users\\crhonox\\Documents\\Tesis\\Minugest\\web\\resources\\image\\p3b.jpg");
+        Image logo = Image.getInstance("C:\\Users\\Sir Lekxas\\Desktop\\Minugest\\web\\resources\\image\\p3b.jpg");
         logo.setAlignment(Element.ALIGN_CENTER);
         doc.add(logo);
         Paragraph par = new Paragraph();

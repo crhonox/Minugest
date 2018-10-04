@@ -16,7 +16,8 @@
         <title>Minugest</title>
     </head>
     <body>
-        <<div class="logo_gest" style="height: 150px; margin-top: 1px;">
+        
+        <div class="logo_gest" style="height: 150px; margin-top: 1px;">
             <div class="conta">
                 <div class="contacto-gest" float="right">
                
@@ -126,7 +127,7 @@
                 
 
 	</sec:authorize>
-         <sec:authorize access="!hasAnyRole('AdministradorA','Supervisor','Encargado')">
+         <sec:authorize access="!hasAnyRole('AdministradorA','AdministradorB','Supervisor','Encargado')">
             <div class="icon-login">
                 <ul>
                     <ul>
@@ -195,10 +196,10 @@
                     <tr>
                 
                 <th>Nombre Casino</th>
-                <th>Region Casino</th>
+                <th>Región Casino</th>
                 <th>Provincia Casino</th>
                 <th>Comuna Casino</th>
-                <th>Direccion Casino</th>
+                <th>Dirección Casino</th>
                 <th>Empresa</th>
                 <th>Acciones</th>
                 </tr>
@@ -220,7 +221,7 @@
             </table>
             <form:form method="post" commandName="cliente">
                 <a href="AñadirCasino.htm?rutemp=${cliente.rut}" class="btn btn-success">Añadir Casino</a>
-                <a href="infoCliente.htm?rut=${rutEmp}" class="btn btn-danger">Volver</a>
+                
             </form:form>
             </div>
         </div>

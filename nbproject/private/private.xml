@@ -2,24 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/SupervisorC/CrearSolicitud.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/SupervisorC/DetalleSolicitud.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/home.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/SupervisorC/estadisticaSolicitud.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/controller/EstadisticasController.java</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Login/login.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/SupervisorC/resultadoSolicitud.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Encargado/AñadirMinuta.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/Modelos/Solicitud.java</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Administracion/AñadirUsuario.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Encargado/DetalleSolicitud.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Login/compañia.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/Encargado/Solicitudes.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/controller/SolicitudController.java</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/web/WEB-INF/jsp/SupervisorC/Solicitudes.jsp</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/Modelos/Minuta.java</file>
-            <file>file:/C:/Users/crhonox/Documents/Tesis/Minugest/src/java/Modelos/EstadisticaSolicitud.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

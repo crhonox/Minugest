@@ -166,7 +166,7 @@
                 <th>Asunto</th>
                 <th>Destinatario</th>
                 <th>Tipo Solicitud</th>
-                
+                <th>Fecha Solicitada</th>
                 <th>Contenido</th>
                 <th>Estado</th>
                 <th>Acciones</th>
@@ -180,6 +180,7 @@
                             <td><a href="DetalleSolicitud.htm?idSolicitud=${dato.idSOLICITUD}"><c:out value="${dato.ASUNTO}"/></a></td>
                             <td><c:out value="${dato.Nombre}"/></td>
                             <td><c:out value="${dato.NOMBRE_TIPO}"/></td>
+                            <td><c:out value="${dato.Fecha_Solicitada}"/></td>
                             <td><c:out value="${dato.CONTENIDO}"/></td>
                             <td>
                                 <c:set var="val" value="${dato.ESTADO}"/>

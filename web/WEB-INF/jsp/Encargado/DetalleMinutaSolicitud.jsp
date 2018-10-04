@@ -153,8 +153,8 @@
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
-                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificación de Minutas</a></li>
+                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestión de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li>
                     </sec:authorize>
@@ -168,7 +168,7 @@
                    
                     <div class="panel-heading"> 
                         <ol class="breadcrumb">
-                <li><a href="<c:url value="Minutas.htm" />">Listado de Minutas</a></li>
+                
                 <li class="active"> Detalle de Minuta</li>
                 </ol>
                     </div>
@@ -187,10 +187,7 @@
                                 <td><label>Fecha de Minuta: </label></td>
                                 <td><c:out value="${min.FECHA_MINUTA}"/></td>
                             </tr>
-                            <tr>
-                                <td><label>Casino asociado: </label></td>
-                                <td><c:out value="${casino}"/></td>
-                            </tr>
+                            
                             <tr>
                                 <td><label>Creador de Minuta: </label></td>
                                 <td><c:out value="${usuario}"/></td>
@@ -215,7 +212,7 @@
                             </tr>
                             </c:forEach>
                             </table>
-                            <a href="RecetaMinuta.htm?COD=${CODM}" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true">Añadir</span></a>
+                            <a href="RecetaMinutaSolicitud.htm?COD=${CODM}" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true">Añadir</span></a>
                             <c:forEach items="${Minutas}" var="min" >
                             <a href="DetalleSolicitud.htm?idSolicitud=${min.CODIGO_SOLICITUD}" class="btn btn-danger">Volver</a>
                             </c:forEach>

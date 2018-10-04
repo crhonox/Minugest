@@ -191,7 +191,8 @@
                                 <td>Cantidad de solicitudes de Servicios Alimenticios :</td>
                                 <td>${Servicio}</td>
                             </tr>
-                        </table>              
+                        </table> 
+                            <a href="Estadisticas.htm" class="btn btn-danger">Volver</a>
                 </div>
             </div>
         </div>

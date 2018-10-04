@@ -150,8 +150,8 @@
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
-                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificación de Minutas</a></li>
+                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestión de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li> 
                     </sec:authorize>
@@ -177,6 +177,14 @@
                                 <td><c:out value="${dato.ASUNTO}"/></td>
                             </tr>
                             <tr>
+                                <td><label>Tipo Solicitud: </label></td>
+                                <td><c:out value="${dato.NOMBRE_TIPO}"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Fecha Solicitada: </label></td>
+                                <td><c:out value="${dato.Fecha_Solicitada}"/></td>
+                            </tr>
+                            <tr>
                                 <td><label>Remitente: </label></td>
                                 <td><c:out value="${dato.Nombre}"/></td>
                             </tr>
@@ -184,7 +192,13 @@
                                 <td><label>Contenido: </label></td>
                                 <td><c:out value="${dato.CONTENIDO}"/></td>
                             </tr>
-                            <tr><td> <a href="AñadirMinutas.htm?idSolicitud=${dato.idSolicitud}" class="btn btn-success">Crear minuta</a> </td></tr>
+                            <tr>
+                                <td><c:set var="val" value="${dato.ESTADO}"/>
+                                <c:choose>
+                                    <c:when test="${val == 1}"></c:when>
+                                    <c:when test="${val == 0}"><a href="AñadirMinutas.htm?idSolicitud=${dato.idSolicitud}&fecha=${dato.Fecha_Solicitada}" class="btn btn-success">Crear minuta</a> </c:when>
+                                </c:choose>
+                                    </td></tr>
                              </c:forEach>
                         </table>
                         
@@ -193,7 +207,6 @@
                 <thead>
                     <tr>
                 <th>Nombre de Minuta</th>
-                <th>Casino</th>
                 <th>Fecha</th>
                 <th>Acciones</th>
                     </tr>
@@ -202,9 +215,13 @@
                     <c:forEach items="${minutas}" var="dato" >
                         <tr>
                             <td><a href="DetalleMinutaSolicitud.htm?COD=${dato.CODIGO_MINUTA}" ><c:out value="${dato.NOMBRE_MINUTA}"/></a></td>
-                            <td><c:out value="${dato.NOMBRE_CASINO}"/></td>
                             <td><c:out value="${dato.FECHA_MINUTA}"/></td>   
-                            <td><a href="ModificarMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
+                            <td>
+                                <c:choose>
+                                    <c:when test="${val == 1}"></c:when>
+                                    <c:when test="${val == 0}"><a href="ModificarMinutaSolicitud.htm?COD=${dato.CODIGO_MINUTA}&idSolicitud=${idSolicitud}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>  </c:when>
+                                </c:choose>
+                                    
                             </td>     
                         </tr>
                     </c:forEach>

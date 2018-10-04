@@ -151,10 +151,12 @@
                     </sec:authorize>
                     <sec:authorize access="hasRole('Supervisor')">
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
+                    <li><a href="Estadisticas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Estadísticas</a></li>
+                    
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
                     <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
-                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestión de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li>
                     </sec:authorize>
@@ -188,10 +190,7 @@
                                 <td><label>Fecha de Minuta: </label></td>
                                 <td><c:out value="${fecha}"/></td>
                             </tr>
-                            <tr>
-                                <td><label>Casino asociado: </label></td>
-                                <td><c:out value="${casino}"/></td>
-                            </tr>
+                            
                             <tr>
                                 <td><label>Creador de Minuta: </label></td>
                                 <td><c:out value="${usuario}"/></td>
@@ -203,7 +202,7 @@
                                     <tr>
                                 <th><label>Recetas asignadas </label></th>
                                 <th><label>Porciones </label></th>
-                                <th><label>Acciones </label></th>
+                                
                                     </tr>
                             </thead>
                             <c:forEach items="${recetas}" var="dato" >

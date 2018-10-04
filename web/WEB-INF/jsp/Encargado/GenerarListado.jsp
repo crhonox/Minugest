@@ -146,8 +146,8 @@
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
-                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificación de Minutas</a></li>
+                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestión de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li>
                     </sec:authorize>
@@ -173,21 +173,33 @@
                                         Fecha Fin : 2017-05-30
                         </p>
                     
-                            <div class="input-group date" id="datetimepicker3" >
-                          
-                                <p><label>Fecha de inicio: </label>
-                                    <input type="text" value="" name="fechaInicio" id="fechaInicio" class="form-control"/></p>
-                          
+                            <table>
+                                <form:form modelAttribute="EstadisticaSolicitud" method="POST" commandName="EstadisticaSolicitud" action="ListadoInsumos.htm">
                             
-                                <p><label>Fecha de Fin: </label>
-                                    <input type="text" value="" name="fechaFin" id="fechaFin" class="form-control"/></p>
-                           
-                            </div>
-                      
+                            <tr>
+                                <td><form:label path="fechaInicio">Fecha de inicio : </form:label></td>
+                                
+                                <td><div class="input-group date" id="datetimepicker3" ><form:input path="fechaInicio" cssClass="form-control" required="true"/></div></td>
                             
+                            </tr>
+                            <tr>
+                                <td><form:label path="fechaFin">Fecha de fin : </form:label></td>
+                                <td> <div class="input-group date" id="datetimepicker3" ><form:input path="fechaFin" cssClass="form-control" required="true"/></div></td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="rutUser">Casino:</form:label></td>
+                        <td><form:select path="rutUser" cssClass="form-control" required="true">
+                            <form:option value="">Seleccione...</form:option>
+                                <rec:forEach items="${casino}" var="cas">   
+                                    <form:option value="${cas.CODIGO_CASINO}"> ${cas.NOMBRE_CASINO}</form:option>
+                                </rec:forEach>    </tr>                        
+                        </form:select></div></p></td>
+                                <tr><td><form:button class="btn btn-success">Enviar</form:button></td><td> <a href="Minutas.htm" class="btn btn-danger">Volver</a></td></tr>
+                        </form:form> 
+                            </table>   
+                        
+                    
                             
-                            <a href="" onclick="this.href='ListadoInsumos.htm?fechaInicio='+document.getElementById('fechaInicio').value+'&fechaFin='+document.getElementById('fechaFin').value"> <span class="btn btn-success" aria-hidden="true">Generar</span></a>
-                            <a href="Minutas.htm" class="btn btn-danger">Volver</a>
                             
                             <script type="text/javascript">
             $(function () {

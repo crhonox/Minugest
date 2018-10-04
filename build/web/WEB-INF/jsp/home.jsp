@@ -268,6 +268,31 @@
             
         </sec:authorize>
          
+        
+        <sec:authorize access="hasRole('AdministradorB')">
+            
+            <div class="menu-conte-wra">
+                <center>
+                    <table>
+                        
+                        <td style="width: 350px;">
+                        <center>Administrador</center><br>
+                        <center>El Administrador tiene la opción de gestionar usuarios y casinos.</center><br>
+                        <center>Los casinos pueden asginar usuarios.</center><br>
+                        <center>Los usuarios pueden ser asginados a un casino.</center>
+                        </td>
+                        <td><p><br></p></td>
+                        <td>
+                        <center><img src="resources/image/A1.jpg"></center>
+                        </td>
+                
+                </table>
+            </center>
+            </div>
+            
+        </sec:authorize>
+        
+        
         <sec:authorize access="hasRole('Supervisor')">
             
             <div class="menu-conte-wra">
@@ -276,7 +301,8 @@
                         
                         <td style="width: 350px;">
                         <center>Supervisor</center><br>
-                        <center>Descripción del Supervisor</center>
+                        <center>El supervisor se encarga de realizar una petición de una o mas minutas, esta petición es recibida por el encargado de minuta para que este la genere en base a lo solicitado.</center><br>
+                        <center>Existen 4 tipos diferentes de categorias de solicitudes, el supervisor puede generar estadísticas del total de solicitudes realizadas por cada tipo.</center>
                         </td>
                         <td><p><br></p></td>
                         <td>
@@ -297,7 +323,9 @@
                         
                         <td style="width: 350px;">
                         <center>Encargado de Minutas</center><br>
-                        <center>Descripción del Encargado de Minutas</center>
+                        <center>El encargado de minutas se encarga de realizar la planificación de minutas, en base a esta planificación tiene la opción de generar un listado de insumos necesarios para la planificación</center><br>
+                        <center>También tiene la opción de gestionar recetas, en caso de que una receta que desee agregar a una minuta no se encuentre en el sistema, el encargado puede agregar la receta y en caso de que un ingrediente no se encuentre en el sistema, el encargado puede agregar el ingrediente al sistema.</center><br>
+                        <center>El encargado tiene la responsabilidad de responder las solicitudes de minutas que le envía el supervisor, de esta manera el encargado debe generar la planificación necesaria para cada solicitud.</center>
                         </td>
                         <td><p><br></p></td>
                         <td>

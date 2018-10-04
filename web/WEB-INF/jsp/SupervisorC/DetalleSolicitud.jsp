@@ -206,7 +206,6 @@
                 <thead>
                     <tr>
                 <th>Nombre de Minuta</th>
-                <th>Casino</th>
                 <th>Fecha</th>
                 <th>Acciones</th>
                     </tr>
@@ -215,7 +214,6 @@
                     <c:forEach items="${minutas}" var="dato" >
                         <tr>
                             <td><a href="DetalleMinutaSolicitud.htm?COD=${dato.CODIGO_MINUTA}" ><c:out value="${dato.NOMBRE_MINUTA}"/></a></td>
-                            <td><c:out value="${dato.NOMBRE_CASINO}"/></td>
                             <td><c:out value="${dato.FECHA_MINUTA}"/></td>   
                             <td><a href="ModificarMinuta.htm?COD=${dato.CODIGO_MINUTA}" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>     
                             </td>     
@@ -223,8 +221,15 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <c:forEach items="${solicitud}" var="dato" >                        
-              <a href="Aprobar.htm?idSolicitud=${dato.idSolicitud}" class="btn btn-success" onclick="return confirm('Esta seguro que quiere aprobar esta Solicitud?');">Aprobar </a></c:forEach>     
+            <c:forEach items="${solicitud}" var="dato" >
+                <c:set var="val" value="${dato.ESTADO}"/>
+                                <c:choose>
+                                    <c:when test="${val == 1}"><a href="ListadoInsumosSolicitud.htm?idSolicitud=${dato.idSolicitud}" class="btn btn-success">Generar Listado de insumos</a></c:when>
+                                    <c:when test="${val == 0}"><a href="Aprobar.htm?idSolicitud=${dato.idSolicitud}" class="btn btn-success" onclick="return confirm('Esta seguro que quiere aprobar esta Solicitud?');">Aprobar </a>
+              </c:when>
+                                </c:choose>
+                
+              </c:forEach>     
                   <a href="Solicitudes.htm" class="btn btn-danger">Volver</a>
                                          </div>
                 </div>

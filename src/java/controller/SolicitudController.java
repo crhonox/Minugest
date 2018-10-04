@@ -42,7 +42,7 @@ public class SolicitudController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         String user=userDetail.getUsername();
-        List solicitud = this.jdbcTemplate.queryForList("select *,Tipo_Solicitud.NOMBRE_TIPO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO inner join Tipo_Solicitud on SOLICITUD.Tipo_Solicitud=Tipo_Solicitud.idTipo_Solicitud where SOLICITUD.CODIGO_USUARIO='"+user+"' order by TIEMPO");
+        List solicitud = this.jdbcTemplate.queryForList("select *,Tipo_Solicitud.NOMBRE_TIPO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO inner join Tipo_Solicitud on SOLICITUD.Tipo_Solicitud=Tipo_Solicitud.idTipo_Solicitud where SOLICITUD.CODIGO_USUARIO='"+user+"' order by TIEMPO desc");
         
         mav.addObject("solicitud",solicitud);
         
@@ -55,10 +55,11 @@ public class SolicitudController {
         ModelAndView mav = new ModelAndView();
         String Codigo = request.getParameter("idSolicitud");
         mav.setViewName("SupervisorC/DetalleSolicitud");
-       List solicitud = this.jdbcTemplate.queryForList("select *,Tipo_Solicitud.NOMBRE_TIPO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO inner join Tipo_Solicitud on SOLICITUD.Tipo_Solicitud=Tipo_Solicitud.idTipo_Solicitud where idSolicitud='"+Codigo+"'");
-        List Minutas = this.jdbcTemplate.queryForList("SELECT MINUTA.*,CASINO.* FROM Minugest.MINUTA inner join CASINO on MINUTA.CODIGO_CASINO=CASINO.CODIGO_CASINO where CODIGO_SOLICITUD='"+Codigo+"'");
+       List solicitud = this.jdbcTemplate.queryForList("select *,Tipo_Solicitud.NOMBRE_TIPO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO inner join Tipo_Solicitud on SOLICITUD.Tipo_Solicitud=Tipo_Solicitud.idTipo_Solicitud where idSolicitud='"+Codigo+"' order by TIEMPO desc");
+        List Minutas = this.jdbcTemplate.queryForList("SELECT MINUTA.* FROM Minugest.MINUTA where CODIGO_SOLICITUD='"+Codigo+"'");
         mav.addObject("minutas",Minutas);
         mav.addObject("solicitud",solicitud);
+        mav.addObject("idSolicitud",Codigo);
         
         return mav;
     }
@@ -142,7 +143,7 @@ public class SolicitudController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         String rut_user=userDetail.getUsername();
-        List solicitud = this.jdbcTemplate.queryForList("select *,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO where SOLICITUD.DESTINO = '"+rut_user+"'");
+        List solicitud = this.jdbcTemplate.queryForList("select *,Tipo_Solicitud.NOMBRE_TIPO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO inner join Tipo_Solicitud on SOLICITUD.Tipo_Solicitud=Tipo_Solicitud.idTipo_Solicitud where SOLICITUD.DESTINO = '"+rut_user+"' order by TIEMPO desc");
         mav.addObject("solicitud",solicitud);
         
         return mav;
@@ -154,11 +155,11 @@ public class SolicitudController {
         ModelAndView mav = new ModelAndView();
         String Codigo = request.getParameter("idSolicitud");
         mav.setViewName("Encargado/DetalleSolicitud");
-        List solicitud = this.jdbcTemplate.queryForList("select *,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.CODIGO_USUARIO where idSolicitud='"+Codigo+"'");
-        List Minutas = this.jdbcTemplate.queryForList("SELECT MINUTA.*,CASINO.* FROM Minugest.MINUTA inner join CASINO on MINUTA.CODIGO_CASINO=CASINO.CODIGO_CASINO where CODIGO_SOLICITUD='"+Codigo+"'");
+        List solicitud = this.jdbcTemplate.queryForList("select *,Tipo_Solicitud.NOMBRE_TIPO,Concat(USUARIO.NOMBRE_USUARIO,' ',USUARIO.APELLIDO_USUARIO) as Nombre  from SOLICITUD inner join USUARIO on USUARIO.CODIGO_USUARIO=SOLICITUD.DESTINO inner join Tipo_Solicitud on SOLICITUD.Tipo_Solicitud=Tipo_Solicitud.idTipo_Solicitud where idSolicitud='"+Codigo+"'");
+        List Minutas = this.jdbcTemplate.queryForList("SELECT MINUTA.* FROM Minugest.MINUTA where CODIGO_SOLICITUD='"+Codigo+"'");
         mav.addObject("minutas",Minutas);
         mav.addObject("solicitud",solicitud);
-        
+        mav.addObject("idSolicitud",Codigo);
         return mav;
     }
 }

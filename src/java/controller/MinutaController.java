@@ -1,7 +1,7 @@
 package controller;
 
-import Modelos.Book;
 import Modelos.Conexion;
+import Modelos.EstadisticaSolicitud;
 import Modelos.Ingrediente;
 import Modelos.Listado;
 import Modelos.Minuta;
@@ -116,6 +116,7 @@ public class MinutaController {
     public ModelAndView AñadirMinuta2(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         String idSolicitud = request.getParameter("idSolicitud");
+        String fechaSolicitada = request.getParameter("fecha");
         mav.setViewName("Encargado/AñadirMinuta2");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
@@ -123,6 +124,7 @@ public class MinutaController {
         String rut_emp= this.jdbcTemplate.queryForObject("SELECT RUT_EMPRESA_USUARIO from USUARIO where CODIGO_USUARIO='"+user+"'", String.class);
         List casino = this.jdbcTemplate.queryForList("select CODIGO_CASINO, NOMBRE_CASINO from CASINO where RUT_EMPRESA='"+rut_emp+"'");
         mav.addObject("idSolicitud",idSolicitud);
+        mav.addObject("fechaSolicitada",fechaSolicitada);
         mav.addObject("casino",casino);
         mav.addObject("Minuta",new Minuta());
         return mav;
@@ -134,8 +136,8 @@ public class MinutaController {
           
 
             this.jdbcTemplate.update("insert into MINUTA (NOMBRE_MINUTA, "
-                    + "CODIGO_CASINO, CODIGO_USUARIO, FECHA_MINUTA,CODIGO_SOLICITUD) "
-                    + "values (?,?,?,?,?)" , min.getNombre_Min(),min.getCodigo_Casi(),min.getCodigo_User(),min.getFecha_Min(),min.getIdSolicitud());
+                    + "CODIGO_USUARIO, FECHA_MINUTA,CODIGO_SOLICITUD) "
+                    + "values (?,?,?,?)" , min.getNombre_Min(),min.getCodigo_User(),min.getFecha_Min(),min.getIdSolicitud());
             return new ModelAndView("redirect:/Encargado/DetalleSolicitud.htm?idSolicitud="+min.getIdSolicitud());
           
  
@@ -206,6 +208,75 @@ public class MinutaController {
     
     }
     
+    @RequestMapping(value = "/Encargado/ModificarMinutaSolicitud.htm",method = RequestMethod.GET)
+    public ModelAndView ModificarMinutaSolicitud(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Encargado/ModificarMinutaSolicitud");
+        String Codigo = request.getParameter("COD");
+        Minuta datos = selectMinutaSolicitud(Codigo);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String user=userDetail.getUsername();
+        String rut_emp= this.jdbcTemplate.queryForObject("SELECT RUT_EMPRESA_USUARIO from USUARIO  where CODIGO_USUARIO='"+user+"'", String.class);
+        List casino = this.jdbcTemplate.queryForList("select CODIGO_CASINO, NOMBRE_CASINO from CASINO where RUT_EMPRESA='"+rut_emp+"'");
+        mav.addObject("casino",casino);
+        mav.addObject("Minuta",new Minuta(datos.getNombre_Min(),Codigo,datos.getCodigo_Casi(),datos.getFecha_Min()));
+        return mav;
+    }
+    
+    @RequestMapping(value = "/Encargado/ModificarMinutaSolicitud.htm",method = RequestMethod.POST)
+    public ModelAndView UpdateMinutaSolicitud (@ModelAttribute("Minuta") Minuta min, BindingResult result, SessionStatus status,HttpServletRequest request)  
+    {
+    
+             String Codigo = request.getParameter("COD");
+             String idSolicitud = request.getParameter("idSolicitud");
+              this.jdbcTemplate.update("UPDATE MINUTA SET NOMBRE_MINUTA=?, FECHA_MINUTA=? where CODIGO_MINUTA=?"
+                    ,min.getNombre_Min(),min.getFecha_Min(),Codigo);
+            return new ModelAndView("redirect:/Encargado/DetalleSolicitud.htm?idSolicitud="+idSolicitud+"");
+         
+ 
+    
+    }
+    
+    @RequestMapping(value = "/Encargado/RecetaMinutaSolicitud.htm",method = RequestMethod.GET)
+    public ModelAndView RecetaMinutaSolicitud(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Encargado/RecetaMinutaSolicitud");
+        String Codigo = request.getParameter("COD");
+        Minuta datos = selectMinuta(Codigo);
+        List RecetasM = this.jdbcTemplate.queryForList("SELECT RECETAMINUTA.CODIGO_RECETA,NOMBRE_RECETA,RECETAMINUTA.CANTIDAD_PORCION from RECETA inner join RECETAMINUTA on RECETA.CODIGO_RECETA=RECETAMINUTA.CODIGO_RECETA where CODIGO_MINUTA='"+Codigo+"'");
+        List Recetas= this.jdbcTemplate.queryForList("SELECT CODIGO_RECETA,NOMBRE_RECETA FROM RECETA");
+        mav.addObject("Receta",Recetas);
+        mav.addObject("Recetas",RecetasM);
+        mav.addObject("COD", Codigo);
+        mav.addObject("Minuta",new Minuta(datos.getNombre_Min(),Codigo,datos.getCodigo_Casi(),datos.getFecha_Min()));
+        return mav;
+    }
+    
+    
+    
+     @RequestMapping(value = "/Encargado/RecetaMinutaSolicitud.htm",method = RequestMethod.POST)
+    public ModelAndView RecetaInsertMinutaSOlicitud (@ModelAttribute("Minuta") Minuta minuta, BindingResult result, SessionStatus status,HttpServletRequest request)  
+    {
+             String Codigo = request.getParameter("COD");
+             List<String> lista = new ArrayList<>();
+             List<String> lista2 = new ArrayList<>();
+             lista = minuta.getCombobox();
+             lista2 = minuta.getCantidad();
+             for (int i = 0; i < lista.size(); i++) {
+            this.jdbcTemplate.update("insert into RECETAMINUTA (CODIGO_RECETA, "
+                    + "CODIGO_MINUTA,CANTIDAD_PORCION)"
+                    + "values (?,?,?)" , lista.get(i),Codigo,lista2.get(i));
+        }
+             
+              
+            return new ModelAndView("redirect:/Encargado/DetalleMinutaSolicitud.htm?COD="+Codigo+"");
+          
+ 
+    
+    }
+    
+    
     @RequestMapping(value = "/Encargado/RecetaMinuta.htm",method = RequestMethod.GET)
     public ModelAndView RecetaMinuta(HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
@@ -274,37 +345,41 @@ public class MinutaController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Encargado/DetalleMinutaSolicitud");
         String Codigo = request.getParameter("COD");
-        List Minutas = this.jdbcTemplate.queryForList("SELECT MINUTA.*,CASINO.* FROM Minugest.MINUTA inner join CASINO on MINUTA.CODIGO_CASINO=CASINO.CODIGO_CASINO where CODIGO_MINUTA='"+Codigo+"'");
-        Minuta datos = selectMinuta(Codigo);
+        List Minutas = this.jdbcTemplate.queryForList("SELECT MINUTA.* FROM Minugest.MINUTA where CODIGO_MINUTA='"+Codigo+"'");
+        
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         String user=userDetail.getUsername();
-        String Nombre=datos.getNombre_Min();
-        String fecha=datos.getFecha_Min();
-        String codcasino=datos.getCodigo_Casi();
-        String Casino=this.jdbcTemplate.queryForObject("SELECT NOMBRE_CASINO from CASINO where CODIGO_CASINO='"+codcasino+"'", String.class);
+        
+
+       
         String Usuario= this.jdbcTemplate.queryForObject("SELECT NOMBRE_USUARIO from USUARIO where CODIGO_USUARIO='"+user+"'", String.class);
         List Recetas = this.jdbcTemplate.queryForList("SELECT RECETAMINUTA.CODIGO_RECETA,NOMBRE_RECETA,RECETAMINUTA.CANTIDAD_PORCION from RECETA inner join RECETAMINUTA on RECETA.CODIGO_RECETA=RECETAMINUTA.CODIGO_RECETA where CODIGO_MINUTA='"+Codigo+"'");
-        mav.addObject("casino",Casino);
-        mav.addObject("nombre",Nombre);
-        mav.addObject("fecha",fecha);
+        
+        
         mav.addObject("usuario",Usuario);
         mav.addObject("recetas",Recetas);
         mav.addObject("CODM",Codigo);
         mav.addObject("Minutas",Minutas);
-        mav.addObject("Minuta",new Minuta(datos.getNombre_Min(),Codigo,datos.getCodigo_Casi(),datos.getFecha_Min()));
+        mav.addObject("Minuta",new Minuta());
         return mav;
     }
     
     @RequestMapping(value = "/Encargado/GenerarListado.htm",method = RequestMethod.GET)
     public ModelAndView GenerarListado(){
         ModelAndView mav= new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String user=userDetail.getUsername();
+        String rut_emp= this.jdbcTemplate.queryForObject("SELECT RUT_EMPRESA_USUARIO from USUARIO where CODIGO_USUARIO='"+user+"'", String.class);
+        List casino = this.jdbcTemplate.queryForList("select CODIGO_CASINO, NOMBRE_CASINO from CASINO where RUT_EMPRESA='"+rut_emp+"'");
         mav.setViewName("Encargado/GenerarListado");
-        
+        mav.addObject("casino",casino);
+        mav.addObject("EstadisticaSolicitud",new EstadisticaSolicitud());
         return mav;
     }
     
-    @RequestMapping(value = "/Encargado/ListadoInsumos.htm", method = RequestMethod.POST)
+    @RequestMapping(value = "/Encargado/ListadoInsumos2.htm", method = RequestMethod.POST)
     public ModelAndView downloadExcel(@ModelAttribute("pdf") PDF pdf, BindingResult result, SessionStatus status,HttpServletRequest request ) {
         List<String> ingrediente = new ArrayList<>();
         List<String> cantidad = new ArrayList<>();
@@ -324,15 +399,19 @@ public class MinutaController {
         return new ModelAndView("pdfView", "ingredientes", insumosFinal);
     }
     
-   @RequestMapping(value = "/Encargado/ListadoInsumos.htm",method = RequestMethod.GET)
-    public ModelAndView ListadoInsumos(HttpServletRequest request){
+   @RequestMapping(value = "/Encargado/ListadoInsumos.htm",method = RequestMethod.POST)
+    public ModelAndView ListadoInsumos(@ModelAttribute("EstadisticaSolicitud") EstadisticaSolicitud esta, BindingResult result, SessionStatus status,HttpServletRequest request){
         ModelAndView mav= new ModelAndView();
-        String fechaInicio= request.getParameter("fechaInicio");
-        String fechaFin= request.getParameter("fechaFin");
+        String fechaInicio= esta.getFechaInicio();
+        System.out.println("fecha inicio:"+esta.getFechaInicio());
+        System.out.println("fecha fin:"+esta.getFechaFin());
+        System.out.println("Codigo Casino:"+esta.getRutUser());
+        String fechaFin= esta.getFechaFin();
+        String codigoCasino=esta.getRutUser();
         List<Listado> insumos = new ArrayList<Listado>();
         List<Ingrediente> insumosFinal = new ArrayList<Ingrediente>();
         final List<Map<String, Object>> rows  = this.jdbcTemplate.queryForList("SELECT * from MINUTA where\n" +
-"FECHA_MINUTA BETWEEN  '"+fechaInicio+"' and '"+fechaFin+"' order by FECHA_MINUTA");
+"FECHA_MINUTA BETWEEN  '"+fechaInicio+"' and '"+fechaFin+"' and CODIGO_CASINO="+codigoCasino+"");
         for (Map<String, Object> row : rows) {
             Listado lista = new Listado();
             lista.setCodigo_Minuta((int) row.get("CODIGO_MINUTA"));
@@ -374,6 +453,78 @@ public class MinutaController {
         mav.addObject("insumos",insumosFinal);
         mav.addObject("pdf",new PDF());
         return mav;
+    }
+    
+    @RequestMapping(value = "/Supervisor/ListadoInsumosSolicitud.htm",method = RequestMethod.GET)
+    public ModelAndView ListadoInsumosSolicitud(HttpServletRequest request){
+        ModelAndView mav= new ModelAndView();
+        String idSolicitud= request.getParameter("idSolicitud");
+        List<Listado> insumos = new ArrayList<Listado>();
+        List<Ingrediente> insumosFinal = new ArrayList<Ingrediente>();
+        final List<Map<String, Object>> rows  = this.jdbcTemplate.queryForList("SELECT * from MINUTA where\n" +
+"CODIGO_SOLICITUD='"+idSolicitud+"' ");
+        for (Map<String, Object> row : rows) {
+            Listado lista = new Listado();
+            lista.setCodigo_Minuta((int) row.get("CODIGO_MINUTA"));
+            insumos.add(lista);
+        }
+        
+        for (int k = 0; k < insumos.size(); k++) {
+            int cod = insumos.get(k).getCodigo_Minuta();
+           String Codigo =  String.valueOf(cod);
+           List<Receta> rec = getReceta(Codigo);
+           for (int i = 0; i < rec.size(); i++) {
+            for (int j = 0; j < rec.get(i).getIngredientes().size(); j++) {
+                Ingrediente ing = new Ingrediente();
+                ing.setIdIngrediente(rec.get(i).getIngredientes().get(j).getIdIngrediente());
+                ing.setCantidadIngrediente(rec.get(i).getIngredientes().get(j).getCantidadIngrediente());
+                ing.setNombreIngrediente(rec.get(i).getIngredientes().get(j).getNombreIngrediente());
+                ing.setUnidadMedida(rec.get(i).getIngredientes().get(j).getUnidadMedida());
+                boolean check = false;
+                if(insumosFinal.size()>0){
+                for (int l = 0; l < insumosFinal.size(); l++) {
+                    if (insumosFinal.get(l).getIdIngrediente().equals(ing.getIdIngrediente())) {
+                        Double CantidadIngrediente = Double.parseDouble(ing.getCantidadIngrediente());
+                        Double CantidadInsumo = Double.parseDouble(insumosFinal.get(l).getCantidadIngrediente());
+                        Double Suma = CantidadIngrediente+CantidadInsumo;
+                        String insumoCantidad = String.valueOf(Suma);
+                        insumosFinal.get(l).setCantidadIngrediente(insumoCantidad);
+                        check=true;
+                        }
+                     }
+                }
+                if (check == false) {
+                    insumosFinal.add(ing);
+                }
+            }
+        }      
+       }
+        
+        mav.setViewName("SupervisorC/ListaInsumos");
+        mav.addObject("insumos",insumosFinal);
+        mav.addObject("idSolicitud",idSolicitud);
+        mav.addObject("pdf",new PDF());
+        return mav;
+    }
+    
+    @RequestMapping(value = "/Supervisor/ListadoInsumosSolicitud.htm", method = RequestMethod.POST)
+    public ModelAndView downloadExcelSolicitud(@ModelAttribute("pdf") PDF pdf, BindingResult result, SessionStatus status,HttpServletRequest request ) {
+        List<String> ingrediente = new ArrayList<>();
+        List<String> cantidad = new ArrayList<>();
+        List<String> unidad = new ArrayList<>();
+        ingrediente = pdf.getIngrediente();
+        cantidad = pdf.getCantidad();
+        unidad = pdf.getUnidad();
+        List<Ingrediente> insumosFinal = new ArrayList<Ingrediente>();
+        for (int i = 0; i < ingrediente.size(); i++) {
+            Ingrediente ing = new Ingrediente();
+                ing.setCantidadIngrediente(cantidad.get(i));
+                ing.setNombreIngrediente(ingrediente.get(i));
+                ing.setUnidadMedida(unidad.get(i));
+                insumosFinal.add(ing);
+        }
+        // return a view which will be resolved by an excel view resolver
+        return new ModelAndView("pdfView", "ingredientes", insumosFinal);
     }
     
 @RequestMapping(value = "/Encargado/CalculoIngrediente.htm",method = RequestMethod.GET)
@@ -460,6 +611,34 @@ public class MinutaController {
             }
         );
     }
+     public Minuta selectMinutaSolicitud(String COD) 
+    {
+        final Minuta minuta = new Minuta();
+        String quer="SELECT\n"
+                + "     NOMBRE_MINUTA,\n"
+                + "     FECHA_MINUTA\n"
+                + "FROM\n"
+                + "MINUTA"
+                + "  WHERE CODIGO_MINUTA='" + COD + "'";
+        return (Minuta) jdbcTemplate.query
+        (
+                quer, new ResultSetExtractor<Minuta>() 
+            {
+                public Minuta extractData(ResultSet rs) throws SQLException, DataAccessException {
+                    if (rs.next()) {
+                        minuta.setFecha_Min(rs.getString("FECHA_MINUTA"));
+                        minuta.setNombre_Min(rs.getString("NOMBRE_MINUTA"));
+                        
+                        
+                        
+                    }
+                    return minuta;
+                }
+
+
+            }
+        );
+    }
      
      public List<Receta> getReceta(String COD) {
 	final String sql = "select RECETAMINUTA.CODIGO_RECETA,NOMBRE_RECETA,RECETAMINUTA.CANTIDAD_PORCION,CODIGO_MINUTA from RECETAMINUTA inner join RECETA on RECETAMINUTA.CODIGO_RECETA = RECETA.CODIGO_RECETA WHERE CODIGO_MINUTA='"+COD+"'";
@@ -499,18 +678,15 @@ public class MinutaController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("SupervisorC/DetalleMinuta");
         String Codigo = request.getParameter("COD");
-        List Minutas = this.jdbcTemplate.queryForList("SELECT MINUTA.*,CASINO.* FROM Minugest.MINUTA inner join CASINO on MINUTA.CODIGO_CASINO=CASINO.CODIGO_CASINO where CODIGO_MINUTA='"+Codigo+"'");
-        Minuta datos = selectMinuta(Codigo);
+        List Minutas = this.jdbcTemplate.queryForList("SELECT MINUTA.* FROM Minugest.MINUTA where CODIGO_MINUTA='"+Codigo+"'");
+        Minuta datos = selectMinutaSolicitud(Codigo);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         String user=userDetail.getUsername();
         String Nombre=datos.getNombre_Min();
         String fecha=datos.getFecha_Min();
-        String codcasino=datos.getCodigo_Casi();
-        String Casino=this.jdbcTemplate.queryForObject("SELECT NOMBRE_CASINO from CASINO where CODIGO_CASINO='"+codcasino+"'", String.class);
         String Usuario= this.jdbcTemplate.queryForObject("SELECT NOMBRE_USUARIO from USUARIO where CODIGO_USUARIO='"+user+"'", String.class);
         List Recetas = this.jdbcTemplate.queryForList("SELECT RECETAMINUTA.CODIGO_RECETA,NOMBRE_RECETA,RECETAMINUTA.CANTIDAD_PORCION from RECETA inner join RECETAMINUTA on RECETA.CODIGO_RECETA=RECETAMINUTA.CODIGO_RECETA where CODIGO_MINUTA='"+Codigo+"'");
-        mav.addObject("casino",Casino);
         mav.addObject("nombre",Nombre);
         mav.addObject("fecha",fecha);
         mav.addObject("usuario",Usuario);

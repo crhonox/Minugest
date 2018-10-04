@@ -205,7 +205,7 @@
                                 <td><c:out value="${nomcas}"/></td>
                             </tr>
                             <tr>
-                                <td><label>Region: </label></td>
+                                <td><label>Región: </label></td>
                                 <td><c:out value="${casreg}"/></td>
                             </tr>
                             <tr>
@@ -217,7 +217,7 @@
                                 <td><c:out value="${cascom}"/></td>
                             </tr>
                             <tr>
-                                <td><label>Direccion: </label></td>
+                                <td><label>Dirección: </label></td>
                                 <td><c:out value="${casdir}"/></td>
                             </tr>
                             

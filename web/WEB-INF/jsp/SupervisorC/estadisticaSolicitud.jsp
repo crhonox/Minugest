@@ -172,6 +172,11 @@
                 </ol>
                     </div>
                     <div class="panel-body">
+                        Para generar la estadística de solicitudes debe ingresar el rango de fecha del periodo <br>
+                        del cual desea sacar la estadística <br>
+                        Ejemplo: 1 semana<br>
+                        Fecha Inicio: 2017-07-03<br>
+                        Fecha fin :2017-07-07<br>
                         <table>
                         <form:form modelAttribute="EstadisticaSolicitud" method="POST" commandName="EstadisticaSolicitud">
                             <input id="rutUser" name="rutUser" type="hidden" value="${rutUser}"/>

@@ -58,7 +58,7 @@
         if(x < max_fields){ //max input box allowed
            x++; //text box increment
            $(wrapper).append('<div><table>\n\
-<tr><td><div class="form-group"><select id="combobox" name="combobox" class="form-control combobox" style="width:600px" required><option value="0">Seleccione...</option><rec:forEach items="${ingrediente}" var="ing"> <option value="${ing.CODIGO_INGREDIENTE}"> ${ing.NOMBRE_INGREDIENTE}</option></rec:forEach></select></td><td><a href="#" class="remove_field">Remove</a></div></td>\n\
+<tr><td><div class="form-group"><select id="combobox" name="combobox" class="form-control combobox" style="width:600px" required><option value="0">Seleccione...</option><rec:forEach items="${ingrediente}" var="ing"> <option value="${ing.CODIGO_INGREDIENTE}"> ${ing.NOMBRE_INGREDIENTE} (${ing.NOMBRE_UNIDAD})</option></rec:forEach></select></td><td><a href="#" class="remove_field">Remove</a></div></td>\n\
 <td>&nbsp;</td><td><div class="form-group"><label for="Cantidad">Cantidad :</label> </td><td><input id="Cantidad" name="Cantidad" class="form-control" type="text" value="" required/></div></td></tr></table></div>');//add input box
         }
        
@@ -209,8 +209,8 @@
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
-                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificación de Minutas</a></li>
+                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestión de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li>
                     </sec:authorize>
@@ -251,7 +251,7 @@
                            <form:select path="combobox" cssClass="form-control combobox" cssStyle="width:600px" multiple="false" required="required" >
                             <form:option value="">Seleccione...</form:option>
                                 <rec:forEach items="${ingrediente}" var="ing">  
-                                    <form:option value="${ing.CODIGO_INGREDIENTE}"> ${ing.NOMBRE_INGREDIENTE}</form:option>
+                                    <form:option value="${ing.CODIGO_INGREDIENTE}"> ${ing.NOMBRE_INGREDIENTE} (${ing.NOMBRE_UNIDAD})</form:option>
                                 </rec:forEach>                            
                            </form:select></p></div>
                                      <div class="help-block with-errors"></div>

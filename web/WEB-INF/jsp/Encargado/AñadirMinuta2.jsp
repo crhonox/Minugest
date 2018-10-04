@@ -146,8 +146,8 @@
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Solicitudes</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasRole('Encargado')">
-                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificacion de Minutas</a></li>
-                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestion de Recetas</a></li>
+                    <li><a href="Minutas.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Planificación de Minutas</a></li>
+                    <li><a href="receta.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;">Gestión de Recetas</a></li>
                     <li><a href="ingrediente.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Ingredientes </a> </li>
                     <li><a href="Solicitudes.htm" class="btn btn-success btn-sm" style="width: 140px; height: 30px; margin-bottom: 0;padding-left: 0;"> Solicitudes </a> </li>
                     </sec:authorize>
@@ -172,19 +172,11 @@
                         <form:input path="Nombre_Min" cssClass="form-control"/>
                     </div> </p>
             <p></p>
-                    <p><div class="form-group">
-                        <form:label path="Codigo_Casi">Casino:</form:label>
-                        <form:select path="Codigo_Casi" cssClass="form-control">
-                            <form:option value="">Seleccione...</form:option>
-                                <rec:forEach items="${casino}" var="cas">   
-                                    <form:option value="${cas.CODIGO_CASINO}"> ${cas.NOMBRE_CASINO}</form:option>
-                                </rec:forEach>                            
-                        </form:select></div></p>
-         <p><div class="form-group">
+             <p><div class="form-group">
          <form:label path="Fecha_Min">Fecha:</form:label> 
 <div class="input-group date" id="datetimepicker3" >
     
-    <input id="Fecha_Min" name="Fecha_Min" type="text" class="form-control" value="" /></p>
+    <input id="Fecha_Min" name="Fecha_Min" type="text" class="form-control" value="${fechaSolicitada}" /></p>
 
     <script type="text/javascript">
             $(function () {
@@ -201,7 +193,7 @@
     <input id="Codigo_User" name="Codigo_User" class="form-control" type="hidden" value="${pageContext.request.userPrincipal.name}" />
                     
                 
-            <form:button class="btn btn-danger" >Enviar</form:button>
+         <form:button class="btn btn-success" >Enviar</form:button> <a href="DetalleSolicitud.htm?idSolicitud=${idSolicitud}" class="btn btn-danger">Volver</a>
         </form:form>
              <script>
                 $('#Minuta').bootstrapValidator({
@@ -218,13 +210,6 @@
                                     message: 'El nombre es requerido y no puede ser vacío'
                                 }
                                 
-                            }
-                        },
-                        Codigo_Casi: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'El casino es requerida y no puede ser vacío'
-                                }
                             }
                         },
                         Fecha_Min: {
